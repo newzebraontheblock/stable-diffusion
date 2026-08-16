@@ -44,7 +44,8 @@ gift-giver directly, not only to the end user.
 | Pale Sage | `#E8E8D8` | Secondary/card backgrounds, borders |
 | Soft Sky Blue | `#A8C4D8` | Sparing — category tag chips only |
 
-**Typography:** **Alice** for headings, **Calibri** for body.
+**Typography:** **Alice** for headings, **Calibri** for body. Alice is also the
+logo's typeface, so headings and wordmark are deliberately the same face.
 
 - *Alice* is a free Google Font (OFL), so it should be selectable directly in
   Squarespace's font library. It ships a **single regular weight and no italic**
@@ -60,10 +61,12 @@ environment), so the HTML falls back to whatever the viewing machine has —
 most likely Georgia in place of Alice. Layout and spacing are accurate; the
 typefaces will substitute.
 
-**Logo:** lowercase staggered two-line lockup — "fourth" upper-left, "& beyond"
+**Logo:** set in **Alice** — the same face as the headings, which is why Alice
+was chosen. Lowercase staggered two-line lockup: "fourth" upper-left, "& beyond"
 dropping right beneath it, ampersand leading line two. The mockup reconstructs
-this in CSS so it recolours for dark mode; the supplied PNG is black-only and
-should be replaced with an SVG plus a reversed variant.
+this in CSS so it recolours for dark mode and matches the logo's letterforms
+once Alice loads. The supplied PNG is black-only; an SVG plus a reversed
+(cream) variant is still needed for dark backgrounds and for exact kerning.
 
 ## Accessibility deviations from the brand doc — keep these
 
@@ -117,10 +120,8 @@ Two structural devices carry meaning and should be preserved:
   conversion; no date confirmed yet.
 - **Calibri licensing unresolved.** Needs a purchased webfont licence, or
   substitute the metric-compatible Carlito. Alice is free and unblocked.
-- **Headline typeface tension.** The logo is set in a high-contrast display
-  serif. Alice is closer to it than Cambria was, but still not the same face.
-  Using the logo's own typeface for headlines remains the stronger option and
-  is not yet decided.
+- **Logo files.** An SVG and a reversed/cream variant are still needed; only a
+  black PNG exists, which fails on Deep Green and in dark mode.
 
 ## Do not publish as-is
 
