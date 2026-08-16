@@ -1,16 +1,27 @@
 <title>Fourth &amp; Beyond</title>
 <style>
 :root{
-  --ground:#FAF6F6;
+  /* confirmed brand system */
+  --green:#2E3830;      /* Deep Green */
+  --coral:#CC7C72;      /* Berry/Coral */
+  --cream:#FAF8F4;      /* Cream */
+  --sage:#E8E8D8;       /* Pale Sage */
+  --sky:#A8C4D8;        /* Soft Sky Blue - sparing */
+
+  --ground:var(--cream);
   --surface:#FFFFFF;
-  --raised:#F3ECEE;
-  --ink:#2B1F2A;
-  --muted:#6F6068;
-  --plum:#6D3557;
-  --plum-soft:#8E5478;
-  --honey:#DC9A3F;
-  --mist:#E9DFE3;
-  --shadow:rgba(43,31,42,.09);
+  --raised:#EFEFE3;
+  --ink:var(--green);
+  --muted:#68715F;
+  --accent:#AC4B3E;
+  --mist:#DFE1D1;
+
+  --btn-bg:var(--green);
+  --btn-fg:var(--cream);
+  --btn-bg-hover:var(--accent);
+  --tag-bg:var(--sky);
+  --tag-fg:var(--green);
+  --amp:var(--coral);
 
   --display:Cambria,Constantia,'Hoefler Text',Georgia,'Times New Roman',serif;
   --body:Avenir,'Avenir Next','Avenir Next LT Pro','Segoe UI',ui-sans-serif,-apple-system,Roboto,'Helvetica Neue',Arial,sans-serif;
@@ -22,175 +33,175 @@
 
 @media (prefers-color-scheme:dark){
   :root:not([data-theme="light"]){
-    --ground:#171117;
-    --surface:#1F1720;
-    --raised:#281E29;
-    --ink:#F2EAEE;
-    --muted:#A5939E;
-    --plum:#D69BBD;
-    --plum-soft:#C085A8;
-    --honey:#EEBC72;
-    --mist:#372A37;
-    --shadow:rgba(0,0,0,.4);
+    --ground:#1C231E;
+    --surface:#242D26;
+    --raised:#2E3830;
+    --ink:#EFEFE3;
+    --muted:#9DA795;
+    --accent:#E09A90;
+    --mist:#3A453C;
+    --btn-bg:#E09A90;
+    --btn-fg:#1C231E;
+    --btn-bg-hover:#EFB3AA;
+    --tag-bg:#A8C4D8;
+    --tag-fg:#1C231E;
+    --amp:#E09A90;
   }
 }
 :root[data-theme="dark"]{
-  --ground:#171117;
-  --surface:#1F1720;
-  --raised:#281E29;
-  --ink:#F2EAEE;
-  --muted:#A5939E;
-  --plum:#D69BBD;
-  --plum-soft:#C085A8;
-  --honey:#EEBC72;
-  --mist:#372A37;
-  --shadow:rgba(0,0,0,.4);
+  --ground:#1C231E;
+  --surface:#242D26;
+  --raised:#2E3830;
+  --ink:#EFEFE3;
+  --muted:#9DA795;
+  --accent:#E09A90;
+  --mist:#3A453C;
+  --btn-bg:#E09A90;
+  --btn-fg:#1C231E;
+  --btn-bg-hover:#EFB3AA;
+  --tag-bg:#A8C4D8;
+  --tag-fg:#1C231E;
+  --amp:#E09A90;
 }
 
 *{box-sizing:border-box}
 body{
-  margin:0;
-  background:var(--ground);
-  color:var(--ink);
+  margin:0;background:var(--ground);color:var(--ink);
   font-family:var(--body);
-  font-size:clamp(1rem,.96rem + .2vw,1.0625rem);
-  line-height:1.65;
+  font-size:clamp(1rem,.96rem + .2vw,1.0625rem);line-height:1.65;
   -webkit-font-smoothing:antialiased;
 }
 h1,h2{font-family:var(--display);font-weight:400;line-height:1.12;text-wrap:balance;margin:0}
 h3{font-family:var(--display);font-weight:700;line-height:1.2;text-wrap:balance;margin:0}
 p{margin:0}
 a{color:inherit}
-:focus-visible{outline:2px solid var(--honey);outline-offset:3px;border-radius:2px}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
 
 .wrap{width:100%;max-width:1080px;margin:0 auto;padding-inline:var(--pad)}
-.label{
-  font-size:.6875rem;letter-spacing:.16em;text-transform:uppercase;
-  font-weight:600;color:var(--plum);margin:0;
-}
+.label{font-size:.6875rem;letter-spacing:.16em;text-transform:uppercase;font-weight:600;color:var(--accent);margin:0}
 
 /* ---------- mockup toolbar ---------- */
-.bar{
-  position:sticky;top:0;z-index:60;
-  background:var(--ink);color:var(--ground);
-  font-size:.75rem;
-}
+.bar{position:sticky;top:0;z-index:60;background:var(--green);color:var(--cream);font-size:.75rem}
 .bar .wrap{display:flex;flex-wrap:wrap;align-items:center;gap:.75rem 1.25rem;padding-block:.5rem}
-.bar b{font-weight:600;letter-spacing:.1em;text-transform:uppercase;font-size:.6875rem;opacity:.55}
+.bar b{font-weight:600;letter-spacing:.1em;text-transform:uppercase;font-size:.6875rem;opacity:.6}
 .bar .sep{flex:1}
 .tabs{display:flex;gap:.25rem}
-.tab{
-  font:inherit;font-weight:600;cursor:pointer;
-  background:transparent;color:inherit;opacity:.6;
-  border:1px solid transparent;border-radius:999px;padding:.3rem .85rem;
-}
+.tab{font:inherit;font-weight:600;cursor:pointer;background:transparent;color:inherit;opacity:.6;
+  border:1px solid transparent;border-radius:999px;padding:.3rem .85rem}
 .tab:hover{opacity:1}
-.tab[aria-selected="true"]{opacity:1;background:var(--ground);color:var(--ink)}
+.tab[aria-selected="true"]{opacity:1;background:var(--cream);color:var(--green)}
+
+/* ---------- wordmark ---------- */
+.brand,.fbrand{
+  display:inline-grid;font-family:var(--display);font-weight:400;
+  line-height:.9;letter-spacing:-.015em;color:var(--ink);text-decoration:none;white-space:nowrap;
+}
+.brand{font-size:1.15rem}
+.fbrand{font-size:1.45rem}
+.brand .lo,.fbrand .lo{justify-self:end;padding-left:1.5em}
+.brand .amp,.fbrand .amp{font-style:italic;color:var(--amp);padding-right:.12em}
 
 /* ---------- site nav ---------- */
 .nav{border-bottom:1px solid var(--mist);background:var(--ground)}
 .nav .wrap{display:flex;align-items:center;gap:1.5rem;padding-block:.95rem}
-.brand{
-  display:inline-grid;font-family:var(--display);font-weight:400;
-  font-size:1.15rem;line-height:.9;letter-spacing:-.015em;
-  text-decoration:none;white-space:nowrap;color:var(--ink);
-}
-.brand .lo{justify-self:end;padding-left:1.5em}
-.brand .amp{font-style:italic;padding-right:.12em}
 .nav ul{display:flex;gap:1.6rem;list-style:none;margin:0 0 0 auto;padding:0;font-size:.9375rem}
 .nav a{text-decoration:none;color:var(--muted)}
 .nav a:hover{color:var(--ink)}
-.btn{
-  display:inline-block;border:0;cursor:pointer;font:inherit;font-weight:600;
-  background:var(--plum);color:var(--surface);
-  padding:.7rem 1.35rem;border-radius:2px;text-decoration:none;white-space:nowrap;
-  transition:background .18s ease;
-}
-.btn:hover{background:var(--plum-soft)}
+.btn{display:inline-block;border:0;cursor:pointer;font:inherit;font-weight:600;
+  background:var(--btn-bg);color:var(--btn-fg);padding:.7rem 1.35rem;border-radius:2px;
+  text-decoration:none;white-space:nowrap;transition:background .18s ease}
+.btn:hover{background:var(--btn-bg-hover)}
 .nav .btn{padding:.55rem 1.1rem;font-size:.9375rem}
-@media (max-width:720px){.nav ul{display:none}}
+@media (max-width:760px){.nav ul{display:none}}
 
-/* ---------- sections ---------- */
 section{padding-block:var(--gutter)}
 .rule{border-top:1px solid var(--mist)}
 
 /* ---------- hero ---------- */
-.hero{padding-block:clamp(3rem,8vw,6rem) var(--gutter)}
+.hero{padding-block:clamp(3rem,8vw,5.5rem) var(--gutter)}
 .hero h1{font-size:clamp(2.35rem,1.4rem + 4.2vw,4.4rem);max-width:17ch;letter-spacing:-.02em}
-.hero h1 span{color:var(--plum);display:block}
-.hero .lede{
-  font-size:clamp(1.1rem,1.02rem + .4vw,1.3rem);
-  color:var(--muted);max-width:52ch;margin-top:1.5rem;
-}
+.hero h1 span{color:var(--accent);display:block}
+.hero .lede{font-size:clamp(1.05rem,1rem + .35vw,1.2rem);color:var(--muted);max-width:56ch;margin-top:1.5rem}
+.hero .lede b{color:var(--ink);font-weight:600}
 .reveal{opacity:0;transform:translateY(14px);animation:rise .7s cubic-bezier(.2,.7,.3,1) forwards}
-.reveal:nth-child(2){animation-delay:.08s}
-.reveal:nth-child(3){animation-delay:.16s}
-.reveal:nth-child(4){animation-delay:.24s}
+.reveal:nth-child(2){animation-delay:.07s}
+.reveal:nth-child(3){animation-delay:.14s}
+.reveal:nth-child(4){animation-delay:.21s}
+.reveal:nth-child(5){animation-delay:.28s}
 @keyframes rise{to{opacity:1;transform:none}}
 @media (prefers-reduced-motion:reduce){.reveal{animation:none;opacity:1;transform:none}}
 
-/* the fourth-trimester device */
-.trimesters{display:grid;grid-template-columns:repeat(4,1fr);gap:.5rem;margin:2.75rem 0 0;max-width:520px}
+.trimesters{display:grid;grid-template-columns:repeat(4,1fr);gap:.5rem;margin-top:2.75rem;max-width:520px}
 .tri{padding-top:.65rem;border-top:3px solid var(--mist)}
 .tri span{font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:600}
-.tri.now{border-top-color:var(--plum)}
-.tri.now span{color:var(--plum)}
-.tri.now small{display:block;font-size:.75rem;color:var(--honey);letter-spacing:.02em;text-transform:none;font-weight:600;margin-top:.15rem}
+.tri.now{border-top-color:var(--coral)}
+.tri.now span{color:var(--accent)}
+.tri.now small{display:block;font-size:.75rem;color:var(--muted);letter-spacing:.02em;text-transform:none;font-weight:600;margin-top:.15rem}
 
-/* signup */
 .signup{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:2.25rem;max-width:480px}
-.signup input{
-  flex:1 1 15rem;font:inherit;color:var(--ink);
-  background:var(--surface);border:1px solid var(--mist);
-  padding:.7rem .9rem;border-radius:2px;
-}
+.signup input{flex:1 1 15rem;font:inherit;color:var(--ink);background:var(--surface);
+  border:1px solid var(--mist);padding:.7rem .9rem;border-radius:2px}
 .signup input::placeholder{color:var(--muted)}
-.signup input:focus{border-color:var(--plum);outline:none}
-.micro{font-size:.8125rem;color:var(--muted);margin-top:.85rem}
+.signup input:focus{border-color:var(--accent);outline:none}
+.micro{font-size:.8125rem;color:var(--muted);margin-top:.85rem;max-width:52ch}
 
-/* ---------- prose ---------- */
 .stack{display:flex;flex-direction:column;gap:1.35rem}
 .prose{max-width:var(--measure);font-size:1.0625rem}
 h2{font-size:clamp(1.7rem,1.3rem + 1.6vw,2.5rem);letter-spacing:-.015em;max-width:20ch}
-.pull{
-  font-family:var(--display);font-size:clamp(1.5rem,1.2rem + 1.4vw,2.1rem);
-  line-height:1.25;color:var(--plum);max-width:22ch;
-  border-left:3px solid var(--honey);padding-left:1.25rem;
-}
+.pull{font-family:var(--display);font-size:clamp(1.5rem,1.2rem + 1.4vw,2.1rem);line-height:1.25;
+  color:var(--accent);max-width:22ch;border-left:3px solid var(--coral);padding-left:1.25rem}
 
-/* ---------- pillars ---------- */
-.pillars{display:grid;gap:2.5rem;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));margin-top:3rem}
-.pillar{display:flex;flex-direction:column;gap:.6rem;border-top:1px solid var(--mist);padding-top:1.25rem}
-.pillar h3{font-size:1.25rem}
-.pillar p{color:var(--muted);font-size:.9688rem}
+/* ---------- product architecture ---------- */
+.products{display:grid;gap:1.25rem;grid-template-columns:repeat(auto-fit,minmax(16rem,1fr));margin-top:2.75rem}
+.product{display:flex;flex-direction:column;gap:.7rem;background:var(--surface);
+  border:1px solid var(--mist);padding:1.75rem}
+.product.core{background:var(--raised)}
+.product h3{font-size:1.3rem}
+.product p{color:var(--muted);font-size:.9688rem}
+.tagline{font-size:.6875rem;letter-spacing:.13em;text-transform:uppercase;font-weight:600;
+  color:var(--tag-fg);background:var(--tag-bg);padding:.2rem .55rem;border-radius:2px;align-self:flex-start}
+
+/* ---------- value props ---------- */
+.props{display:grid;gap:2.25rem;grid-template-columns:repeat(auto-fit,minmax(14rem,1fr));margin-top:2.5rem}
+.prop{display:flex;flex-direction:column;gap:.5rem;border-top:1px solid var(--mist);padding-top:1.1rem}
+.prop h3{font-size:1.1rem}
+.prop p{color:var(--muted);font-size:.9375rem}
+
+/* ---------- gifting ---------- */
+.gift{background:var(--raised);border-block:1px solid var(--mist)}
+.gift .inner{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(2rem,5vw,4rem);align-items:center}
+.gift h2{max-width:16ch}
+.gift p{color:var(--muted);margin-top:1rem;max-width:46ch}
+.gift .btn{margin-top:1.75rem}
+@media (max-width:800px){.gift .inner{grid-template-columns:1fr}}
+
+/* photography placeholder - clearly an image slot, not decoration */
+.shot{aspect-ratio:4/3;background:var(--sage);border:1px dashed var(--muted);
+  display:grid;place-content:center;gap:.35rem;text-align:center;padding:1rem;color:var(--green)}
+.shot b{font-size:.6875rem;letter-spacing:.14em;text-transform:uppercase;font-weight:600}
+.shot span{font-size:.8125rem;opacity:.75;font-family:var(--body)}
 
 /* ---------- timeline ---------- */
-.phases{display:grid;gap:0;margin-top:2.75rem}
-.phase{
-  display:grid;grid-template-columns:11rem 1fr;gap:1.5rem;
-  padding-block:1.6rem;border-top:1px solid var(--mist);
-}
+.phases{display:grid;margin-top:2.75rem}
+.phase{display:grid;grid-template-columns:11rem 1fr;gap:1.5rem;padding-block:1.6rem;border-top:1px solid var(--mist)}
 .phase:last-child{border-bottom:1px solid var(--mist)}
-.phase dt{font-family:var(--display);font-weight:700;font-size:1.1rem;color:var(--plum);margin:0}
+.phase.beyond dt{color:var(--accent)}
+.phase dt{font-family:var(--display);font-weight:700;font-size:1.1rem;color:var(--ink);margin:0}
 .phase dd{margin:0;color:var(--muted)}
 .phase dd b{color:var(--ink);font-weight:600;display:block;font-size:1.0625rem;margin-bottom:.2rem;font-family:var(--body)}
 @media (max-width:640px){.phase{grid-template-columns:1fr;gap:.4rem}}
 
 /* ---------- cards ---------- */
 .cards{display:grid;gap:1.5rem;grid-template-columns:repeat(auto-fill,minmax(16rem,1fr));margin-top:2.5rem}
-.card{
-  display:flex;flex-direction:column;gap:.55rem;
-  background:var(--surface);border:1px solid var(--mist);
-  padding:1.5rem;text-decoration:none;
-  transition:border-color .18s ease,transform .18s ease;
-}
-.card:hover{border-color:var(--plum);transform:translateY(-2px)}
+.card{display:flex;flex-direction:column;gap:.6rem;background:var(--surface);border:1px solid var(--mist);
+  padding:1.5rem;text-decoration:none;transition:border-color .18s ease,transform .18s ease}
+.card:hover{border-color:var(--accent);transform:translateY(-2px)}
 .card h3{font-size:1.1rem;line-height:1.25}
 .card p{color:var(--muted);font-size:.9375rem}
-.cat{font-size:.6875rem;letter-spacing:.13em;text-transform:uppercase;font-weight:600;color:var(--honey)}
+.cat{font-size:.6875rem;letter-spacing:.13em;text-transform:uppercase;font-weight:600;
+  color:var(--tag-fg);background:var(--tag-bg);padding:.2rem .55rem;border-radius:2px;align-self:flex-start}
 .read{font-size:.8125rem;color:var(--muted);margin-top:auto;padding-top:.5rem}
 
-/* ---------- cta band ---------- */
 .band{background:var(--raised);border-block:1px solid var(--mist)}
 .band h2{max-width:18ch}
 
@@ -198,37 +209,22 @@ h2{font-size:clamp(1.7rem,1.3rem + 1.6vw,2.5rem);letter-spacing:-.015em;max-widt
 .hubhead{padding-block:clamp(2.5rem,6vw,4.5rem) 2rem}
 .hubhead h1{font-size:clamp(2rem,1.5rem + 2.4vw,3.2rem);letter-spacing:-.02em}
 .filters{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:2.25rem}
-.pill{
-  font:inherit;font-size:.875rem;cursor:pointer;
-  background:transparent;color:var(--muted);
-  border:1px solid var(--mist);border-radius:999px;padding:.4rem 1rem;
-  transition:all .16s ease;
-}
-.pill:hover{color:var(--ink);border-color:var(--plum)}
-.pill[aria-pressed="true"]{background:var(--plum);border-color:var(--plum);color:var(--surface)}
-.featured{
-  display:grid;grid-template-columns:1.2fr 1fr;gap:2.5rem;align-items:center;
-  background:var(--surface);border:1px solid var(--mist);padding:clamp(1.5rem,4vw,2.75rem);margin-top:2.5rem;
-}
-.featured h2{font-size:clamp(1.5rem,1.2rem + 1.2vw,2.1rem);max-width:none}
+.pill{font:inherit;font-size:.875rem;cursor:pointer;background:transparent;color:var(--muted);
+  border:1px solid var(--mist);border-radius:999px;padding:.4rem 1rem;transition:all .16s ease}
+.pill:hover{color:var(--ink);border-color:var(--accent)}
+.pill[aria-pressed="true"]{background:var(--btn-bg);border-color:var(--btn-bg);color:var(--btn-fg)}
+.featured{display:grid;grid-template-columns:1.2fr 1fr;gap:2.5rem;align-items:center;
+  background:var(--surface);border:1px solid var(--mist);padding:clamp(1.5rem,4vw,2.75rem);margin-top:2.5rem}
+.featured h2{font-size:clamp(1.5rem,1.2rem + 1.2vw,2.1rem);max-width:none;margin-top:.75rem}
 .featured p{color:var(--muted);margin-top:.85rem}
-.figure{aspect-ratio:4/3;background:linear-gradient(150deg,var(--raised),var(--mist));border:1px solid var(--mist);display:grid;place-items:center}
-.figure span{font-family:var(--display);font-size:2.5rem;color:var(--plum);opacity:.5}
 @media (max-width:760px){.featured{grid-template-columns:1fr}}
 .hidden{display:none}
 
-/* ---------- footer ---------- */
 footer{border-top:1px solid var(--mist);padding-block:3rem;font-size:.875rem;color:var(--muted)}
 footer .wrap{display:flex;flex-wrap:wrap;gap:1.5rem 2.5rem;align-items:flex-start}
 footer ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:.45rem}
 footer a{text-decoration:none}
 footer a:hover{color:var(--ink)}
-.fbrand{
-  display:inline-grid;font-family:var(--display);font-weight:400;
-  font-size:1.45rem;line-height:.9;letter-spacing:-.015em;color:var(--ink);
-}
-.fbrand .lo{justify-self:end;padding-left:1.5em}
-.fbrand .amp{font-style:italic;padding-right:.12em}
 .note{margin-left:auto;max-width:30ch;font-size:.8125rem}
 </style>
 
@@ -240,7 +236,7 @@ footer a:hover{color:var(--ink)}
       <button class="tab" role="tab" aria-selected="false" data-view="hub">Resource Hub</button>
     </div>
     <span class="sep"></span>
-    <span>Resource content is placeholder</span>
+    <span>Visual reference only &mdash; rebuild natively in Squarespace</span>
   </div>
 </div>
 
@@ -248,8 +244,9 @@ footer a:hover{color:var(--ink)}
   <div class="wrap">
     <a class="brand" href="#"><span>fourth</span><span class="lo"><span class="amp">&amp;</span>beyond</span></a>
     <ul>
-      <li><a href="#kit">The Kit</a></li>
-      <li><a href="#timeline">What to expect</a></li>
+      <li><a href="#products">What&rsquo;s inside</a></li>
+      <li><a href="#gifting">Gifting</a></li>
+      <li><a href="#timeline">42 days</a></li>
       <li><a href="#" data-go="hub">Resource Hub</a></li>
     </ul>
     <a class="btn" href="#join">Join the waitlist</a>
@@ -262,7 +259,7 @@ footer a:hover{color:var(--ink)}
   <section class="hero">
     <div class="wrap">
       <h1 class="reveal">Nobody prepares you for the fourth trimester. <span>We do.</span></h1>
-      <p class="lede reveal">Postpartum care sets the stage for lifelong health and well&#8209;being. Getting it right is key.</p>
+      <p class="lede reveal">Journals and post&#8209;birth home recovery care packages, <b>curated by mums and perinatal specialists</b>, for body and for mind, beyond the first 42 days.</p>
 
       <div class="trimesters reveal" aria-label="The four trimesters">
         <div class="tri"><span>1st</span></div>
@@ -275,7 +272,7 @@ footer a:hover{color:var(--ink)}
         <input type="email" placeholder="your@email.com" aria-label="Email address" required>
         <button class="btn" type="submit">Join the waitlist</button>
       </form>
-      <p class="micro reveal">Early access to our home recovery kits. No spam &mdash; just what we&rsquo;re building, and how to prepare.</p>
+      <p class="micro reveal">Early access to our home recovery kits &mdash; for yourself, or for someone you love. No spam, just what we&rsquo;re building and how to prepare.</p>
     </div>
   </section>
 
@@ -289,36 +286,76 @@ footer a:hover{color:var(--ink)}
     </div>
   </section>
 
-  <section class="rule" id="kit">
+  <section class="rule" id="products">
     <div class="wrap">
-      <p class="label">The kits</p>
-      <h2>Immediate, clinically&#8209;reviewed care &mdash; already in the house.</h2>
-      <div class="pillars">
-        <div class="pillar">
-          <h3>Clinically reviewed</h3>
-          <p>Every item and every piece of guidance is checked by clinicians, so you are not sorting truth from noise at three in the morning.</p>
+      <p class="label">What&rsquo;s inside</p>
+      <h2>Three parts, for body and for mind.</h2>
+      <div class="products">
+        <article class="product core">
+          <span class="tagline">The core</span>
+          <h3>Home Recovery Kit</h3>
+          <p>Clinically reviewed recovery essentials, in the house before you need them. No ordering, no pharmacy run, no asking someone to go out for you in week one.</p>
+        </article>
+        <article class="product">
+          <span class="tagline">In every box</span>
+          <h3>Maternal Journal</h3>
+          <p>Co&#8209;created with a midwife and a King&rsquo;s College psychiatrist. Prompts and guidance for the days when you do not know where to start &mdash; the mind half of recovery, included as standard.</p>
+        </article>
+        <article class="product">
+          <span class="tagline">Add&#8209;on</span>
+          <h3>Service Vouchers</h3>
+          <p>Physiotherapy, counselling and night nanny support. For when what you need most is a person, not a product &mdash; redeemable when you are ready.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="rule">
+    <div class="wrap">
+      <p class="label">Why it&rsquo;s different</p>
+      <h2>Lived experience, checked by specialists.</h2>
+      <div class="props">
+        <div class="prop">
+          <h3>Curated by mums and perinatal specialists</h3>
+          <p>Every item and every word is chosen by people who have been through it, then reviewed by clinicians who do this for a living.</p>
         </div>
-        <div class="pillar">
+        <div class="prop">
           <h3>It arrives before you need it</h3>
-          <p>The kit comes ahead of your due date. No ordering, no pharmacy run, no asking someone to go out for you in week one.</p>
+          <p>The kit comes ahead of your due date, so nothing has to be sourced in the week you can least manage it.</p>
         </div>
-        <div class="pillar">
-          <h3>Lived experience, plain language</h3>
-          <p>Written by people who have been through it, alongside expert guidance. Clarity and peace of mind, not a leaflet.</p>
+        <div class="prop">
+          <h3>For body and for mind</h3>
+          <p>Physical recovery and mental health are not separate problems. The kit and the journal treat them as one.</p>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="gift" id="gifting">
+    <div class="wrap inner">
+      <div>
+        <p class="label">For the gift&#8209;giver</p>
+        <h2>The gift that actually helps.</h2>
+        <p>Everyone buys for the baby. The babygrows, the blankets, the tiny shoes she will pack away in a month.</p>
+        <p>Be the one who buys for <em>her</em> &mdash; something she will open in week one and be genuinely grateful for. Choose a kit, add service vouchers, and we will send it with a note in your name.</p>
+        <a class="btn" href="#join">Gift a recovery kit</a>
+      </div>
+      <div class="shot" role="img" aria-label="Photography placeholder: gifting moment">
+        <b>Photography</b>
+        <span>Gifting shot &mdash; to be booked</span>
       </div>
     </div>
   </section>
 
   <section class="rule" id="timeline">
     <div class="wrap">
-      <p class="label">What to expect</p>
-      <h2>The fourth trimester, week by week.</h2>
+      <p class="label">The first 42 days</p>
+      <h2>And what happens after them.</h2>
       <dl class="phases">
-        <div class="phase"><dt>First 72 hours</dt><dd><b>Getting home</b>Comfort and practical recovery essentials for the days when leaving the house is not an option.</dd></div>
-        <div class="phase"><dt>Weeks 1&ndash;2</dt><dd><b>Healing and rest</b>Support for physical recovery, with guidance on what is normal and the signs worth calling someone about.</dd></div>
-        <div class="phase"><dt>Weeks 2&ndash;6</dt><dd><b>Finding a rhythm</b>Feeding, sleep and mental health &mdash; the stretch where most people are told they are &ldquo;fine&rdquo; and quietly are not.</dd></div>
-        <div class="phase"><dt>Weeks 6&ndash;12</dt><dd><b>And beyond</b>The six&#8209;week check is not the finish line. Longer&#8209;term recovery, pelvic health and returning to yourself.</dd></div>
+        <div class="phase"><dt>Days 1&ndash;3</dt><dd><b>Getting home</b>Comfort and practical recovery essentials for the days when leaving the house is not an option.</dd></div>
+        <div class="phase"><dt>Days 4&ndash;14</dt><dd><b>Healing and rest</b>Support for physical recovery, with guidance on what is normal and the signs worth calling someone about.</dd></div>
+        <div class="phase"><dt>Days 15&ndash;42</dt><dd><b>Finding a rhythm</b>Feeding, sleep and mental health &mdash; the stretch where most people are told they are &ldquo;fine&rdquo; and quietly are not.</dd></div>
+        <div class="phase beyond"><dt>Day 43 &amp; beyond</dt><dd><b>Where most support stops</b>The six&#8209;week check is not the finish line. Longer&#8209;term recovery, pelvic health and returning to yourself &mdash; which is the half we are named after.</dd></div>
       </dl>
     </div>
   </section>
@@ -338,7 +375,7 @@ footer a:hover{color:var(--ink)}
   <section class="band">
     <div class="wrap stack">
       <h2>Let us help you prepare.</h2>
-      <p class="prose">Join the waitlist for early access to our home recovery kits.</p>
+      <p class="prose">Join the waitlist for early access to our home recovery kits, journals and service vouchers.</p>
       <form class="signup" onsubmit="return false">
         <input type="email" placeholder="your@email.com" aria-label="Email address" required>
         <button class="btn" type="submit">Join the waitlist</button>
@@ -353,7 +390,7 @@ footer a:hover{color:var(--ink)}
     <div class="wrap stack">
       <p class="label">Resource hub</p>
       <h1>Everything we wish someone had told us.</h1>
-      <p class="lede">Clinically reviewed guidance on postpartum recovery, written in plain language. Free, and always will be.</p>
+      <p class="prose" style="color:var(--muted)">Clinically reviewed guidance on postpartum recovery, written in plain language. Free, and always will be.</p>
       <div class="filters">
         <button class="pill" aria-pressed="true" data-cat="all">All</button>
         <button class="pill" aria-pressed="false" data-cat="Recovery">Recovery</button>
@@ -372,9 +409,12 @@ footer a:hover{color:var(--ink)}
           <span class="cat">Recovery</span>
           <h2>What actually happens to your body in week one</h2>
           <p>Bleeding, cramping, night sweats, the first shower. An honest, clinically reviewed account of the first seven days &mdash; and what you want within arm&rsquo;s reach before you get there.</p>
-          <p class="read">6 min read &middot; Reviewed by a registered midwife</p>
+          <p class="read">6 min read</p>
         </div>
-        <div class="figure" aria-hidden="true"><span>4th</span></div>
+        <div class="shot" role="img" aria-label="Photography placeholder: featured article image">
+          <b>Photography</b>
+          <span>Featured image &mdash; to be booked</span>
+        </div>
       </article>
 
       <div class="cards" id="grid">
@@ -391,7 +431,7 @@ footer a:hover{color:var(--ink)}
   <section class="band">
     <div class="wrap stack">
       <h2>Get the next one first.</h2>
-      <p class="prose">Join the waitlist for early access to our home recovery kits &mdash; and new resources as we publish them.</p>
+      <p class="prose">Join the waitlist for early access to our kits, journals and service vouchers &mdash; and new resources as we publish them.</p>
       <form class="signup" onsubmit="return false">
         <input type="email" placeholder="your@email.com" aria-label="Email address" required>
         <button class="btn" type="submit">Join the waitlist</button>
@@ -402,12 +442,13 @@ footer a:hover{color:var(--ink)}
 
 <footer>
   <div class="wrap">
-    <div class="stack" style="gap:.5rem">
+    <div class="stack" style="gap:.6rem">
       <span class="fbrand"><span>fourth</span><span class="lo"><span class="amp">&amp;</span>beyond</span></span>
-      <span>Postpartum home recovery kits.</span>
+      <span>Post&#8209;birth recovery kits, journals and service vouchers.</span>
     </div>
     <ul>
-      <li><a href="#kit">The Kit</a></li>
+      <li><a href="#products">What&rsquo;s inside</a></li>
+      <li><a href="#gifting">Gifting</a></li>
       <li><a href="#" data-go="hub">Resource Hub</a></li>
       <li><a href="#join">Join the waitlist</a></li>
     </ul>
@@ -419,7 +460,6 @@ footer a:hover{color:var(--ink)}
 (function(){
   var views={home:document.getElementById('view-home'),hub:document.getElementById('view-hub')};
   var tabs=[].slice.call(document.querySelectorAll('.tab'));
-
   function show(name){
     Object.keys(views).forEach(function(k){views[k].classList.toggle('hidden',k!==name)});
     tabs.forEach(function(t){t.setAttribute('aria-selected',String(t.dataset.view===name))});
@@ -430,16 +470,13 @@ footer a:hover{color:var(--ink)}
     var el=e.target.closest('[data-go]');
     if(el){e.preventDefault();show(el.dataset.go)}
   });
-
   var pills=[].slice.call(document.querySelectorAll('.pill'));
   var cards=[].slice.call(document.querySelectorAll('#grid .card'));
   pills.forEach(function(p){
     p.addEventListener('click',function(){
       pills.forEach(function(o){o.setAttribute('aria-pressed',String(o===p))});
       var c=p.dataset.cat;
-      cards.forEach(function(card){
-        card.classList.toggle('hidden',!(c==='all'||card.dataset.cat===c));
-      });
+      cards.forEach(function(card){card.classList.toggle('hidden',!(c==='all'||card.dataset.cat===c))});
     });
   });
 })();
