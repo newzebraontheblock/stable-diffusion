@@ -89,9 +89,14 @@ a{color:inherit}
 
 /* ---------- site nav ---------- */
 .nav{border-bottom:1px solid var(--mist);background:var(--ground)}
-.nav .wrap{display:flex;align-items:center;gap:1.5rem;padding-block:1.15rem}
-.brand{font-family:var(--display);font-weight:700;font-size:1.25rem;letter-spacing:-.01em;text-decoration:none;white-space:nowrap}
-.brand em{font-style:normal;color:var(--plum)}
+.nav .wrap{display:flex;align-items:center;gap:1.5rem;padding-block:.95rem}
+.brand{
+  display:inline-grid;font-family:var(--display);font-weight:400;
+  font-size:1.15rem;line-height:.9;letter-spacing:-.015em;
+  text-decoration:none;white-space:nowrap;color:var(--ink);
+}
+.brand .lo{justify-self:end;padding-left:1.5em}
+.brand .amp{font-style:italic;padding-right:.12em}
 .nav ul{display:flex;gap:1.6rem;list-style:none;margin:0 0 0 auto;padding:0;font-size:.9375rem}
 .nav a{text-decoration:none;color:var(--muted)}
 .nav a:hover{color:var(--ink)}
@@ -218,7 +223,12 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:1.5rem 2.5rem;align-items:flex-star
 footer ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:.45rem}
 footer a{text-decoration:none}
 footer a:hover{color:var(--ink)}
-.fbrand{font-family:var(--display);font-weight:700;font-size:1.15rem;color:var(--ink)}
+.fbrand{
+  display:inline-grid;font-family:var(--display);font-weight:400;
+  font-size:1.45rem;line-height:.9;letter-spacing:-.015em;color:var(--ink);
+}
+.fbrand .lo{justify-self:end;padding-left:1.5em}
+.fbrand .amp{font-style:italic;padding-right:.12em}
 .note{margin-left:auto;max-width:30ch;font-size:.8125rem}
 </style>
 
@@ -236,7 +246,7 @@ footer a:hover{color:var(--ink)}
 
 <header class="nav">
   <div class="wrap">
-    <a class="brand" href="#">Fourth <em>&amp;</em> Beyond</a>
+    <a class="brand" href="#"><span>fourth</span><span class="lo"><span class="amp">&amp;</span>beyond</span></a>
     <ul>
       <li><a href="#kit">The Kit</a></li>
       <li><a href="#timeline">What to expect</a></li>
@@ -393,7 +403,7 @@ footer a:hover{color:var(--ink)}
 <footer>
   <div class="wrap">
     <div class="stack" style="gap:.5rem">
-      <span class="fbrand">Fourth &amp; Beyond</span>
+      <span class="fbrand"><span>fourth</span><span class="lo"><span class="amp">&amp;</span>beyond</span></span>
       <span>Postpartum home recovery kits.</span>
     </div>
     <ul>
