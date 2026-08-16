@@ -1,0 +1,465 @@
+<title>Fourth &amp; Beyond Build Guide</title>
+<style>
+:root{
+  --green:#2E3830; --coral:#CC7C72; --coral-text:#AC4B3E;
+  --cream:#FAF8F4; --sage:#E8E8D8; --sky:#A8C4D8;
+
+  --ground:var(--cream); --surface:#FFFFFF; --panel:#EFEFE3;
+  --ink:var(--green); --muted:#68715F; --accent:var(--coral-text);
+  --rule:#DFE1D1; --code-bg:#2E3830; --code-fg:#EFEFE3;
+  --warn-bg:#FBEFE9; --warn-edge:#CC7C72;
+
+  --display:Georgia,'Iowan Old Style',Cambria,serif;
+  --body:ui-sans-serif,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
+  --mono:ui-monospace,'SFMono-Regular',Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --ground:#1C231E; --surface:#242D26; --panel:#2E3830;
+    --ink:#EFEFE3; --muted:#9DA795; --accent:#E09A90;
+    --rule:#3A453C; --code-bg:#121814; --code-fg:#DDE4DA;
+    --warn-bg:#33241F; --warn-edge:#E09A90;
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#1C231E; --surface:#242D26; --panel:#2E3830;
+  --ink:#EFEFE3; --muted:#9DA795; --accent:#E09A90;
+  --rule:#3A453C; --code-bg:#121814; --code-fg:#DDE4DA;
+  --warn-bg:#33241F; --warn-edge:#E09A90;
+}
+
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--body);
+  font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased}
+.page{max-width:820px;margin:0 auto;padding:clamp(2rem,6vw,4.5rem) clamp(1.15rem,5vw,2.5rem) 6rem}
+h1,h2,h3,h4{font-family:var(--display);font-weight:400;text-wrap:balance;margin:0;line-height:1.2}
+p{margin:0}
+a{color:var(--accent)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+
+.masthead{border-bottom:3px solid var(--ink);padding-bottom:1.5rem;margin-bottom:2.5rem}
+.masthead .kicker{font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;
+  font-weight:700;color:var(--accent);margin-bottom:.9rem}
+h1{font-size:clamp(2rem,1.5rem + 2.4vw,3rem);letter-spacing:-.02em}
+.masthead p{color:var(--muted);margin-top:.9rem;max-width:56ch}
+
+/* part headers */
+.part{margin-top:4rem;padding-top:1.5rem;border-top:1px solid var(--rule);
+  display:flex;align-items:baseline;gap:1rem}
+.part .num{font-family:var(--display);font-size:2.4rem;color:var(--accent);line-height:1;
+  min-width:2.2rem;font-variant-numeric:tabular-nums}
+.part h2{font-size:clamp(1.5rem,1.2rem + 1.2vw,2rem);letter-spacing:-.015em}
+.part .time{font-size:.8rem;color:var(--muted);margin-top:.3rem}
+
+h3{font-size:1.25rem;margin-top:2.25rem}
+.step{display:flex;gap:.7rem;align-items:baseline;margin-top:2.25rem}
+.step .n{font-family:var(--mono);font-size:.8rem;font-weight:700;color:var(--accent);
+  background:var(--panel);border-radius:2px;padding:.15rem .45rem;white-space:nowrap;
+  font-variant-numeric:tabular-nums}
+.step h3{margin:0;font-size:1.2rem}
+.body{margin-top:.75rem}
+.body p + p{margin-top:.75rem}
+
+ol.do,ul.do{margin:.9rem 0 0;padding-left:1.35rem;display:flex;flex-direction:column;gap:.5rem}
+ol.do li::marker{color:var(--accent);font-weight:700}
+ul.do li::marker{color:var(--accent)}
+
+kbd{font-family:var(--body);font-weight:700;background:var(--panel);border:1px solid var(--rule);
+  border-radius:3px;padding:.06em .4em;font-size:.92em;white-space:nowrap}
+code{font-family:var(--mono);font-size:.88em;background:var(--panel);
+  padding:.1em .35em;border-radius:3px}
+
+/* copy blocks */
+.copyblock{background:var(--surface);border:1px solid var(--rule);border-left:3px solid var(--coral);
+  padding:1.1rem 1.25rem;margin-top:1rem;border-radius:2px}
+.copyblock .cap{font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;font-weight:700;
+  color:var(--muted);margin-bottom:.6rem}
+.copyblock p{font-size:1.02rem}
+.copyblock p + p{margin-top:.7rem}
+
+pre{background:var(--code-bg);color:var(--code-fg);padding:1.1rem 1.25rem;border-radius:3px;
+  overflow-x:auto;margin-top:1rem;font-size:.82rem;line-height:1.55}
+pre code{background:none;padding:0;color:inherit;font-size:inherit}
+
+/* tables */
+.tablewrap{overflow-x:auto;margin-top:1.1rem;border:1px solid var(--rule);border-radius:2px}
+table{border-collapse:collapse;width:100%;font-size:.95rem;background:var(--surface)}
+th,td{text-align:left;padding:.65rem .85rem;border-bottom:1px solid var(--rule);vertical-align:top}
+th{background:var(--panel);font-weight:700;font-size:.78rem;letter-spacing:.06em;text-transform:uppercase}
+tr:last-child td{border-bottom:0}
+.swatch{display:inline-block;width:1.05rem;height:1.05rem;border-radius:2px;
+  border:1px solid rgba(128,128,128,.35);vertical-align:-2px;margin-right:.5rem}
+
+/* callouts */
+.note{background:var(--panel);border-radius:2px;padding:1rem 1.15rem;margin-top:1.1rem;font-size:.95rem}
+.note b{display:block;margin-bottom:.3rem}
+.warn{background:var(--warn-bg);border-left:3px solid var(--warn-edge);border-radius:2px;
+  padding:1rem 1.15rem;margin-top:1.1rem;font-size:.95rem}
+.warn b{display:block;margin-bottom:.3rem;color:var(--accent)}
+
+/* checklist */
+.check{list-style:none;padding:0;margin:1.1rem 0 0;display:flex;flex-direction:column;gap:.55rem}
+.check li{display:flex;gap:.7rem;align-items:flex-start;font-size:.97rem}
+.check li::before{content:"";flex:none;width:1.05rem;height:1.05rem;margin-top:.28rem;
+  border:1.5px solid var(--muted);border-radius:2px}
+</style>
+
+<div class="page">
+
+<header class="masthead">
+  <p class="kicker">Squarespace 7.1 &middot; Step by step</p>
+  <h1>Building the Fourth &amp; Beyond website</h1>
+  <p>Written for someone who does not code and does not design. Every click is named, every value is given, and all the wording is ready to copy. Work top to bottom &mdash; each part assumes the one before it is done.</p>
+</header>
+
+<div class="note">
+  <b>How long this takes</b>
+  Roughly a day if you have your logo files and email tool ready. Parts 1 and 2 are the bulk of it. Nothing here is permanent &mdash; every change can be undone.
+</div>
+
+<!-- ============ PART 0 ============ -->
+<div class="part"><span class="num">0</span><div><h2>Before you start</h2><p class="time">About 30 minutes &middot; gathering things</p></div></div>
+
+<div class="step"><span class="n">0.1</span><h3>Check your Squarespace plan</h3></div>
+<div class="body">
+<p>You need the <b>Business plan or higher</b>. The Personal plan does not allow Custom CSS, and Part 1 depends on it.</p>
+<p>Check under <kbd>Billing</kbd> &rarr; <kbd>Billing &amp; Account</kbd>. If you are on Personal, upgrade before continuing.</p>
+</div>
+
+<div class="step"><span class="n">0.2</span><h3>Gather your files</h3></div>
+<div class="body">
+<ul class="do">
+<li><b>Logo, two versions.</b> The black one you have, plus a <b>cream/white version</b> for dark backgrounds. Ask your designer for both as <code>.svg</code> if possible, <code>.png</code> if not.</li>
+<li><b>A body font file.</b> See step 1.3 &mdash; you may not need one.</li>
+<li><b>Photography.</b> Not needed yet. The design has marked slots and you can launch with them empty or with stock images.</li>
+</ul>
+</div>
+
+<div class="step"><span class="n">0.3</span><h3>Decide where waitlist emails go</h3></div>
+<div class="body">
+<p>You need somewhere to collect signups. Pick one now, because Part 4 depends on it.</p>
+<div class="tablewrap"><table>
+<tr><th>Option</th><th>Good for</th><th>Effort</th></tr>
+<tr><td><b>Squarespace Forms</b><br>(built in)</td><td>Getting live fastest. Emails land in Squarespace and can forward to you.</td><td>5 minutes</td></tr>
+<tr><td><b>Beehiiv or ConvertKit</b><br>(recommended)</td><td>Sending a welcome email automatically and warming the list before launch.</td><td>About an hour, including writing a welcome email</td></tr>
+</table></div>
+<div class="note"><b>My recommendation</b>Beehiiv or ConvertKit. Your resource hub will bring people in over months, and a waitlist that never hears from you converts poorly when you finally launch. The built-in form collects addresses but cannot nurture them.</div>
+</div>
+
+<!-- ============ PART 1 ============ -->
+<div class="part"><span class="num">1</span><div><h2>Set up your brand</h2><p class="time">About 45 minutes &middot; do this once, it applies everywhere</p></div></div>
+
+<div class="step"><span class="n">1.1</span><h3>Enter your five brand colours</h3></div>
+<div class="body">
+<p>Squarespace 7.1 uses a palette of exactly five colours &mdash; which is exactly what you have.</p>
+<ol class="do">
+<li>Click <kbd>Website</kbd> in the left menu, then <kbd>Site styles</kbd> (the paintbrush icon).</li>
+<li>Click <kbd>Colours</kbd>, then <kbd>Edit palette</kbd>.</li>
+<li>Click each of the five swatches in turn and type in the code below. Include the <code>#</code>.</li>
+</ol>
+<div class="tablewrap"><table>
+<tr><th>Slot</th><th>Colour</th><th>Code to type</th></tr>
+<tr><td>1</td><td><span class="swatch" style="background:#2E3830"></span>Deep Green</td><td><code>#2E3830</code></td></tr>
+<tr><td>2</td><td><span class="swatch" style="background:#CC7C72"></span>Berry/Coral</td><td><code>#CC7C72</code></td></tr>
+<tr><td>3</td><td><span class="swatch" style="background:#FAF8F4"></span>Cream</td><td><code>#FAF8F4</code></td></tr>
+<tr><td>4</td><td><span class="swatch" style="background:#E8E8D8"></span>Pale Sage</td><td><code>#E8E8D8</code></td></tr>
+<tr><td>5</td><td><span class="swatch" style="background:#A8C4D8"></span>Soft Sky Blue</td><td><code>#A8C4D8</code></td></tr>
+</table></div>
+<p>Squarespace will now generate a set of <b>themes</b> from these &mdash; named things like &ldquo;Lightest 1&rdquo; and &ldquo;Dark 1&rdquo;. You will pick a theme for each section later. Do not worry about them yet.</p>
+</div>
+
+<div class="step"><span class="n">1.2</span><h3>Set Alice as your heading font</h3></div>
+<div class="body">
+<ol class="do">
+<li>Still in <kbd>Site styles</kbd>, click <kbd>Fonts</kbd>.</li>
+<li>Click <kbd>Assign styles</kbd>, then <kbd>Headings</kbd>.</li>
+<li>In the font list, search for <b>Alice</b> and select it.</li>
+</ol>
+<div class="warn"><b>Important: never make a heading bold</b>Alice only comes in one weight. If you bold a heading, the browser fakes it by smearing the letters and it looks visibly wrong. The Custom CSS in step 1.4 prevents this automatically &mdash; but do not manually bold headings either.</div>
+</div>
+
+<div class="step"><span class="n">1.3</span><h3>Set your body font</h3></div>
+<div class="body">
+<p>Calibri is not free for websites &mdash; having it in Microsoft Office does not cover web use. You have two choices:</p>
+<ol class="do">
+<li><b>Try Carlito first (free).</b> It is a copy of Calibri with identical letter widths, so it looks near-identical and costs nothing. Search the font list for <b>Carlito</b>. If it is there, choose it and you are done.</li>
+<li><b>Or buy the Calibri web licence.</b> If Carlito is not available or you want the real thing, buy a webfont licence (search &ldquo;Calibri webfont licence&rdquo; &mdash; it is sold by Monotype). You will be given <code>.woff2</code> files. Then in <kbd>Fonts</kbd>, use the option to <b>upload a custom font</b> and select those files.</li>
+</ol>
+<p>Then click <kbd>Assign styles</kbd> &rarr; <kbd>Paragraphs</kbd> and choose whichever you set up.</p>
+</div>
+
+<div class="step"><span class="n">1.4</span><h3>Paste in the Custom CSS</h3></div>
+<div class="body">
+<p>This is the only code in the whole guide. You do not need to understand it &mdash; copy it whole and paste it in. If anything looks wrong afterwards, delete it and everything returns to normal.</p>
+<ol class="do">
+<li>Go to <kbd>Website</kbd> &rarr; <kbd>Website tools</kbd> &rarr; <kbd>Custom CSS</kbd>.</li>
+<li>Click into the empty box and paste everything below.</li>
+<li>Click <kbd>Save</kbd>.</li>
+</ol>
+<pre><code>/* ============================================
+   FOURTH &amp; BEYOND - brand styling
+   ============================================ */
+
+/* Headings never bold - Alice has only one weight */
+h1, h2, h3, h4 {
+  font-weight: 400 !important;
+  letter-spacing: -0.015em;
+}
+
+/* Turn "Heading 4" into the small label above headlines */
+h4 {
+  text-transform: uppercase !important;
+  letter-spacing: 0.16em !important;
+  font-size: 0.75rem !important;
+  color: #AC4B3E !important;
+}
+
+/* Buttons: deep green, coral on hover */
+.sqs-block-button-element,
+.sqs-button-element--primary {
+  background-color: #2E3830 !important;
+  color: #FAF8F4 !important;
+  border-radius: 2px !important;
+  transition: background-color 0.18s ease;
+}
+.sqs-block-button-element:hover,
+.sqs-button-element--primary:hover {
+  background-color: #AC4B3E !important;
+}
+
+/* Blog category tags: sky blue chip, green text */
+.blog-categories a,
+.blog-meta-item--categories a {
+  background: #A8C4D8;
+  color: #2E3830 !important;
+  padding: 0.2em 0.6em;
+  border-radius: 2px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.7rem;
+  text-decoration: none !important;
+}</code></pre>
+<div class="note"><b>What that did</b>It stopped headings going bold, turned the &ldquo;Heading 4&rdquo; text style into your small coral label, made buttons deep green with a coral hover, and styled your blog category tags as sky-blue chips.</div>
+<div class="warn"><b>On the colours in that code</b>The coral used for text is <code>#AC4B3E</code>, a deeper version of your brand coral. Your actual brand coral is too light to read as small text on cream &mdash; it fails accessibility standards. The true <code>#CC7C72</code> is still used for the logo and decorative lines. Please keep this as is.</div>
+</div>
+
+<!-- ============ PART 2 ============ -->
+<div class="part"><span class="num">2</span><div><h2>Build the home page</h2><p class="time">About 3 hours &middot; eight sections, top to bottom</p></div></div>
+
+<div class="body">
+<p>Open your home page and click <kbd>Edit</kbd>. You will add eight sections in order. For each one: click <kbd>Add section</kbd> at the bottom, pick the layout named, then replace the placeholder text with the copy given.</p>
+<p>To set a section's background, hover it, click the <b>paintbrush</b>, and choose the theme named.</p>
+</div>
+
+<div class="step"><span class="n">2.1</span><h3>Header and navigation</h3></div>
+<div class="body">
+<ol class="do">
+<li>Click your site title at the top, then <kbd>Edit site header</kbd>.</li>
+<li>Under <kbd>Site title &amp; logo</kbd>, upload your <b>logo image</b>. Set its height to about <b>60px</b>.</li>
+<li>Add these navigation links: <b>What&rsquo;s inside</b>, <b>Gifting</b>, <b>42 days</b>, <b>Resource Hub</b>.</li>
+<li>Turn on the <kbd>Button</kbd> option. Label it <b>Join the waitlist</b>, linking to your waitlist section.</li>
+</ol>
+</div>
+
+<div class="step"><span class="n">2.2</span><h3>Hero</h3></div>
+<div class="body">
+<p>Add section &rarr; choose a <b>simple left-aligned layout with a headline, text and a button</b>. Set the background theme to the <b>lightest</b> one (cream).</p>
+<div class="copyblock">
+<p class="cap">Heading 1</p>
+<p>Nobody prepares you for the fourth trimester. We do.</p>
+<p class="cap">Paragraph &mdash; below it</p>
+<p>Journals and post-birth home recovery care packages, curated by mums and perinatal specialists, for body and for mind, beyond the first 42 days.</p>
+<p class="cap">Small text under the signup</p>
+<p>Early access to our home recovery kits &mdash; for yourself, or for someone you love. No spam, just what we&rsquo;re building and how to prepare.</p>
+</div>
+<p style="margin-top:1rem">Add your <b>signup form</b> here &mdash; see Part 4 for how to wire it up. Put the email field itself on the page, not a button that jumps elsewhere; every extra click loses signups.</p>
+<div class="note"><b>The four-trimester graphic is optional</b>The mockup shows four bars with the fourth highlighted. It is a nice touch but not essential, and it is fiddly to build natively. Launch without it. If you want it later, ask your designer for it as a single image and drop it in as a picture.</div>
+</div>
+
+<div class="step"><span class="n">2.3</span><h3>The gap</h3></div>
+<div class="body">
+<p>Add section &rarr; a <b>single column of text</b>. Background theme: <b>lightest</b> (cream).</p>
+<div class="copyblock">
+<p class="cap">Heading 4 &mdash; the small label</p>
+<p>The gap</p>
+<p class="cap">Heading 2</p>
+<p>The focus falls entirely on the baby.</p>
+<p class="cap">Paragraph</p>
+<p>Becoming a new parent is an incredible journey. Yet almost all the preparation, the appointments and the advice point one way &mdash; leaving mothers and birth parents unprepared and overlooked in their own recovery.</p>
+<p>The cost of that oversight is immense: mental health struggles, and a difficult physical return to health.</p>
+<p class="cap">Heading 3 &mdash; set on its own line</p>
+<p>You deserve to thrive, not just survive.</p>
+</div>
+</div>
+
+<div class="step"><span class="n">2.4</span><h3>What&rsquo;s inside &mdash; your three products</h3></div>
+<div class="body">
+<p>Add section &rarr; a <b>three-column layout with cards</b>. Background: <b>lightest</b> (cream). Give the section the label <b>What&rsquo;s inside</b> (Heading 4) and the headline <b>Three parts, for body and for mind.</b> (Heading 2).</p>
+<div class="copyblock">
+<p class="cap">Card 1 &mdash; give this one a Pale Sage background</p>
+<p><b>Home Recovery Kit</b><br>Clinically reviewed recovery essentials, in the house before you need them. No ordering, no pharmacy run, no asking someone to go out for you in week one.</p>
+<p class="cap">Card 2</p>
+<p><b>Maternal Journal</b><br>Co-created with a midwife and a King&rsquo;s College psychiatrist. Prompts and guidance for the days when you do not know where to start &mdash; the mind half of recovery, included as standard.</p>
+<p class="cap">Card 3</p>
+<p><b>Service Vouchers</b><br>Physiotherapy, counselling and night nanny support. For when what you need most is a person, not a product &mdash; redeemable when you are ready.</p>
+</div>
+</div>
+
+<div class="step"><span class="n">2.5</span><h3>Why it&rsquo;s different</h3></div>
+<div class="body">
+<p>Add section &rarr; a <b>three-column text layout</b> (no cards). Background: <b>lightest</b>. Label: <b>Why it&rsquo;s different</b>. Headline: <b>Lived experience, checked by specialists.</b></p>
+<div class="copyblock">
+<p><b>Curated by mums and perinatal specialists</b><br>Every item and every word is chosen by people who have been through it, then reviewed by clinicians who do this for a living.</p>
+<p><b>It arrives before you need it</b><br>The kit comes ahead of your due date, so nothing has to be sourced in the week you can least manage it.</p>
+<p><b>For body and for mind</b><br>Physical recovery and mental health are not separate problems. The kit and the journal treat them as one.</p>
+</div>
+</div>
+
+<div class="step"><span class="n">2.6</span><h3>Gifting</h3></div>
+<div class="body">
+<p>Add section &rarr; a <b>two-column layout, text on the left and an image on the right</b>. Background theme: pick the one using <b>Pale Sage</b>, so this section stands out from the cream ones.</p>
+<div class="copyblock">
+<p class="cap">Heading 4</p>
+<p>For the gift-giver</p>
+<p class="cap">Heading 2</p>
+<p>The gift that actually helps.</p>
+<p class="cap">Paragraph</p>
+<p>Everyone buys for the baby. The babygrows, the blankets, the tiny shoes she will pack away in a month.</p>
+<p>Be the one who buys for her &mdash; something she will open in week one and be genuinely grateful for. Choose a kit, add service vouchers, and we will send it with a note in your name.</p>
+<p class="cap">Button</p>
+<p>Gift a recovery kit</p>
+</div>
+<p style="margin-top:1rem">Leave the image slot empty for now, or use a plain sage-coloured block until your photography is shot.</p>
+</div>
+
+<div class="step"><span class="n">2.7</span><h3>The first 42 days</h3></div>
+<div class="body">
+<p>Add section &rarr; a <b>list or accordion layout</b> with four rows. Background: <b>lightest</b>. Label: <b>The first 42 days</b>. Headline: <b>And what happens after them.</b></p>
+<div class="tablewrap"><table>
+<tr><th>Row title</th><th>Text underneath</th></tr>
+<tr><td><b>Days 1&ndash;3</b><br>Getting home</td><td>Comfort and practical recovery essentials for the days when leaving the house is not an option.</td></tr>
+<tr><td><b>Days 4&ndash;14</b><br>Healing and rest</td><td>Support for physical recovery, with guidance on what is normal and the signs worth calling someone about.</td></tr>
+<tr><td><b>Days 15&ndash;42</b><br>Finding a rhythm</td><td>Feeding, sleep and mental health &mdash; the stretch where most people are told they are &ldquo;fine&rdquo; and quietly are not.</td></tr>
+<tr><td><b>Day 43 &amp; beyond</b><br>Where most support stops</td><td>The six-week check is not the finish line. Longer-term recovery, pelvic health and returning to yourself &mdash; which is the half we are named after.</td></tr>
+</table></div>
+<div class="note"><b>Why this section matters</b>Your subhead promises care &ldquo;beyond the first 42 days&rdquo;, and your company is called Fourth &amp; Beyond. This section is where that promise is actually shown. Keep the last row &mdash; it is the one that explains your name.</div>
+</div>
+
+<div class="step"><span class="n">2.8</span><h3>Resource hub teaser and closing CTA</h3></div>
+<div class="body">
+<p>Two more sections.</p>
+<p><b>First</b>, add a section with a <b>summary block</b> set to pull the three most recent blog posts (you will create the blog in Part 3 &mdash; leave this empty until then). Label: <b>Resource hub</b>. Headline: <b>Start preparing now &mdash; free.</b></p>
+<p><b>Then</b>, the closing section. Background: <b>Pale Sage</b> theme.</p>
+<div class="copyblock">
+<p class="cap">Heading 2</p>
+<p>Let us help you prepare.</p>
+<p class="cap">Paragraph</p>
+<p>Join the waitlist for early access to our home recovery kits, journals and service vouchers.</p>
+</div>
+<p style="margin-top:1rem">Put the same signup form here as in the hero.</p>
+</div>
+
+<!-- ============ PART 3 ============ -->
+<div class="part"><span class="num">3</span><div><h2>Build the resource hub</h2><p class="time">About 45 minutes</p></div></div>
+
+<div class="step"><span class="n">3.1</span><h3>Create the blog</h3></div>
+<div class="body">
+<ol class="do">
+<li>In <kbd>Pages</kbd>, click <kbd>+</kbd> and choose <kbd>Blog</kbd>.</li>
+<li>Name it <b>Resource Hub</b>.</li>
+<li>In its settings, set the URL to <code>/resource-hub</code>.</li>
+</ol>
+</div>
+
+<div class="step"><span class="n">3.2</span><h3>Set up your five categories</h3></div>
+<div class="body">
+<p>Categories are how readers filter the hub. Create these five exactly, and put every post in one of them:</p>
+<ul class="do">
+<li>Recovery</li>
+<li>Mental health</li>
+<li>Feeding</li>
+<li>Pelvic health</li>
+<li>For partners</li>
+</ul>
+<p>You add a category when writing a post, in the post&rsquo;s settings panel. Once posts exist, the category links appear automatically and the CSS from step 1.4 styles them as sky-blue chips.</p>
+</div>
+
+<div class="step"><span class="n">3.3</span><h3>Add a signup prompt to every post</h3></div>
+<div class="body">
+<p>At the bottom of each post, add the same signup form with this wording:</p>
+<div class="copyblock">
+<p><b>Get the next one first.</b></p>
+<p>Join the waitlist for early access to our kits, journals and service vouchers &mdash; and new resources as we publish them.</p>
+</div>
+<div class="warn"><b>Do not publish the sample articles</b>The six article titles in the mockup are invented placeholders, written so the design could be judged. None has been clinically reviewed. Every real article needs sign-off from Irati or Evone before it goes live.</div>
+</div>
+
+<!-- ============ PART 4 ============ -->
+<div class="part"><span class="num">4</span><div><h2>Connect the waitlist form</h2><p class="time">About 30 minutes</p></div></div>
+
+<div class="body">
+<p>This is the single most important thing on the site to get right. A form that silently fails loses you signups you will never know about.</p>
+</div>
+
+<div class="step"><span class="n">4.1</span><h3>If you chose Squarespace Forms</h3></div>
+<div class="body">
+<ol class="do">
+<li>In a section, click <kbd>Add block</kbd> &rarr; <kbd>Form</kbd>.</li>
+<li>Delete every field except <b>Email</b>.</li>
+<li>Set the button text to <b>Join the waitlist</b>.</li>
+<li>In the form&rsquo;s <kbd>Storage</kbd> settings, connect it to your email address and, if you like, a Google Sheet.</li>
+</ol>
+</div>
+
+<div class="step"><span class="n">4.2</span><h3>If you chose Beehiiv or ConvertKit</h3></div>
+<div class="body">
+<ol class="do">
+<li>In that tool, create a signup form and choose the <b>embed</b> option. Copy the code it gives you.</li>
+<li>In Squarespace, click <kbd>Add block</kbd> &rarr; <kbd>Code</kbd>, and paste it in.</li>
+<li>Set up a <b>welcome email</b> that sends automatically on signup. This is the point of choosing this option &mdash; do not skip it.</li>
+</ol>
+</div>
+
+<div class="step"><span class="n">4.3</span><h3>Test it properly</h3></div>
+<div class="body">
+<ol class="do">
+<li>Open your live site in a private/incognito window.</li>
+<li>Sign up with a real email address you can check.</li>
+<li>Confirm the email actually arrives, and that the address appears in your list.</li>
+<li>Repeat on your phone.</li>
+</ol>
+<div class="warn"><b>Do this before you tell anyone the site is live</b>Test every form on the site &mdash; hero, closing section, and blog posts. They are separate blocks and any one of them can be misconfigured on its own.</div>
+</div>
+
+<!-- ============ PART 5 ============ -->
+<div class="part"><span class="num">5</span><div><h2>Before you launch</h2><p class="time">About 30 minutes</p></div></div>
+
+<div class="body">
+<p>Work through this list. The first four are the ones that actually cost you if missed.</p>
+<ul class="check">
+<li><b>Every form tested</b> on desktop and phone, with a real email that arrived.</li>
+<li><b>Nothing published that has not been clinically checked.</b> No placeholder articles, no health claims without sign-off.</li>
+<li><b>No invented statistics.</b> If you use your gifting research figure, state the sample size and the date it was collected.</li>
+<li><b>Medical disclaimer in the footer:</b> &ldquo;The information here is for general guidance and does not replace advice from your midwife, GP or health visitor.&rdquo;</li>
+<li><b>Checked on a phone.</b> Most of your visitors will be on one. Scroll the whole site.</li>
+<li><b>No heading is bold</b> anywhere.</li>
+<li><b>Logo readable on every background</b>, including the sage and green sections.</li>
+<li><b>Privacy policy page exists</b> and is linked in the footer &mdash; you are collecting email addresses, so under UK GDPR you need one.</li>
+<li><b>Page title and description set</b> for both pages, under each page&rsquo;s SEO settings.</li>
+<li><b>Favicon uploaded</b> (Design &rarr; Browser icon).</li>
+</ul>
+</div>
+
+<div class="part"><span class="num">?</span><div><h2>If something looks wrong</h2></div></div>
+<div class="body">
+<div class="tablewrap"><table>
+<tr><th>Problem</th><th>Fix</th></tr>
+<tr><td>Headings look smudged or too heavy</td><td>Something is bold. Check the text is not bolded manually, and that the CSS from step 1.4 saved correctly.</td></tr>
+<tr><td>Buttons are the wrong colour</td><td>The CSS did not save. Go back to step 1.4 and re-paste it.</td></tr>
+<tr><td>A section is the wrong background</td><td>Hover the section, click the paintbrush, pick a different theme. It does not affect any other section.</td></tr>
+<tr><td>Everything suddenly looks broken</td><td>Delete everything in the Custom CSS box and save. The site returns to normal immediately.</td></tr>
+<tr><td>A menu name here does not match what you see</td><td>Squarespace renames menus occasionally. Search the Squarespace Help Centre for the setting name &mdash; the setting still exists, it has just moved.</td></tr>
+</table></div>
+</div>
+
+</div>
