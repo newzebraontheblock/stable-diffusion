@@ -44,10 +44,21 @@ gift-giver directly, not only to the end user.
 | Pale Sage | `#E8E8D8` | Secondary/card backgrounds, borders |
 | Soft Sky Blue | `#A8C4D8` | Sparing — category tag chips only |
 
-**Typography:** Cambria for headings, Avenir for body. Both are commercially
-licensed and were NOT embedded in the mockup — it falls back to whatever the
-viewing machine has. Cambria ships only 400/700, so large display headings are
-set at 400 and small headings at 700 to avoid synthesised weights.
+**Typography:** **Alice** for headings, **Calibri** for body.
+
+- *Alice* is a free Google Font (OFL), so it should be selectable directly in
+  Squarespace's font library. It ships a **single regular weight and no italic**
+  — every heading is therefore set at 400 and hierarchy is carried by size, not
+  weight. Do not set headings bold; it produces a synthesised faux-bold.
+- *Calibri* is a Microsoft desktop font. Owning Office does **not** grant web
+  use — it needs a separately purchased webfont licence, then upload via
+  Squarespace's custom font uploader. *Carlito* is a free, metric-compatible
+  substitute if the licence is not worth buying.
+
+Neither face is embedded in the mockup (both were unreachable from the build
+environment), so the HTML falls back to whatever the viewing machine has —
+most likely Georgia in place of Alice. Layout and spacing are accurate; the
+typefaces will substitute.
 
 **Logo:** lowercase staggered two-line lockup — "fourth" upper-left, "& beyond"
 dropping right beneath it, ampersand leading line two. The mockup reconstructs
@@ -104,13 +115,12 @@ Two structural devices carry meaning and should be preserved:
   months before launch. Not yet chosen.
 - **Launch date not set.** A "kits ship [date]" line under the CTA would lift
   conversion; no date confirmed yet.
-- **Font licensing unresolved.** Avenir Next needs an Adobe Fonts subscription
-  via code injection; Cambria needs a separately purchased webfont licence
-  (owning Microsoft Office does not grant web use).
+- **Calibri licensing unresolved.** Needs a purchased webfont licence, or
+  substitute the metric-compatible Carlito. Alice is free and unblocked.
 - **Headline typeface tension.** The logo is set in a high-contrast display
-  serif; Cambria is a low-contrast screen serif. They do not obviously read as
-  the same brand. Using the logo's own typeface for headlines was recommended
-  and not yet decided.
+  serif. Alice is closer to it than Cambria was, but still not the same face.
+  Using the logo's own typeface for headlines remains the stronger option and
+  is not yet decided.
 
 ## Do not publish as-is
 
