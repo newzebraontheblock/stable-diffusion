@@ -70,6 +70,10 @@
   --amp:#E09A90;
 }
 
+/* review toggle: lighter ground. Light mode only - dark keeps its own ground. */
+@media (prefers-color-scheme:light){:root.tint:not([data-theme="dark"]){--ground:#DDE6EA}}
+:root.tint[data-theme="light"]{--ground:#DDE6EA}
+
 *{box-sizing:border-box}
 body{
   margin:0;background:var(--ground);color:var(--ink);
@@ -96,7 +100,8 @@ a{color:inherit}
 .tab{font:inherit;font-weight:600;cursor:pointer;background:transparent;color:inherit;opacity:.6;
   border:1px solid transparent;border-radius:999px;padding:.3rem .85rem}
 .tab:hover{opacity:1}
-.tab[aria-selected="true"]{opacity:1;background:var(--cream);color:var(--green)}
+.tab[aria-selected="true"],.tab[aria-pressed="true"]{opacity:1;background:var(--cream);color:var(--green)}
+.grd{display:inline-flex;align-items:center;gap:.3rem}
 
 /* ---------- wordmark ---------- */
 .brand,.fbrand{
@@ -276,7 +281,10 @@ footer a:hover{color:var(--ink)}
       <button class="tab" role="tab" aria-selected="false" data-view="hub">Resource Hub</button>
     </div>
     <span class="sep"></span>
-    <span>Visual reference only &mdash; rebuild natively in Squarespace</span>
+    <span class="grd">Ground
+      <button class="tab" id="g-sky" aria-pressed="true">Sky</button>
+      <button class="tab" id="g-tint" aria-pressed="false">Tint</button>
+    </span>
   </div>
 </div>
 
@@ -558,6 +566,15 @@ footer a:hover{color:var(--ink)}
     var el=e.target.closest('[data-go]');
     if(el){e.preventDefault();show(el.dataset.go)}
   });
+  var sky=document.getElementById('g-sky'),tint=document.getElementById('g-tint');
+  function ground(isTint){
+    document.documentElement.classList.toggle('tint',isTint);
+    sky.setAttribute('aria-pressed',String(!isTint));
+    tint.setAttribute('aria-pressed',String(isTint));
+  }
+  sky.addEventListener('click',function(){ground(false)});
+  tint.addEventListener('click',function(){ground(true)});
+
   var pills=[].slice.call(document.querySelectorAll('.pill'));
   var cards=[].slice.call(document.querySelectorAll('#grid .card'));
   pills.forEach(function(p){
