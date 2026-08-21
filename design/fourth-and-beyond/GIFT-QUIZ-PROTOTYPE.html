@@ -56,6 +56,7 @@ p{margin:0}
 .rblock h3{font-size:1.25rem;margin-bottom:.5rem}
 .rblock p + p{margin-top:.6rem}
 .price{font-family:var(--display);font-size:1.5rem;color:var(--emphasis)}
+.why{font-size:.9rem;color:var(--muted);margin-top:.6rem;padding-top:.6rem;border-top:1px solid var(--mist)}
 .notebox{background:var(--raised);border-radius:2px;padding:1rem 1.15rem;margin-top:.8rem;
   font-family:var(--display);font-size:1.08rem;line-height:1.5}
 .copyrow{display:flex;align-items:center;gap:.8rem;margin-top:.75rem}
@@ -109,13 +110,13 @@ p{margin:0}
     unknown:"The kit covers either case — practical recovery essentials, with the Maternal Journal included for the parts nobody explains."
   };
   var ADDON={
-    low:{h:'The Home Recovery Kit + a night nanny or meals voucher',
+    low:{h:'The Full Home Recovery Kit + a night nanny or meals voucher',
          p:"With little help at home, what she needs most is hands, not more objects. The voucher is the part she'll remember."},
-    medium:{h:'The Home Recovery Kit + a physio or counselling voucher',
+    medium:{h:'The Full Home Recovery Kit + a physio or counselling voucher',
          p:"She has some support around her, so the voucher covers what friends and family can't."},
-    high:{h:'The Home Recovery Kit',
+    high:{h:'The Full Home Recovery Kit',
          p:"She's got people around her. The kit on its own is plenty — no need to add to it."},
-    unknown:{h:'The Home Recovery Kit',
+    unknown:{h:'The Full Home Recovery Kit',
          p:"Without knowing what help she has, the kit on its own is the safe choice. It works either way."}
   };
   var TIME={
@@ -162,7 +163,8 @@ p{margin:0}
 
       '<div class="rblock"><p class="rlabel">What to send</p>'+
       '<h3>'+esc(add.h)+'</h3>'+
-      '<p class="price">£150'+(A.support==='low'||A.support==='medium'?' + voucher':'')+'</p>'+
+      '<p class="price">Full kit'+(A.support==='low'||A.support==='medium'?' + voucher':'')+'</p>'+
+      '<p class="why">There are two kits. The <b>Basic</b> covers a straightforward vaginal birth; the <b>Full</b> is ready for a caesarean too. You can’t know which she’ll need — and nor can she — so gifts should always be the Full one.</p>'+
       '<p>'+esc(add.p)+'</p>'+
       '<p>'+esc(LEAD[A.first]||LEAD.unknown)+'</p>'+
       (shared?'<p><b>Going in with others works well here</b> — three of you covers the kit comfortably.</p>':'')+

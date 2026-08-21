@@ -163,7 +163,12 @@ h2{font-size:clamp(1.7rem,1.3rem + 1.6vw,2.5rem);letter-spacing:-.015em;max-widt
 .aphoto{aspect-ratio:1;background:var(--slot);border:1px dashed var(--muted);border-radius:2px}
 .await,.hold,.todo{color:var(--muted);font-size:.8125rem;font-style:italic}
 .hold{margin-top:1.5rem;max-width:60ch}
-.timing{margin-top:1.5rem;color:var(--ink);font-size:1rem}
+.timing{margin-top:1rem;color:var(--muted);font-size:.95rem}
+.choose{margin-top:1.5rem;background:var(--surface);border:1px solid var(--mist);
+  border-left:3px solid var(--coral);border-radius:2px;padding:1rem 1.2rem;font-size:1rem;max-width:56ch}
+.choose b{color:var(--emphasis)}
+.todo-tag{background:transparent!important;color:var(--muted)!important;
+  border:1px dashed var(--mist);font-style:italic}
 
 /* ---------- product architecture ---------- */
 .products{display:flex;flex-direction:column;gap:.6rem;margin-top:2.75rem}
@@ -341,9 +346,16 @@ footer a:hover{color:var(--ink)}
       <h2>Three parts, for body and for mind.</h2>
       <div class="products">
         <details class="product">
-          <summary><span class="pname">The Home Recovery Kit</span><span class="pmeta">&pound;150</span></summary>
+          <summary><span class="pname">Basic Home Recovery Kit</span><span class="pmeta">&pound;150</span></summary>
           <div class="pbody">
-            <p>Clinically reviewed recovery essentials, in the house before you need them. No ordering, no pharmacy run, no asking someone to go out for you in week one.</p>
+            <p>For a straightforward vaginal birth. Clinically reviewed recovery essentials, in the house before you need them &mdash; no ordering, no pharmacy run, no asking someone to go out for you in week one.</p>
+            <p class="todo">[Full contents list to be added]</p>
+          </div>
+        </details>
+        <details class="product">
+          <summary><span class="pname">Full Home Recovery Kit</span><span class="pmeta todo-tag">Price to confirm</span></summary>
+          <div class="pbody">
+            <p>Ready for however the birth actually goes, caesarean included. Everything in the Basic kit, plus what she will need if she is recovering from abdominal surgery at the same time as everything else.</p>
             <p class="todo">[Full contents list to be added]</p>
           </div>
         </details>
@@ -360,6 +372,7 @@ footer a:hover{color:var(--ink)}
           </div>
         </details>
       </div>
+      <p class="choose"><b>Gifting? Send the Full kit.</b> Nobody knows in advance how the birth will go &mdash; including her. A caesarean is often not something anyone gets to plan for.</p>
       <p class="timing">Arrives before the due date, ready for the day she comes home.</p>
     </div>
   </section>
