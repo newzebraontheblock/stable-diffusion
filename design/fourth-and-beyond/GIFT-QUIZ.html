@@ -1,0 +1,238 @@
+<title>What Does She Actually Need</title>
+<style>
+:root{
+  --green:#2E3830; --coral:#CC7C72; --cream:#FAF8F4; --sage:#E8E8D8; --sky:#A8C4D8;
+  --ground:#DDE6EA; --surface:var(--cream); --raised:var(--sage); --slot:#C2D3DE;
+  --ink:var(--green); --emphasis:#1C231E; --muted:#434E42; --mist:#9FB9C9;
+  --display:Alice,Georgia,Cambria,'Times New Roman',serif;
+  --body:Calibri,Carlito,'Segoe UI',ui-sans-serif,-apple-system,Roboto,Arial,sans-serif;
+  --mono:ui-monospace,'SFMono-Regular',Menlo,Consolas,monospace;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--body);
+  font-size:17px;line-height:1.62;-webkit-font-smoothing:antialiased}
+.page{max-width:840px;margin:0 auto;padding:clamp(2rem,6vw,4rem) clamp(1.15rem,5vw,2.5rem) 6rem}
+h1,h2,h3,h4{font-family:var(--display);font-weight:400;margin:0;line-height:1.18;text-wrap:balance}
+p{margin:0}
+a{color:var(--ink)}
+:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+
+.masthead{border-bottom:2px solid var(--ink);padding-bottom:1.4rem;margin-bottom:2.5rem}
+.kicker{font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;font-weight:700;
+  color:var(--ink);opacity:.65;margin-bottom:.8rem}
+h1{font-size:clamp(2rem,1.5rem + 2.4vw,3rem);letter-spacing:-.02em}
+.masthead p{color:var(--muted);margin-top:.9rem;max-width:58ch}
+
+.sect{margin-top:3.5rem;padding-top:1.4rem;border-top:1px solid var(--mist);
+  display:flex;align-items:baseline;gap:.9rem}
+.sect .num{font-family:var(--display);font-size:2rem;color:var(--ink);opacity:.4;line-height:1;
+  min-width:1.8rem;font-variant-numeric:tabular-nums}
+.sect h2{font-size:clamp(1.4rem,1.2rem + 1vw,1.9rem);letter-spacing:-.015em}
+.body{margin-top:1rem}
+.body p + p{margin-top:.8rem}
+
+.q{background:var(--surface);border:1px solid var(--mist);border-radius:2px;
+  padding:1.35rem 1.5rem;margin-top:1.1rem}
+.q .qn{font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;font-weight:700;
+  color:var(--muted);margin-bottom:.5rem}
+.q h3{font-size:1.3rem;margin-bottom:.9rem}
+.opts{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:.45rem}
+.opts li{display:flex;flex-wrap:wrap;gap:.5rem 1rem;align-items:baseline;
+  border-top:1px solid var(--mist);padding-top:.45rem;font-size:.97rem}
+.opts li:first-child{border-top:0;padding-top:0}
+.opts .tag{margin-left:auto;font-family:var(--mono);font-size:.72rem;color:var(--muted);
+  background:var(--raised);padding:.12rem .45rem;border-radius:2px;white-space:nowrap}
+.why{margin-top:.9rem;font-size:.9rem;color:var(--muted);font-style:italic}
+
+.tablewrap{overflow-x:auto;margin-top:1.1rem;border:1px solid var(--mist);border-radius:2px}
+table{border-collapse:collapse;width:100%;font-size:.94rem;background:var(--surface)}
+th,td{text-align:left;padding:.62rem .8rem;border-bottom:1px solid var(--mist);vertical-align:top}
+th{background:var(--raised);font-weight:700;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase}
+tr:last-child td{border-bottom:0}
+code{font-family:var(--mono);font-size:.86em;background:var(--raised);padding:.1em .35em;border-radius:2px}
+
+.copyblock{background:var(--surface);border-left:3px solid var(--coral);border:1px solid var(--mist);
+  border-left:3px solid var(--coral);padding:1rem 1.2rem;margin-top:.9rem;border-radius:2px}
+.copyblock .cap{font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;font-weight:700;
+  color:var(--muted);margin-bottom:.5rem}
+.copyblock p + p{margin-top:.6rem}
+
+.note{background:var(--raised);border-radius:2px;padding:.95rem 1.15rem;margin-top:1.1rem;font-size:.94rem}
+.warn{background:var(--surface);border-left:3px solid var(--coral);border-radius:2px;
+  padding:.95rem 1.15rem;margin-top:1.1rem;font-size:.94rem}
+.note b,.warn b{display:block;margin-bottom:.25rem}
+
+ul.do,ol.do{margin:.9rem 0 0;padding-left:1.3rem;display:flex;flex-direction:column;gap:.45rem}
+ul.do li::marker,ol.do li::marker{color:var(--ink)}
+</style>
+
+<div class="page">
+
+<header class="masthead">
+  <p class="kicker">Fourth &amp; Beyond &middot; Gifter quiz specification</p>
+  <h1>What does she actually need?</h1>
+  <p>A four-question quiz for gift-buyers, and the logic behind its results. Hand this to whoever builds it, or build it yourself in Typeform. Every question here is one a colleague could answer &mdash; not just a partner.</p>
+</header>
+
+<div class="note">
+  <b>The output is not a product recommendation</b>
+  It is a short brief: <b>what to send, when it should arrive, and what to write in the note.</b> That last part is what gift-buyers actually agonise over, and nobody else in this category gives it to them.
+</div>
+
+<!-- 1 -->
+<div class="sect"><span class="num">1</span><h2>The questions</h2></div>
+<div class="body">
+<p>Four, plus an optional fifth. One tap each. The tag on the right is what gets stored against the signup for segmentation.</p>
+
+<div class="q">
+  <p class="qn">Question 1</p>
+  <h3>Where is she up to?</h3>
+  <ul class="opts">
+    <li>More than six weeks until the birth <span class="tag">stage=early</span></li>
+    <li>Due within the next six weeks <span class="tag">stage=imminent</span></li>
+    <li>The baby has just arrived <span class="tag">stage=newborn</span></li>
+    <li>She&rsquo;s a few weeks in <span class="tag">stage=weeks_in</span></li>
+  </ul>
+  <p class="why">Drives the timing line, and tells you when to launch.</p>
+</div>
+
+<div class="q">
+  <p class="qn">Question 2</p>
+  <h3>Is this her first baby?</h3>
+  <ul class="opts">
+    <li>Her first <span class="tag">first=yes</span></li>
+    <li>She&rsquo;s done this before <span class="tag">first=no</span></li>
+    <li>I&rsquo;m not sure <span class="tag">first=unknown</span></li>
+  </ul>
+  <p class="why">First-timers don&rsquo;t know what to ask for. Second-timers know exactly how hard it is and want relief, not guidance.</p>
+</div>
+
+<div class="q">
+  <p class="qn">Question 3</p>
+  <h3>How much help will she have at home?</h3>
+  <ul class="opts">
+    <li>A partner around most of the time <span class="tag">support=high</span></li>
+    <li>Some family or friends nearby <span class="tag">support=medium</span></li>
+    <li>Mostly on her own <span class="tag">support=low</span></li>
+    <li>I don&rsquo;t know <span class="tag">support=unknown</span></li>
+  </ul>
+  <p class="why">The single strongest signal for which voucher to suggest.</p>
+</div>
+
+<div class="q">
+  <p class="qn">Question 4</p>
+  <h3>How well do you know her?</h3>
+  <ul class="opts">
+    <li>Very well &mdash; I&rsquo;d know how she&rsquo;s really doing <span class="tag">closeness=close</span></li>
+    <li>Good friend or family <span class="tag">closeness=friend</span></li>
+    <li>A colleague, or a friend of a friend <span class="tag">closeness=distant</span></li>
+  </ul>
+  <p class="why">The clever one. It calibrates how personal the suggested note should be &mdash; and stops a colleague being handed wording that would mortify them both.</p>
+</div>
+
+<div class="q">
+  <p class="qn">Question 5 &mdash; optional, allow skip</p>
+  <h3>Roughly what did you have in mind?</h3>
+  <ul class="opts">
+    <li>Around &pound;50 &mdash; I&rsquo;m going in with others <span class="tag">budget=shared</span></li>
+    <li>Around &pound;150 <span class="tag">budget=kit</span></li>
+    <li>&pound;200 or more <span class="tag">budget=plus</span></li>
+    <li>Rather not say <span class="tag">budget=skip</span></li>
+  </ul>
+  <p class="why">Pre-launch this is research, not a filter. The &ldquo;going in with others&rdquo; answer also tells you how much demand there is for group gifting.</p>
+</div>
+</div>
+
+<!-- 2 -->
+<div class="sect"><span class="num">2</span><h2>Result logic</h2></div>
+<div class="body">
+<p>Don&rsquo;t write twenty-seven result pages. The result is assembled from three modular blocks, so the build stays small and the copy stays writable.</p>
+
+<h3 style="margin-top:2rem;font-size:1.2rem">Block A &mdash; what to send</h3>
+<div class="tablewrap"><table>
+<tr><th>If</th><th>Recommend</th></tr>
+<tr><td><code>support=low</code></td><td>Kit + <b>night nanny or meals voucher</b>. She needs hands, not objects.</td></tr>
+<tr><td><code>support=medium</code></td><td>Kit + <b>physio or counselling voucher</b>.</td></tr>
+<tr><td><code>support=high</code> or <code>unknown</code></td><td><b>The kit on its own.</b> Don&rsquo;t upsell into a gap that may not exist.</td></tr>
+<tr><td><code>budget=shared</code></td><td>Kit, framed as a <b>group gift</b> &mdash; &ldquo;three of you covers it.&rdquo;</td></tr>
+<tr><td><code>first=yes</code></td><td>Lead the description with <b>the journal</b>; she doesn&rsquo;t yet know what she&rsquo;ll need.</td></tr>
+<tr><td><code>first=no</code></td><td>Lead with <b>practical relief</b>; she already knows.</td></tr>
+</table></div>
+
+<h3 style="margin-top:2rem;font-size:1.2rem">Block B &mdash; when it should arrive</h3>
+<div class="tablewrap"><table>
+<tr><th>If</th><th>Line to show</th></tr>
+<tr><td><code>stage=early</code></td><td>&ldquo;Order when you like &mdash; we&rsquo;ll hold it and deliver the week before she&rsquo;s due.&rdquo;</td></tr>
+<tr><td><code>stage=imminent</code></td><td>&ldquo;Send it now. It should be in the house before the hospital bag leaves it.&rdquo;</td></tr>
+<tr><td><code>stage=newborn</code></td><td>&ldquo;Send it today. The first fortnight is when it does the most work.&rdquo;</td></tr>
+<tr><td><code>stage=weeks_in</code></td><td>&ldquo;Not too late &mdash; most support disappears around now, which is exactly the problem.&rdquo;</td></tr>
+</table></div>
+
+<h3 style="margin-top:2rem;font-size:1.2rem">Block C &mdash; what to write</h3>
+<p style="margin-top:.8rem">Offer it as copyable text. This is the part people screenshot.</p>
+<div class="copyblock">
+<p class="cap">closeness = close</p>
+<p>&ldquo;I know everyone&rsquo;s going to be looking at the baby. This one&rsquo;s for you. I&rsquo;m around &mdash; for the 3am ones too.&rdquo;</p>
+</div>
+<div class="copyblock">
+<p class="cap">closeness = friend</p>
+<p>&ldquo;Everyone&rsquo;s buying for the baby, so I got you something for you. No need to reply to this &mdash; or to anything, for a while.&rdquo;</p>
+</div>
+<div class="copyblock">
+<p class="cap">closeness = distant</p>
+<p>&ldquo;Congratulations. We thought you might like something for you, rather than another babygrow. Wishing you a gentle few weeks.&rdquo;</p>
+</div>
+<div class="note"><b>Why the note matters more than the recommendation</b>A gift-buyer has usually decided to spend the money before they arrive. What they&rsquo;re stuck on is the card. Solve that and you&rsquo;ve done something no competitor does.</div>
+</div>
+
+<!-- 3 -->
+<div class="sect"><span class="num">3</span><h2>The results screen</h2></div>
+<div class="body">
+<div class="copyblock">
+<p class="cap">Heading</p>
+<p>Here&rsquo;s what we&rsquo;d send.</p>
+<p class="cap">Then, in order</p>
+<p><b>Block A</b> &mdash; the recommendation, with the price shown<br>
+<b>Block B</b> &mdash; the timing line<br>
+<b>Block C</b> &mdash; the suggested note, with a copy button</p>
+<p class="cap">Then the single CTA</p>
+<p>We&rsquo;re not open yet &mdash; kits ship spring 2027. Join the waitlist and we&rsquo;ll tell you the moment gifting opens, in time for her.</p>
+</div>
+<div class="warn"><b>Show the result before asking for the email</b>Gating it behind a signup will lift capture a little and cost you more in drop-off and goodwill. Your brand&rsquo;s whole promise is that it gives things away &mdash; a free resource hub, guidance with no strings. Withholding a four-question result contradicts that on the first interaction. Show the answer, then ask.</div>
+</div>
+
+<!-- 4 -->
+<div class="sect"><span class="num">4</span><h2>What you learn</h2></div>
+<div class="body">
+<p>This is the real reason to build it pre-launch. Every completion tells you:</p>
+<ul class="do">
+<li><b>When to launch</b> &mdash; the spread of <code>stage</code> answers is a live due-date curve.</li>
+<li><b>Whether the gifting thesis holds</b> &mdash; volume through this quiz versus your main signup form is a direct test of your 81% figure.</li>
+<li><b>Whether to build group gifting</b> &mdash; the <code>budget=shared</code> count answers it for you.</li>
+<li><b>How to segment the emails</b> &mdash; a gift-buyer and an expectant mother need entirely different nurture sequences. Right now your list can&rsquo;t tell them apart.</li>
+</ul>
+<div class="note"><b>Tag every signup with <code>audience=gifter</code></b>Even if you never use the other fields, this one alone justifies the build. It splits your list in two.</div>
+</div>
+
+<!-- 5 -->
+<div class="sect"><span class="num">5</span><h2>Rules &mdash; do not break these</h2></div>
+<div class="body">
+<div class="warn"><b>Never ask how she is feeling</b>The moment a question touches mood, you are adjacent to clinical screening and you do not have the governance for it. Every question stays practical: timing, household, support, relationship. No exceptions, however gently worded.</div>
+<div class="warn"><b>Do not collect her details</b>No name, no email, no address for the mother at quiz stage. The person answering is not the data subject and cannot consent on her behalf. Collect recipient details at checkout, from a buyer who is actually purchasing.</div>
+<div class="warn"><b>The result is guidance &mdash; get it signed off</b>Anything suggesting what a recovering woman needs is health guidance. Same clinician sign-off as the resource hub articles, before it goes live.</div>
+</div>
+
+<!-- 6 -->
+<div class="sect"><span class="num">6</span><h2>Building it</h2></div>
+<div class="body">
+<div class="tablewrap"><table>
+<tr><th>Item</th><th>Detail</th></tr>
+<tr><td><b>Tool</b></td><td><b>Typeform</b> is the safe choice &mdash; conditional logic, clean on mobile, connects to most email tools. <b>Interact</b> is purpose-built for quizzes if you want more.</td></tr>
+<tr><td><b>Squarespace</b></td><td>No native quiz. It goes in a <b>Code Block</b>, which needs the <b>Core plan or above</b>.</td></tr>
+<tr><td><b>Where it lives</b></td><td>Its own page at <code>/what-does-she-need</code>, linked from the Gifting section and the nav.</td></tr>
+<tr><td><b>Prerequisite</b></td><td><b>The waitlist form must already work.</b> A quiz feeding a broken backend is worse than a plain email field that collects.</td></tr>
+</table></div>
+<div class="note"><b>Sequence</b>Get the plain waitlist live and tested first. Add this second, as the upgrade. It is the highest-value thing you can build once the basics collect properly &mdash; but only once they do.</div>
+</div>
+
+</div>
