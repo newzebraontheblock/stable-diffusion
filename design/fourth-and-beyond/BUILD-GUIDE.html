@@ -165,12 +165,12 @@ tr:last-child td{border-bottom:0}
 <li>Click each of the five swatches in turn and type in the code below. Include the <code>#</code>.</li>
 </ol>
 <div class="tablewrap"><table>
-<tr><th>Slot</th><th>Colour</th><th>Code to type</th></tr>
-<tr><td>1</td><td><span class="swatch" style="background:#2E3830"></span>Deep Green</td><td><code>#2E3830</code></td></tr>
-<tr><td>2</td><td><span class="swatch" style="background:#CC7C72"></span>Berry/Coral</td><td><code>#CC7C72</code></td></tr>
-<tr><td>3</td><td><span class="swatch" style="background:#FAF8F4"></span>Cream</td><td><code>#FAF8F4</code></td></tr>
-<tr><td>4</td><td><span class="swatch" style="background:#E8E8D8"></span>Pale Sage</td><td><code>#E8E8D8</code></td></tr>
-<tr><td>5</td><td><span class="swatch" style="background:#A8C4D8"></span>Soft Sky Blue</td><td><code>#A8C4D8</code></td></tr>
+<tr><th>Slot</th><th>Colour</th><th>Code to type</th><th>Now used for</th></tr>
+<tr><td>1</td><td><span class="swatch" style="background:#A8C4D8"></span>Soft Sky Blue</td><td><code>#A8C4D8</code></td><td><b>Main background</b></td></tr>
+<tr><td>2</td><td><span class="swatch" style="background:#2E3830"></span>Deep Green</td><td><code>#2E3830</code></td><td><b>Accent</b> &mdash; text, buttons, labels</td></tr>
+<tr><td>3</td><td><span class="swatch" style="background:#FAF8F4"></span>Cream</td><td><code>#FAF8F4</code></td><td>Cards and button text</td></tr>
+<tr><td>4</td><td><span class="swatch" style="background:#E8E8D8"></span>Pale Sage</td><td><code>#E8E8D8</code></td><td>Banded sections</td></tr>
+<tr><td>5</td><td><span class="swatch" style="background:#CC7C72"></span>Berry/Coral</td><td><code>#CC7C72</code></td><td>Logo ampersand and small rules only</td></tr>
 </table></div>
 <p>Squarespace will now generate a set of <b>themes</b> from these &mdash; named things like &ldquo;Lightest 1&rdquo; and &ldquo;Dark 1&rdquo;. You will pick a theme for each section later. Do not worry about them yet.</p>
 </div>
@@ -218,7 +218,7 @@ h4 {
   text-transform: uppercase !important;
   letter-spacing: 0.16em !important;
   font-size: 0.75rem !important;
-  color: #AC4B3E !important;
+  color: #2E3830 !important;
 }
 
 /* Buttons: deep green, coral on hover */
@@ -231,13 +231,13 @@ h4 {
 }
 .sqs-block-button-element:hover,
 .sqs-button-element--primary:hover {
-  background-color: #AC4B3E !important;
+  background-color: #1C231E !important;
 }
 
-/* Blog category tags: sky blue chip, green text */
+/* Blog category tags: cream chip, green text */
 .blog-categories a,
 .blog-meta-item--categories a {
-  background: #A8C4D8;
+  background: #FAF8F4;
   color: #2E3830 !important;
   padding: 0.2em 0.6em;
   border-radius: 2px;
@@ -247,7 +247,7 @@ h4 {
   text-decoration: none !important;
 }</code></pre>
 <div class="note"><b>What that did</b>It stopped headings going bold, turned the &ldquo;Heading 4&rdquo; text style into your small coral label, made buttons deep green with a coral hover, and styled your blog category tags as sky-blue chips.</div>
-<div class="warn"><b>On the colours in that code</b>The coral used for text is <code>#AC4B3E</code>, a deeper version of your brand coral. Your actual brand coral is too light to read as small text on cream &mdash; it fails accessibility standards. The true <code>#CC7C72</code> is still used for the logo and decorative lines. Please keep this as is.</div>
+<div class="warn"><b>On the colours in that code</b>The page background is now Soft Sky Blue and Deep Green does the work of text, buttons and labels. Two consequences to keep: <b>coral can no longer be used for text</b> &mdash; it is unreadable on blue at any size, so it survives only in the logo ampersand and a few thin rules; and <b>category tags are now cream chips</b> with green text, because sky blue cannot sit on itself. Please keep both as they are.</div>
 </div>
 
 <!-- ============ PART 2 ============ -->
