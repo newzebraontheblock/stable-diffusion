@@ -152,15 +152,43 @@ h2{font-size:clamp(1.7rem,1.3rem + 1.6vw,2.5rem);letter-spacing:-.015em;max-widt
 .pull{font-family:var(--display);font-size:clamp(1.5rem,1.2rem + 1.4vw,2.1rem);line-height:1.25;
   color:var(--accent);max-width:22ch;border-left:3px solid var(--coral);padding-left:1.25rem}
 
+/* ---------- hero dual paths ---------- */
+.paths{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:2rem}
+.paths .btn{flex:1 1 13rem;text-align:center}
+.btn-alt{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--ink)}
+.btn-alt:hover{background:var(--ink);color:var(--ground)}
+@media (max-width:520px){.paths .btn{flex:1 1 100%}}
+
+/* ---------- two paths section ---------- */
+.pathgrid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(1.5rem,4vw,3rem)}
+.pathblock{display:flex;flex-direction:column;gap:.9rem;background:var(--surface);
+  border:1px solid var(--mist);padding:clamp(1.35rem,3vw,2rem)}
+.pathblock h2{font-size:clamp(1.25rem,1.1rem + .7vw,1.6rem);max-width:none}
+.pathblock p{color:var(--muted);font-size:.9688rem}
+@media (max-width:720px){.pathgrid{grid-template-columns:1fr}}
+
+/* ---------- advisory board (structure only) ---------- */
+.advisors{display:grid;gap:1.5rem;grid-template-columns:repeat(auto-fit,minmax(12rem,1fr));margin-top:1.5rem}
+.advisor{display:flex;flex-direction:column;gap:.75rem}
+.aphoto{aspect-ratio:1;background:var(--sage);border:1px dashed var(--muted);border-radius:2px}
+.await,.hold,.todo{color:var(--muted);font-size:.8125rem;font-style:italic}
+.hold{margin-top:1.5rem;max-width:60ch}
+.timing{margin-top:1.5rem;color:var(--ink);font-size:1rem}
+
 /* ---------- product architecture ---------- */
-.products{display:grid;gap:1.25rem;grid-template-columns:repeat(auto-fit,minmax(16rem,1fr));margin-top:2.75rem}
-.product{display:flex;flex-direction:column;gap:.7rem;background:var(--surface);
-  border:1px solid var(--mist);padding:1.75rem}
-.product.core{background:var(--raised)}
-.product h3{font-size:1.35rem;color:var(--ink)}
-.product p{color:var(--muted);font-size:.9688rem}
-.tagline{font-size:.6875rem;letter-spacing:.13em;text-transform:uppercase;font-weight:600;
-  color:var(--tag-fg);background:var(--tag-bg);padding:.2rem .55rem;border-radius:2px;align-self:flex-start}
+.products{display:flex;flex-direction:column;gap:.6rem;margin-top:2.75rem}
+.product{background:var(--surface);border:1px solid var(--mist)}
+.product summary{display:flex;flex-wrap:wrap;align-items:baseline;gap:.5rem 1rem;
+  cursor:pointer;padding:1.15rem 1.4rem;list-style:none}
+.product summary::-webkit-details-marker{display:none}
+.product summary::after{content:"+";margin-left:auto;color:var(--accent);font-size:1.3rem;line-height:1}
+.product[open] summary::after{content:"\2212"}
+.product summary:hover{background:var(--raised)}
+.pname{font-family:var(--display);font-size:1.3rem;color:var(--ink)}
+.pmeta{font-size:.8125rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600;
+  color:var(--tag-fg);background:var(--tag-bg);padding:.2rem .55rem;border-radius:2px}
+.pbody{padding:0 1.4rem 1.4rem;display:flex;flex-direction:column;gap:.7rem}
+.pbody p{color:var(--muted);font-size:.9688rem}
 
 /* ---------- value props ---------- */
 .props{display:grid;gap:2.25rem;grid-template-columns:repeat(auto-fit,minmax(14rem,1fr));margin-top:2.5rem}
@@ -265,7 +293,12 @@ footer a:hover{color:var(--ink)}
   <section class="hero">
     <div class="wrap">
       <h1 class="reveal">Nobody prepares you for the fourth trimester. <span>We do.</span></h1>
-      <p class="lede reveal">Journals and post&#8209;birth home recovery care packages, <b>curated by mums and perinatal specialists</b>, for body and for mind, beyond the first 42 days.</p>
+      <p class="lede reveal">Journals and post&#8209;birth home recovery care packages, <b>chosen by a mother, informed by clinicians</b>, for body and for mind, beyond the first 42 days.</p>
+
+      <div class="paths reveal">
+        <a class="btn" href="#join">Buy for someone else</a>
+        <a class="btn btn-alt" href="#join">Buy for yourself</a>
+      </div>
 
       <div class="trimesters reveal" aria-label="The four trimesters">
         <div class="tri"><span>1st</span></div>
@@ -279,6 +312,23 @@ footer a:hover{color:var(--ink)}
         <button class="btn" type="submit">Join the waitlist</button>
       </form>
       <p class="micro reveal">Early access to our home recovery kits &mdash; whether you&rsquo;re expecting, or buying for someone who is. No spam, just what we&rsquo;re building and how to prepare.</p>
+    </div>
+  </section>
+
+  <section class="rule twopaths">
+    <div class="wrap">
+      <div class="pathgrid">
+        <div class="pathblock">
+          <h2>Buying for someone you love</h2>
+          <p>You want to give her something that actually helps. Not another candle. Not something she&rsquo;ll smile at and quietly put in a drawer.</p>
+          <p>Every item is chosen for the things nobody warns her about. It arrives before the birth, so it&rsquo;s there when she needs it &mdash; not three weeks late, when the hardest part has already passed.</p>
+        </div>
+        <div class="pathblock">
+          <h2>Buying for yourself</h2>
+          <p>You&rsquo;ve thought about the pram, the cot, the hospital bag. Almost nobody thinks about their own recovery until they&rsquo;re in it.</p>
+          <p>This is the kit you&rsquo;d have assembled yourself, if you&rsquo;d known what to buy and had the time to research it.</p>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -297,22 +347,27 @@ footer a:hover{color:var(--ink)}
       <p class="label">What&rsquo;s inside</p>
       <h2>Three parts, for body and for mind.</h2>
       <div class="products">
-        <article class="product core">
-          <span class="tagline">The core</span>
-          <h3>Home Recovery Kit</h3>
-          <p>Clinically reviewed recovery essentials, in the house before you need them. No ordering, no pharmacy run, no asking someone to go out for you in week one.</p>
-        </article>
-        <article class="product">
-          <span class="tagline">In every box</span>
-          <h3>Maternal Journal</h3>
-          <p>Co&#8209;created with a midwife and a King&rsquo;s College psychiatrist. Prompts and guidance for the days when you do not know where to start &mdash; the mind half of recovery, included as standard.</p>
-        </article>
-        <article class="product">
-          <span class="tagline">Add&#8209;on</span>
-          <h3>Service Vouchers</h3>
-          <p>Physiotherapy, counselling and night nanny support. For when what you need most is a person, not a product &mdash; redeemable when you are ready.</p>
-        </article>
+        <details class="product" open>
+          <summary><span class="pname">The Home Recovery Kit</span><span class="pmeta">&pound;150</span></summary>
+          <div class="pbody">
+            <p>Clinically reviewed recovery essentials, in the house before you need them. No ordering, no pharmacy run, no asking someone to go out for you in week one.</p>
+            <p class="todo">[Full contents list to be added]</p>
+          </div>
+        </details>
+        <details class="product">
+          <summary><span class="pname">The Maternal Journal</span><span class="pmeta">Included in every box</span></summary>
+          <div class="pbody">
+            <p>Created by midwife Laura Godfrey&#8209;Isaacs with King&rsquo;s College London. Prompts and guidance for the days when you do not know where to start &mdash; the mind half of recovery, included as standard.</p>
+          </div>
+        </details>
+        <details class="product">
+          <summary><span class="pname">Service Vouchers</span><span class="pmeta">Add&#8209;on</span></summary>
+          <div class="pbody">
+            <p>Physiotherapy, counselling, night nanny support and ready&#8209;made meals. For when what you need most is a person, not a product &mdash; redeemable when you are ready.</p>
+          </div>
+        </details>
       </div>
+      <p class="timing">Arrives before the due date, ready for the day she comes home.</p>
     </div>
   </section>
 
@@ -322,8 +377,8 @@ footer a:hover{color:var(--ink)}
       <h2>Lived experience, checked by specialists.</h2>
       <div class="props">
         <div class="prop">
-          <h3>Curated by mums and perinatal specialists</h3>
-          <p>Every item and every word is chosen by people who have been through it, then reviewed by clinicians who do this for a living.</p>
+          <h3>Chosen by a mother, informed by clinicians</h3>
+          <p>Every item is chosen by a mother who has been through it, and informed by clinicians who do this for a living.</p>
         </div>
         <div class="prop">
           <h3>It arrives before you need it</h3>
@@ -334,6 +389,19 @@ footer a:hover{color:var(--ink)}
           <p>Physical recovery and mental health are not separate problems. The kit and the journal treat them as one.</p>
         </div>
       </div>
+    </div>
+  </section>
+
+  <section class="rule" id="advisors">
+    <div class="wrap">
+      <p class="label">Advisory board</p>
+      <h2>&nbsp;</h2>
+      <div class="advisors">
+        <div class="advisor"><div class="aphoto" aria-hidden="true"></div><p class="await">Awaiting confirmed copy</p></div>
+        <div class="advisor"><div class="aphoto" aria-hidden="true"></div><p class="await">Awaiting confirmed copy</p></div>
+        <div class="advisor"><div class="aphoto" aria-hidden="true"></div><p class="await">Awaiting confirmed copy</p></div>
+      </div>
+      <p class="hold">Section structure only. Names, titles and descriptions are pending confirmation with each advisor and must not be drafted here.</p>
     </div>
   </section>
 
@@ -386,6 +454,7 @@ footer a:hover{color:var(--ink)}
   <section class="band">
     <div class="wrap stack">
       <h2>Let us help you prepare.</h2>
+      <p class="prose"><b>Not sure what she needs? Neither is she. That&rsquo;s rather the point.</b></p>
       <p class="prose">Buying this for yourself isn&rsquo;t indulgent. It&rsquo;s the same preparation you have already done for the baby &mdash; done for the person actually doing the recovering.</p>
       <p class="prose">Join the waitlist for early access to our home recovery kits, journals and service vouchers.</p>
       <form class="signup" onsubmit="return false">
@@ -457,6 +526,7 @@ footer a:hover{color:var(--ink)}
     <div class="stack" style="gap:.6rem">
       <span class="fbrand"><span>fourth</span><span class="lo"><span class="amp">&amp;</span>beyond</span></span>
       <span>Post&#8209;birth recovery kits, journals and service vouchers.</span>
+      <span>Founded by a mother, built with clinicians.</span>
     </div>
     <ul>
       <li><a href="#products">What&rsquo;s inside</a></li>

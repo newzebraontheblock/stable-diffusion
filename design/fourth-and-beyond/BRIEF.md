@@ -1,134 +1,151 @@
-# Fourth & Beyond — website design handoff
+# Fourth & Beyond — website update brief
 
-Context brief for an AI assistant picking up this work. Pair it with `fb-site.html`
-(the mockup file). The HTML shows *what*; this explains *why*, and what is still open.
+Handoff for the agent working on the site artifact. Apply these changes to the
+current build. Copy is written out in full — use it verbatim unless a note says
+otherwise.
 
 ---
 
-## The business
+## Context you need
 
-**Fourth & Beyond** — post-birth home recovery kits for mothers and birth parents,
-sold in the UK. The proposition is that the fourth trimester (the ~12 weeks after
-birth) is the one nobody prepares you for: all attention goes to the baby, and the
-mother's own recovery is overlooked.
+**Fourth & Beyond** — UK postpartum recovery kits, launching spring 2027.
+Currently pre-launch: the site's job is waitlist signups, not sales.
 
-Positioning line: *"Nobody prepares you for the fourth trimester. We do."*
+**The problem this brief fixes:** the site currently addresses the mother
+directly ("nobody prepares *you*"). But most purchases are gifts — friends,
+family, colleagues buying for a new mother. A gift-buyer reading the current
+page doesn't see themselves in it. Every change below follows from that.
 
-Confirmed subhead (use verbatim — do not rewrite):
+---
 
-> Journals and post-birth home recovery care packages, curated by mums and
-> perinatal specialists, for body and for mind, beyond the first 42 days.
+## 1. Two buttons in the hero — highest priority
 
-The phrase **"curated by mums and perinatal specialists"** is the credibility
-signal and must survive any edit.
+Directly beneath the subhead, above the fold. Do not move them lower.
 
-## Product architecture (three parts — all must be visible)
+```
+[ Buy for someone else ]     [ Buy for yourself ]
+```
 
-| Part | Role | Notes |
+- Side by side on desktop, stacked full-width on mobile
+- "Buy for someone else" on the left — it's the majority use case
+- **Both link to the same waitlist form.** They signal recognition, not
+  separate funnels. Two paths get built after launch, not now.
+- Primary button style: Deep Green `#2E3830` (coral fails contrast at small
+  sizes — keep coral for hover only)
+
+---
+
+## 2. New section — the two paths
+
+Immediately below the hero. Two blocks, side by side on desktop, stacked on
+mobile. Equal visual weight — neither is the "real" audience.
+
+**Left block — heading: Buying for someone you love**
+
+> You want to give her something that actually helps. Not another candle. Not
+> something she'll smile at and quietly put in a drawer.
+>
+> Every item is chosen for the things nobody warns her about. It arrives before
+> the birth, so it's there when she needs it — not three weeks late, when the
+> hardest part has already passed.
+
+**Right block — heading: Buying for yourself**
+
+> You've thought about the pram, the cot, the hospital bag. Almost nobody
+> thinks about their own recovery until they're in it.
+>
+> This is the kit you'd have assembled yourself, if you'd known what to buy and
+> had the time to research it.
+
+---
+
+## 3. Product section — convert to accordions
+
+Replace the current dense cards with three collapsed rows. Scanners see three
+names instantly; researchers expand for detail.
+
+| Row | Collapsed label | Expanded content |
 |---|---|---|
-| **Home Recovery Kit** | Core physical product | Clinically reviewed; arrives before the due date |
-| **Maternal Journal** | Included in every box | Co-created with a midwife and a King's College psychiatrist |
-| **Service Vouchers** | Add-on | Physio, counselling, night nanny support |
+| 1 | **The Home Recovery Kit · £150** | Full contents list |
+| 2 | **The Maternal Journal · included in every box** | Created by midwife Laura Godfrey-Isaacs with King's College London |
+| 3 | **Service Vouchers · add-on** | Physiotherapy, counselling, night nanny support, ready-made meals |
 
-**Gifting is the primary acquisition mechanic** — the majority of surveyed
-respondents prefer to receive a kit as a gift. The page must speak to the
-gift-giver directly, not only to the end user.
+**Keep the price visible.** Competitors in the premium concierge space hide
+pricing because they charge thousands. Showing £150 openly is the
+differentiator — do not gate it behind a consultation or enquiry form.
 
-## Brand system (confirmed — do not substitute)
+---
+
+## 4. Advisory board section — LEAVE THE SPACE, DON'T WRITE IT
+
+Build the section structure (photo, name, title, one line each) but **do not
+write or publish any copy for it yet.**
+
+Reason: the founder is confirming with each advisor how their involvement may
+be described. One is an NHS midwife whose conflict-of-interest clearance
+depends on not appearing to endorse commercial products. Wording is unresolved
+and legally sensitive.
+
+Placeholder only. Await confirmed copy.
+
+---
+
+## 5. Copy on hold — do not use this phrase
+
+The line **"curated by mums and perinatal specialists"** appears in the current
+subhead. It is under review and may overstate the advisory board's role — they
+advise on what recovery requires; product selection is the founder's.
+
+**Do not propagate this phrase into any new copy.** If a replacement is needed
+before the review concludes, use:
+
+> Chosen by a mother. Informed by clinicians.
+
+---
+
+## 6. Smaller copy additions
+
+Two lines, placed where noted:
+
+- **Near the product section:** "Arrives before the due date, ready for the day
+  she comes home." *(Timing is the gift-buyer's real anxiety.)*
+- **Near the closing CTA:** "Not sure what she needs? Neither is she. That's
+  rather the point."
+- **Footer:** "Founded by a mother, built with clinicians."
+
+---
+
+## Brand tokens — confirmed, do not substitute
 
 | Token | Hex | Use |
 |---|---|---|
-| Deep Green | `#2E3830` | Headers, primary text, dark backgrounds, primary buttons |
-| Berry/Coral | `#CC7C72` | Accent details, decorative rules, the `&` in the logo |
+| Deep Green | `#2E3830` | Headers, body text, dark backgrounds, primary buttons |
+| Berry/Coral | `#CC7C72` | Decorative rules, logo ampersand, button hover |
 | Cream | `#FAF8F4` | Main background |
-| Pale Sage | `#E8E8D8` | Secondary/card backgrounds, borders |
-| Soft Sky Blue | `#A8C4D8` | Sparing — category tag chips only |
+| Pale Sage | `#E8E8D8` | Card backgrounds, borders |
+| Soft Sky Blue | `#A8C4D8` | Category tag chips only — never as text |
 
-**Typography:** **Alice** for headings, **Calibri** for body. Alice is also the
-logo's typeface, so headings and wordmark are deliberately the same face.
+**Accessibility deviations to preserve:** coral fails WCAG AA on cream at small
+sizes. Use `#AC4B3E` for links and small text (same hue, deeper). Sky blue is a
+chip *background* with Deep Green text, never text itself. The audience reads
+this on phones at 3am — do not restore failing combinations.
 
-- *Alice* is a free Google Font (OFL), so it should be selectable directly in
-  Squarespace's font library. It ships a **single regular weight and no italic**
-  — every heading is therefore set at 400 and hierarchy is carried by size, not
-  weight. Do not set headings bold; it produces a synthesised faux-bold.
-- *Calibri* is a Microsoft desktop font. Owning Office does **not** grant web
-  use — it needs a separately purchased webfont licence, then upload via
-  Squarespace's custom font uploader. *Carlito* is a free, metric-compatible
-  substitute if the licence is not worth buying.
+---
 
-Neither face is embedded in the mockup (both were unreachable from the build
-environment), so the HTML falls back to whatever the viewing machine has —
-most likely Georgia in place of Alice. Layout and spacing are accurate; the
-typefaces will substitute.
+## Do not publish
 
-**Logo:** set in **Alice** — the same face as the headings, which is why Alice
-was chosen. Lowercase staggered two-line lockup: "fourth" upper-left, "& beyond"
-dropping right beneath it, ampersand leading line two. The mockup reconstructs
-this in CSS so it recolours for dark mode and matches the logo's letterforms
-once Alice loads. The supplied PNG is black-only; an SVG plus a reversed
-(cream) variant is still needed for dark backgrounds and for exact kerning.
+- **Resource hub articles** — all current ones are invented placeholders for
+  design review. None is clinically reviewed. Not publishable.
+- **Statistics** — left off deliberately, pending a citable sample and date.
+- **Photography** — unshot. Dashed placeholders are correct for now.
+- **Any health claim** — needs clinician sign-off first.
 
-## Accessibility deviations from the brand doc — keep these
+---
 
-Measured against WCAG AA. These are deliberate, not errors:
+## Priority order
 
-- **Coral buttons fail** (2.96:1 with cream text). Primary buttons are Deep Green
-  (11.5:1); coral moved to the hover state.
-- **Sky Blue as text fails badly** (1.71:1 on cream). It is used as a *chip
-  background* with Deep Green text (6.7:1) for category tags.
-- **Coral for small text fails.** A darkened `#AC4B3E` (5.2:1) is used for labels
-  and links — same hue (7°) and saturation as the brand coral, just deeper.
-  Pure `#CC7C72` is retained for decorative rules and the logo ampersand.
-
-Audience reads this on phones at 3am. Do not restore the failing combinations.
-
-## Page structure
-
-**Home:** hero (H1 + subhead + four-trimester device + inline email capture) →
-the gap (problem) → what's inside (three products) → why it's different (three
-value props) → gifting → the first 42 days (timeline) → resource hub teaser →
-closing CTA.
-
-**Resource Hub:** filterable blog collection. Categories: Recovery / Mental
-health / Feeding / Pelvic health / For partners. Each post ends in a waitlist CTA.
-
-Two structural devices carry meaning and should be preserved:
-
-1. **The four-trimester bar** — three faint segments (mapped), the fourth drawn
-   in full. States the proposition without a paragraph.
-2. **The timeline in days** — Days 1–3 → 4–14 → 15–42 → **Day 43 & beyond**.
-   Ties the brand name, the "42 days" subhead and the six-week check to one
-   number. "Day 43 and beyond" is the half the company is named after.
-
-## Build constraints
-
-- Platform is **Squarespace 7.1**, built natively in the page editor with
-  Custom CSS. Business plan or higher (needed for CSS and code injection).
-- **Do not paste the mockup HTML into Squarespace.** It carries its own nav,
-  header and footer that will collide with Squarespace's site chrome. It is a
-  visual and copy reference only.
-- Resource hub should be a native Squarespace **Blog collection** with
-  categories, not hand-built pages.
-- The mockup's form is inert. The live form must connect to a real backend.
-
-## Open / unresolved
-
-- **Waitlist backend undecided.** Recommendation: Beehiiv or ConvertKit over
-  Squarespace's native form, since a blog-fed waitlist needs nurturing over
-  months before launch. Not yet chosen.
-- **Launch date not set.** A "kits ship [date]" line under the CTA would lift
-  conversion; no date confirmed yet.
-- **Calibri licensing unresolved.** Needs a purchased webfont licence, or
-  substitute the metric-compatible Carlito. Alice is free and unblocked.
-- **Logo files.** An SVG and a reversed/cream variant are still needed; only a
-  black PNG exists, which fails on Deep Green and in dark mode.
-
-## Do not publish as-is
-
-- **All six resource-hub articles are invented placeholders**, written to be
-  plausible for design review. None is clinically reviewed. Nothing there is
-  publishable copy.
-- **No statistics appear on the page by choice.** The gifting research figure was
-  deliberately left off pending a citable sample and date.
-- **Photography is unshot.** Image slots are marked as dashed placeholders.
-- Any health claim needs clinician sign-off before going live.
+1. Hero buttons *(highest value, smallest effort)*
+2. Two-paths section
+3. Product accordions
+4. Small copy additions
+5. Advisory board structure — space only, no copy
