@@ -1,0 +1,1120 @@
+<!--
+  ============================================================================
+  FOURTHH & BEYOND — RECOVERY KIT FINDER
+  ============================================================================
+  Paste this whole file into a Squarespace Code Block (Business plan or above).
+
+  Everything you need to change lives in the CONFIG and PRODUCTS blocks in the
+  <script> tag near the bottom. Search for "EDIT ME" to find them.
+
+  Placeholder data is marked with [PLACEHOLDER]. Swap it for real copy,
+  prices, regions and links before this goes live.
+  ============================================================================
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Karla:wght@400;500;600&family=Newsreader:opsz,wght@6..72,300;6..72,400;6..72,500&display=swap">
+
+<style>
+/* ---------------------------------------------------------------------------
+   TOKENS — swap these hex values for your brand palette. Nothing else needs
+   to change. Every colour in the widget is derived from this block.
+   --------------------------------------------------------------------------- */
+:root {
+  --fb-ground:      #EEF1F0;
+  --fb-surface:     #FFFFFF;
+  --fb-surface-2:   #F7F9F8;
+  --fb-ink:         #14201E;
+  --fb-muted:       #5A6B67;
+  --fb-line:        #D9E0DE;
+  --fb-line-strong: #B9C6C3;
+  --fb-accent:      #0E4B48;
+  --fb-accent-hi:   #14625E;
+  --fb-accent-soft: #DCE9E7;
+  --fb-on-accent:   #FFFFFF;
+
+  --fb-font-display: "Newsreader", Georgia, "Times New Roman", serif;
+  --fb-font-body:    "Karla", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --fb-radius: 4px;
+  --fb-col: 620px;
+}
+
+/* Dark theme. Two selectors so the widget resolves correctly whether the
+   viewer's OS is dark or they've explicitly chosen dark. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --fb-ground:      #0D1413;
+    --fb-surface:     #141D1B;
+    --fb-surface-2:   #1B2624;
+    --fb-ink:         #E8EEEC;
+    --fb-muted:       #9AAAA6;
+    --fb-line:        #2A3735;
+    --fb-line-strong: #3D4E4B;
+    --fb-accent:      #6FC3B8;
+    --fb-accent-hi:   #8AD4CA;
+    --fb-accent-soft: #1D3330;
+    --fb-on-accent:   #08201E;
+  }
+}
+:root[data-theme="dark"] {
+  --fb-ground:      #0D1413;
+  --fb-surface:     #141D1B;
+  --fb-surface-2:   #1B2624;
+  --fb-ink:         #E8EEEC;
+  --fb-muted:       #9AAAA6;
+  --fb-line:        #2A3735;
+  --fb-line-strong: #3D4E4B;
+  --fb-accent:      #6FC3B8;
+  --fb-accent-hi:   #8AD4CA;
+  --fb-accent-soft: #1D3330;
+  --fb-on-accent:   #08201E;
+}
+
+/* ---------------------------------------------------------------------------
+   Everything below is scoped under #fb-quiz so it cannot leak into the rest
+   of your Squarespace page, and Squarespace's styles cannot leak in.
+   --------------------------------------------------------------------------- */
+/* Only applies when the file is opened on its own (JS adds .fb-standalone).
+   Inside Squarespace the class is never added, so the host page is untouched. */
+html.fb-standalone,
+html.fb-standalone body {
+  margin: 0;
+  background: var(--fb-ground);
+}
+
+#fb-quiz,
+#fb-quiz *,
+#fb-quiz *::before,
+#fb-quiz *::after { box-sizing: border-box; }
+
+#fb-quiz {
+  background: var(--fb-ground);
+  color: var(--fb-ink);
+  font-family: var(--fb-font-body);
+  font-size: 17px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  padding: clamp(32px, 7vw, 88px) clamp(16px, 5vw, 40px);
+  margin: 0;
+}
+
+#fb-quiz p,
+#fb-quiz h1,
+#fb-quiz h2,
+#fb-quiz h3,
+#fb-quiz ul,
+#fb-quiz li,
+#fb-quiz figure { margin: 0; padding: 0; }
+#fb-quiz ul { list-style: none; }
+
+#fb-quiz .fb-shell {
+  width: 100%;
+  max-width: var(--fb-col);
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+/* --- progress ------------------------------------------------------------ */
+#fb-quiz .fb-progress {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+#fb-quiz .fb-progress-track {
+  flex: 1;
+  height: 1px;
+  background: var(--fb-line-strong);
+  position: relative;
+  overflow: hidden;
+}
+#fb-quiz .fb-progress-fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 0%;
+  background: var(--fb-accent);
+  height: 100%;
+  transition: width 320ms cubic-bezier(.4,0,.2,1);
+}
+#fb-quiz .fb-progress-label {
+  font-size: 11px;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+  color: var(--fb-muted);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+/* --- card ---------------------------------------------------------------- */
+#fb-quiz .fb-card {
+  background: var(--fb-surface);
+  border: 1px solid var(--fb-line);
+  border-radius: var(--fb-radius);
+  padding: clamp(24px, 5vw, 44px);
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+}
+
+#fb-quiz .fb-eyebrow {
+  font-size: 11px;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: var(--fb-accent);
+  font-weight: 600;
+}
+
+#fb-quiz .fb-q-title {
+  font-family: var(--fb-font-display);
+  font-weight: 400;
+  font-size: clamp(27px, 5.2vw, 36px);
+  line-height: 1.18;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+
+#fb-quiz .fb-q-note {
+  color: var(--fb-muted);
+  font-size: 15px;
+  max-width: 46ch;
+}
+
+#fb-quiz .fb-head {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* --- options ------------------------------------------------------------- */
+#fb-quiz .fb-options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#fb-quiz .fb-opt {
+  appearance: none;
+  -webkit-appearance: none;
+  font: inherit;
+  text-align: left;
+  width: 100%;
+  cursor: pointer;
+  background: var(--fb-surface-2);
+  color: var(--fb-ink);
+  border: 1px solid var(--fb-line);
+  border-radius: var(--fb-radius);
+  padding: 17px 20px;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  transition: border-color 140ms ease, background-color 140ms ease;
+}
+#fb-quiz .fb-opt:hover { border-color: var(--fb-line-strong); }
+#fb-quiz .fb-opt:focus-visible {
+  outline: 2px solid var(--fb-accent);
+  outline-offset: 2px;
+}
+#fb-quiz .fb-opt[aria-pressed="true"] {
+  border-color: var(--fb-accent);
+  background: var(--fb-accent-soft);
+}
+
+#fb-quiz .fb-opt-mark {
+  flex: 0 0 auto;
+  width: 18px;
+  height: 18px;
+  margin-top: 4px;
+  border: 1px solid var(--fb-line-strong);
+  border-radius: 50%;
+  position: relative;
+  transition: border-color 140ms ease;
+}
+#fb-quiz .fb-opt[aria-pressed="true"] .fb-opt-mark { border-color: var(--fb-accent); }
+#fb-quiz .fb-opt[aria-pressed="true"] .fb-opt-mark::after {
+  content: "";
+  position: absolute;
+  inset: 3px;
+  border-radius: 50%;
+  background: var(--fb-accent);
+}
+
+#fb-quiz .fb-opt-body { display: flex; flex-direction: column; gap: 3px; }
+#fb-quiz .fb-opt-label { font-weight: 500; }
+#fb-quiz .fb-opt-note { font-size: 14px; color: var(--fb-muted); line-height: 1.45; }
+
+/* --- buttons ------------------------------------------------------------- */
+#fb-quiz .fb-btn {
+  appearance: none;
+  -webkit-appearance: none;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: var(--fb-radius);
+  padding: 15px 26px;
+  border: 1px solid transparent;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: background-color 140ms ease, border-color 140ms ease, color 140ms ease;
+}
+#fb-quiz .fb-btn:focus-visible { outline: 2px solid var(--fb-accent); outline-offset: 2px; }
+#fb-quiz .fb-btn-primary {
+  background: var(--fb-accent);
+  color: var(--fb-on-accent);
+}
+#fb-quiz .fb-btn-primary:hover { background: var(--fb-accent-hi); }
+#fb-quiz .fb-btn-primary[disabled] {
+  opacity: .4;
+  cursor: not-allowed;
+}
+#fb-quiz .fb-btn-ghost {
+  background: transparent;
+  color: var(--fb-ink);
+  border-color: var(--fb-line-strong);
+}
+#fb-quiz .fb-btn-ghost:hover { border-color: var(--fb-ink); }
+
+/* --- footer row ---------------------------------------------------------- */
+#fb-quiz .fb-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+#fb-quiz .fb-foot-center { justify-content: center; }
+/* The heading is focused programmatically so the question is announced before
+   the answers. It isn't a control, so it takes no focus ring; the answer
+   buttons keep theirs. */
+#fb-quiz .fb-q-title:focus,
+#fb-quiz .fb-q-title:focus-visible { outline: none; }
+#fb-quiz .fb-link {
+  appearance: none;
+  background: none;
+  border: 0;
+  padding: 4px 0;
+  font: inherit;
+  font-size: 14px;
+  color: var(--fb-muted);
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--fb-line-strong);
+}
+#fb-quiz .fb-link:hover { color: var(--fb-ink); }
+#fb-quiz .fb-link:focus-visible { outline: 2px solid var(--fb-accent); outline-offset: 2px; }
+#fb-quiz .fb-link[hidden] { display: none; }
+
+/* --- result -------------------------------------------------------------- */
+#fb-quiz .fb-result-head {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-bottom: 22px;
+  border-bottom: 1px solid var(--fb-line);
+}
+#fb-quiz .fb-result-name {
+  font-family: var(--fb-font-display);
+  font-weight: 400;
+  font-size: clamp(30px, 6vw, 42px);
+  line-height: 1.12;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+}
+#fb-quiz .fb-result-price {
+  font-family: var(--fb-font-display);
+  font-size: 20px;
+  color: var(--fb-muted);
+  font-variant-numeric: tabular-nums;
+}
+#fb-quiz .fb-result-blurb { color: var(--fb-muted); max-width: 52ch; }
+
+#fb-quiz .fb-section-label {
+  font-size: 11px;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: var(--fb-muted);
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+#fb-quiz .fb-reasons { display: flex; flex-direction: column; gap: 11px; }
+#fb-quiz .fb-reason {
+  display: flex;
+  gap: 12px;
+  font-size: 15.5px;
+  line-height: 1.5;
+}
+#fb-quiz .fb-reason::before {
+  content: "";
+  flex: 0 0 auto;
+  width: 6px;
+  height: 6px;
+  margin-top: 9px;
+  border-radius: 50%;
+  background: var(--fb-accent);
+}
+#fb-quiz .fb-reason.fb-reason-flag::before {
+  background: transparent;
+  border: 1px solid var(--fb-line-strong);
+}
+#fb-quiz .fb-reason.fb-reason-flag { color: var(--fb-muted); }
+
+#fb-quiz .fb-contents {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border-top: 1px solid var(--fb-line);
+}
+#fb-quiz .fb-contents li {
+  padding: 11px 0;
+  border-bottom: 1px solid var(--fb-line);
+  font-size: 15.5px;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+}
+#fb-quiz .fb-contents li span:last-child {
+  color: var(--fb-muted);
+  font-size: 13px;
+  text-align: right;
+  white-space: nowrap;
+}
+
+#fb-quiz .fb-cta {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+#fb-quiz .fb-cta-note {
+  font-size: 14px;
+  color: var(--fb-muted);
+  text-align: center;
+}
+@media (min-width: 520px) {
+  #fb-quiz .fb-cta-row { display: flex; gap: 12px; }
+  #fb-quiz .fb-cta-row > * { flex: 1; }
+}
+@media (max-width: 519px) {
+  #fb-quiz .fb-cta-row { display: flex; flex-direction: column; gap: 12px; }
+}
+
+/* --- alternatives -------------------------------------------------------- */
+#fb-quiz .fb-alts { border-top: 1px solid var(--fb-line); padding-top: 22px; }
+#fb-quiz .fb-alt-list { display: flex; flex-direction: column; gap: 2px; }
+#fb-quiz .fb-alt {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--fb-line);
+  text-decoration: none;
+  color: inherit;
+}
+#fb-quiz .fb-alt:last-child { border-bottom: 0; }
+#fb-quiz .fb-alt:hover .fb-alt-name { text-decoration: underline; text-underline-offset: 3px; }
+#fb-quiz .fb-alt:focus-visible { outline: 2px solid var(--fb-accent); outline-offset: 2px; }
+#fb-quiz .fb-alt-name { font-weight: 500; font-size: 15.5px; }
+#fb-quiz .fb-alt-why { font-size: 13.5px; color: var(--fb-muted); }
+#fb-quiz .fb-alt-price {
+  font-family: var(--fb-font-display);
+  color: var(--fb-muted);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+#fb-quiz .fb-alt-unavailable { opacity: .55; }
+
+/* --- email opt-in (only rendered when CONFIG.emailEndpoint is set) -------- */
+#fb-quiz .fb-optin {
+  border-top: 1px solid var(--fb-line);
+  padding-top: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+#fb-quiz .fb-optin-row { display: flex; gap: 8px; flex-wrap: wrap; }
+#fb-quiz .fb-input {
+  flex: 1 1 200px;
+  font: inherit;
+  padding: 13px 15px;
+  border: 1px solid var(--fb-line-strong);
+  border-radius: var(--fb-radius);
+  background: var(--fb-surface-2);
+  color: var(--fb-ink);
+  min-width: 0;
+}
+#fb-quiz .fb-input:focus-visible { outline: 2px solid var(--fb-accent); outline-offset: 1px; }
+
+/* --- motion -------------------------------------------------------------- */
+#fb-quiz .fb-enter { animation: fb-rise 200ms cubic-bezier(.32,.72,.35,1) both; }
+@keyframes fb-rise {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  #fb-quiz .fb-enter { animation: none; }
+  #fb-quiz .fb-progress-fill { transition: none; }
+}
+
+#fb-quiz .fb-sr {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+</style>
+
+<div id="fb-quiz">
+  <div class="fb-shell">
+    <div class="fb-progress" id="fb-progress">
+      <div class="fb-progress-track"><div class="fb-progress-fill" id="fb-progress-fill"></div></div>
+      <div class="fb-progress-label" id="fb-progress-label">Question 1 of 5</div>
+    </div>
+    <div id="fb-stage"></div>
+  </div>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  /* =========================================================================
+     EDIT ME (1 of 2) — CONFIG
+     ========================================================================= */
+  var CONFIG = {
+    currency: "£",                                  // [PLACEHOLDER] confirm currency
+
+    // Your Squarespace Scheduling / Acuity booking page.
+    bookingUrl: "https://REPLACE-ME.as.me/postpartum-chat", // [PLACEHOLDER]
+
+    // Optional. Leave as "" and the email opt-in is not rendered at all.
+    // Set it to a form endpoint (Squarespace form, Formspree, Mailchimp) to
+    // switch on the "email me this" step after the result.
+    emailEndpoint: "",
+
+    // [PLACEHOLDER] The regions where service vouchers can actually be
+    // fulfilled. `id` is used in the logic; `label` is what people read.
+    serviceRegions: [
+      { id: "london",     label: "London" },
+      { id: "south-east", label: "The South East" },
+      { id: "manchester", label: "Greater Manchester" }
+    ],
+
+    // Fires a GA4 / Squarespace Analytics event per step if gtag is present.
+    trackEvents: true
+  };
+
+  /* =========================================================================
+     EDIT ME (2 of 2) — PRODUCTS
+     `needsServices: true` means the route includes service vouchers, so it is
+     withheld from anyone outside the regions above.
+     ========================================================================= */
+  var PRODUCTS = {
+    full: {
+      id: "full",
+      name: "The Full Recovery Kit",                     // [PLACEHOLDER]
+      price: 340,                                        // [PLACEHOLDER]
+      url: "/shop/full-recovery-kit",                    // [PLACEHOLDER]
+      needsServices: true,
+      blurb: "The whole thing: the physical kit, plus vouchers for the services that give you back time and hands.", // [PLACEHOLDER]
+      contents: [                                        // [PLACEHOLDER] all rows
+        { item: "The recovery box", detail: "Full contents" },
+        { item: "Physiotherapy voucher", detail: "3 sessions" },
+        { item: "Ready meal delivery", detail: "2 weeks" },
+        { item: "The journal", detail: "Included" }
+      ]
+    },
+    services: {
+      id: "services",
+      name: "Services & Journal",                        // [PLACEHOLDER]
+      price: 195,                                        // [PLACEHOLDER]
+      url: "/shop/services-and-journal",                 // [PLACEHOLDER]
+      needsServices: true,
+      blurb: "No box of things. Vouchers for the help that matters, and the journal to go with them.", // [PLACEHOLDER]
+      contents: [
+        { item: "Service vouchers", detail: "Your choice" },
+        { item: "The journal", detail: "Included" }
+      ]
+    },
+    base: {
+      id: "base",
+      name: "The Base Recovery Kit",                     // [PLACEHOLDER]
+      price: 120,                                        // [PLACEHOLDER]
+      url: "/shop/base-recovery-kit",                    // [PLACEHOLDER]
+      needsServices: false,
+      blurb: "The physical essentials for the first weeks, posted to the door.", // [PLACEHOLDER]
+      contents: [
+        { item: "The recovery box", detail: "Core contents" },
+        { item: "The journal", detail: "Included" }
+      ]
+    },
+    journal: {
+      id: "journal",
+      name: "The Journal",                               // [PLACEHOLDER]
+      price: 38,                                         // [PLACEHOLDER]
+      url: "/shop/the-journal",                          // [PLACEHOLDER]
+      needsServices: false,
+      blurb: "Somewhere to put the fourth trimester down on paper. On its own, it is still a real gift.", // [PLACEHOLDER]
+      contents: [
+        { item: "The journal", detail: "Standalone" }
+      ]
+    }
+  };
+
+  var ORDER = ["full", "services", "base", "journal"];
+
+  /* =========================================================================
+     QUESTIONS
+     `when` decides whether a question is shown, given answers so far.
+     `type` is "single" or "multi".
+     ========================================================================= */
+  function isGift(a) { return a.recipient === "gift"; }
+
+  var QUESTIONS = [
+    {
+      id: "recipient",
+      type: "single",
+      eyebrow: "First things first",
+      title: "Who are we looking after?",
+      options: [
+        { value: "self",  label: "Me",              note: "I'm the one recovering." },
+        { value: "gift",  label: "Someone else",    note: "I'm buying this as a gift." },
+        { value: "brows", label: "Just looking",    note: "I want to see what you do." }
+      ]
+    },
+    {
+      id: "timing",
+      type: "single",
+      eyebrow: "Timing",
+      title: function (a) { return isGift(a) ? "Where are they in it?" : "Where are you in it?"; },
+      options: function (a) {
+        return isGift(a) ? [
+          { value: "pregnant", label: "Baby isn't here yet",  note: "Buying ahead of the birth." },
+          { value: "newborn",  label: "They've just had the baby", note: "The first few weeks." },
+          { value: "months",   label: "A few months in",      note: "Past the newest part." },
+          { value: "unknown",  label: "I don't know",         note: "Common with a gift. We'll work around it." }
+        ] : [
+          { value: "pregnant", label: "Still pregnant",       note: "Getting things in place beforehand." },
+          { value: "newborn",  label: "The first few weeks",  note: "Very new. Everything is a lot." },
+          { value: "months",   label: "A few months in",      note: "Past the newest part, still recovering." },
+          { value: "unknown",  label: "I'd rather not say",   note: "Skip this one." }
+        ];
+      }
+    },
+    {
+      id: "needs",
+      type: "multi",
+      max: 2,
+      eyebrow: "What would help",
+      title: function (a) {
+        return isGift(a)
+          ? "What do you think would make the most difference?"
+          : "What would actually make a difference right now?";
+      },
+      note: "Pick one or two.",
+      options: function (a) {
+        var them = isGift(a);
+        return [
+          { value: "body",      label: them ? "Their body"          : "My body",
+            note: "Recovery is physical. It needs looking after." },
+          { value: "practical", label: "The practical stuff",
+            note: "Food, hands, hours. Things taken off the plate." },
+          { value: "headspace", label: them ? "Somewhere to put their head" : "Somewhere to put my head",
+            note: "Space to process what's happened." },
+          { value: "all",       label: them ? "All of it — properly covered" : "Honestly, all of it",
+            note: "I'd rather not have to choose." }
+        ];
+      }
+    },
+    {
+      id: "region",
+      type: "single",
+      eyebrow: "Where",
+      title: "Where would this be used?",
+      note: "Our service vouchers — physiotherapy, meals and the rest — only work where we've built a network. The kits post anywhere.",
+      options: function (a) {
+        var opts = CONFIG.serviceRegions.map(function (r) {
+          return { value: r.id, label: r.label, note: "Full service network." };
+        });
+        opts.push({ value: "elsewhere", label: "Somewhere else", note: "We'll show you what still works." });
+        if (isGift(a)) {
+          opts.push({ value: "unknown", label: "I don't know where they are", note: "We'll sort it out with you." });
+        }
+        return opts;
+      }
+    },
+    {
+      id: "budget",
+      type: "single",
+      eyebrow: "Budget",
+      title: "What feels right to spend?",
+      note: "There's no wrong answer here. It just narrows things down.",
+      options: function () {
+        var c = CONFIG.currency;
+        return [
+          { value: "u75",   label: "Under " + c + "75",        note: "" },
+          { value: "75",    label: c + "75–" + c + "150",  note: "" },
+          { value: "150",   label: c + "150–" + c + "300", note: "" },
+          { value: "300",   label: c + "300 and up",            note: "" },
+          { value: "open",  label: "I'd rather see the options", note: "We'll show you the full range." }
+        ];
+      }
+    }
+  ];
+
+  var BUDGET_CEILING = { u75: 75, "75": 150, "150": 300, "300": Infinity, open: Infinity };
+
+  /* =========================================================================
+     RECOMMENDATION LOGIC
+     ========================================================================= */
+  function recommend(a) {
+    var scores = { full: 0, services: 0, base: 0, journal: 0 };
+    var needs = a.needs || [];
+
+    if (needs.indexOf("body") > -1)      { scores.full += 2; scores.base += 2; scores.services += 1; }
+    if (needs.indexOf("practical") > -1) { scores.full += 2; scores.services += 3; }
+    if (needs.indexOf("headspace") > -1) { scores.journal += 3; scores.services += 1; scores.full += 1; }
+    if (needs.indexOf("all") > -1)       { scores.full += 3; scores.services += 1; scores.base += 1; }
+
+    if (a.timing === "pregnant") { scores.base += 1; scores.full += 1; }
+    if (a.timing === "newborn")  { scores.services += 2; scores.full += 1; }
+    if (a.timing === "months")   { scores.services += 1; scores.journal += 1; }
+
+    if (a.recipient === "gift")  { scores.full += 1; scores.services += 1; }
+    else                         { scores.base += 1; scores.journal += 1; }
+
+    var outOfArea = a.region === "elsewhere";
+    var regionUnknown = a.region === "unknown";
+    var ceiling = BUDGET_CEILING[a.budget] != null ? BUDGET_CEILING[a.budget] : Infinity;
+
+    var available = {};
+    ORDER.forEach(function (id) {
+      var p = PRODUCTS[id];
+      available[id] = { overBudget: p.price > ceiling, unserviced: outOfArea && p.needsServices };
+    });
+
+    var eligible = ORDER.filter(function (id) {
+      return !available[id].overBudget && !available[id].unserviced;
+    });
+
+    // Nothing survives the filters: fall back to the cheapest fulfillable route.
+    if (!eligible.length) {
+      eligible = ORDER.filter(function (id) { return !available[id].unserviced; })
+                      .sort(function (x, y) { return PRODUCTS[x].price - PRODUCTS[y].price; })
+                      .slice(0, 1);
+    }
+    if (!eligible.length) { eligible = ["journal"]; }
+
+    eligible.sort(function (x, y) {
+      if (scores[y] !== scores[x]) { return scores[y] - scores[x]; }
+      return PRODUCTS[y].price - PRODUCTS[x].price;
+    });
+
+    return {
+      pick: PRODUCTS[eligible[0]],
+      scores: scores,
+      availability: available,
+      outOfArea: outOfArea,
+      regionUnknown: regionUnknown,
+      budgetOpen: a.budget === "open"
+    };
+  }
+
+  function reasonsFor(a, r) {
+    var them = isGift(a);
+    var subj = them ? "them" : "you";
+    var out = [];
+    var needs = a.needs || [];
+    var pick = r.pick.id;
+
+    if (needs.indexOf("practical") > -1) {
+      out.push({
+        flag: false,
+        text: pick === "journal" || pick === "base"
+          ? "You said the practical side is what matters most. This is what we can get to " + subj + " within the budget and the area — the routes that buy hands and hours are listed below."
+          : "You said the practical side matters most — food, hands, hours. This is the route that actually buys those, rather than just posting a box."
+      });
+    }
+    if (needs.indexOf("body") > -1 && (pick === "full" || pick === "base")) {
+      out.push({ flag: false, text: "Recovery is physical, and you said so. The kit is built around the body's first weeks, not around looking nice on a shelf." });
+    }
+    if (needs.indexOf("headspace") > -1) {
+      out.push({ flag: false, text: "The journal is in this either way. It's the part people tell us they come back to months later." });
+    }
+    if (needs.indexOf("all") > -1 && pick === "full") {
+      out.push({ flag: false, text: "You didn't want to choose, so we haven't made " + subj + " choose. This is everything we do, in one." });
+    }
+
+    if (a.timing === "newborn") {
+      out.push({ flag: false, text: them
+        ? "They're in the first few weeks. Anything that needs organising is a cost right now — this arrives ready to use."
+        : "You're in the first few weeks. This is set up so nothing needs organising on your end." });
+    }
+    if (a.timing === "pregnant") {
+      out.push({ flag: false, text: "There's time before the birth, which is the easiest moment to get this in place." });
+    }
+
+    if (r.outOfArea) {
+      out.push({ flag: true, text: "You're outside the areas where our service network runs, so we've left the voucher routes out rather than sell " + subj + " something we can't deliver. The kits post anywhere — and it's worth asking us, because the network keeps growing." });
+    }
+    if (r.regionUnknown) {
+      out.push({ flag: true, text: "You weren't sure where they are. Service vouchers depend on the area, so that's the first thing we'd check on a call." });
+    }
+    if (r.budgetOpen) {
+      out.push({ flag: true, text: "You asked to see the range rather than set a budget, so this is the match on need alone. Every other option is below, with prices." });
+    }
+    if (a.recipient === "brows") {
+      out.push({ flag: true, text: "You told us you were just looking. Nothing here is a commitment — the full range is below." });
+    }
+    return out;
+  }
+
+  /* =========================================================================
+     STATE + RENDER
+     ========================================================================= */
+  var answers = {};
+  var path = [];        // ids of questions actually shown, in order
+  var cursor = 0;
+  var stage = document.getElementById("fb-stage");
+  var progressWrap = document.getElementById("fb-progress");
+  var progressFill = document.getElementById("fb-progress-fill");
+  var progressLabel = document.getElementById("fb-progress-label");
+
+  function resolve(v, a) { return typeof v === "function" ? v(a) : v; }
+
+  function visibleQuestions() {
+    return QUESTIONS.filter(function (q) { return !q.when || q.when(answers); });
+  }
+
+  function track(name, params) {
+    if (!CONFIG.trackEvents) { return; }
+    if (typeof window.gtag === "function") { window.gtag("event", name, params || {}); }
+  }
+
+  function el(tag, cls, text) {
+    var n = document.createElement(tag);
+    if (cls) { n.className = cls; }
+    if (text != null) { n.textContent = text; }
+    return n;
+  }
+
+  function setProgress(step, total) {
+    if (step == null) {
+      progressWrap.style.visibility = "hidden";
+      return;
+    }
+    progressWrap.style.visibility = "visible";
+    progressFill.style.width = Math.round((step / total) * 100) + "%";
+    progressLabel.textContent = "Question " + step + " of " + total;
+  }
+
+  function swap(node) {
+    stage.innerHTML = "";
+    node.classList.add("fb-enter");
+    stage.appendChild(node);
+  }
+
+  function escapeHatch() {
+    var b = el("button", "fb-link", "I'd rather just talk to someone");
+    b.type = "button";
+    b.addEventListener("click", function () {
+      track("quiz_escape_hatch", { step: cursor + 1 });
+      renderTalk();
+    });
+    return b;
+  }
+
+  function renderQuestion() {
+    var list = visibleQuestions();
+    var q = list[cursor];
+    if (!q) { return renderResult(); }
+
+    setProgress(cursor + 1, list.length);
+
+    var card = el("div", "fb-card");
+    var head = el("div", "fb-head");
+    head.appendChild(el("div", "fb-eyebrow", q.eyebrow));
+
+    var h = el("h2", "fb-q-title", resolve(q.title, answers));
+    h.id = "fb-q-" + q.id;
+    h.tabIndex = -1;
+    head.appendChild(h);
+
+    var note = resolve(q.note, answers);
+    if (note) { head.appendChild(el("p", "fb-q-note", note)); }
+    card.appendChild(head);
+
+    var group = el("div", "fb-options");
+    group.setAttribute("role", "group");
+    group.setAttribute("aria-labelledby", h.id);
+
+    var opts = resolve(q.options, answers);
+    var multi = q.type === "multi";
+    var selected = multi ? (answers[q.id] || []).slice() : answers[q.id];
+
+    var continueBtn = null;
+
+    opts.forEach(function (opt) {
+      var b = el("button", "fb-opt");
+      b.type = "button";
+      var on = multi ? selected.indexOf(opt.value) > -1 : selected === opt.value;
+      b.setAttribute("aria-pressed", on ? "true" : "false");
+      b.appendChild(el("span", "fb-opt-mark"));
+      var body = el("div", "fb-opt-body");
+      body.appendChild(el("span", "fb-opt-label", opt.label));
+      if (opt.note) { body.appendChild(el("span", "fb-opt-note", opt.note)); }
+      b.appendChild(body);
+
+      b.addEventListener("click", function () {
+        if (multi) {
+          var i = selected.indexOf(opt.value);
+          if (i > -1) {
+            selected.splice(i, 1);
+          } else {
+            if (q.max && selected.length >= q.max) { selected.shift(); }
+            selected.push(opt.value);
+          }
+          answers[q.id] = selected;
+          Array.prototype.forEach.call(group.children, function (child, idx) {
+            child.setAttribute("aria-pressed", selected.indexOf(opts[idx].value) > -1 ? "true" : "false");
+          });
+          if (continueBtn) { continueBtn.disabled = selected.length === 0; }
+        } else {
+          answers[q.id] = opt.value;
+          track("quiz_answer", { question: q.id, answer: opt.value });
+          advance();
+        }
+      });
+
+      group.appendChild(b);
+    });
+
+    card.appendChild(group);
+
+    var foot = el("div", "fb-foot");
+    var back = el("button", "fb-link", "Back");
+    back.type = "button";
+    back.hidden = cursor === 0;
+    back.addEventListener("click", function () {
+      cursor = Math.max(0, cursor - 1);
+      renderQuestion();
+    });
+    foot.appendChild(back);
+
+    if (multi) {
+      continueBtn = el("button", "fb-btn fb-btn-primary", "Continue");
+      continueBtn.type = "button";
+      continueBtn.disabled = !selected.length;
+      continueBtn.addEventListener("click", function () {
+        track("quiz_answer", { question: q.id, answer: (answers[q.id] || []).join(",") });
+        advance();
+      });
+      foot.appendChild(continueBtn);
+    } else {
+      foot.appendChild(escapeHatch());
+    }
+    card.appendChild(foot);
+
+    if (multi) {
+      var hatchRow = el("div", "fb-foot fb-foot-center");
+      hatchRow.appendChild(escapeHatch());
+      card.appendChild(hatchRow);
+    }
+
+    swap(card);
+    // Move focus to the question itself on each step: the question is read
+    // first, then Tab walks the answers. Skipped on the very first render so
+    // landing on the page doesn't scroll the widget into view unbidden.
+    if (cursor > 0) { h.focus(); }
+  }
+
+  function advance() {
+    cursor += 1;
+    if (cursor >= visibleQuestions().length) { renderResult(); } else { renderQuestion(); }
+  }
+
+  function bookButton(label) {
+    var a = el("a", "fb-btn fb-btn-primary", label);
+    a.href = CONFIG.bookingUrl;
+    a.target = "_blank";
+    a.rel = "noopener";
+    a.addEventListener("click", function () { track("quiz_book_call", { product: answers._pick || "none" }); });
+    return a;
+  }
+
+  function renderTalk() {
+    setProgress(null);
+    var card = el("div", "fb-card");
+    var head = el("div", "fb-head");
+    head.appendChild(el("div", "fb-eyebrow", "No quiz needed"));
+    head.appendChild(el("h2", "fb-q-title", "Let's just talk it through."));
+    head.appendChild(el("p", "fb-q-note", "Fifteen minutes, whenever suits. Tell us what's going on and we'll work out what's right — for you, or for whoever you're buying for. No pressure to buy anything at the end of it."));
+    card.appendChild(head);
+
+    var cta = el("div", "fb-cta");
+    cta.appendChild(bookButton("Book fifteen minutes"));
+    card.appendChild(cta);
+
+    var foot = el("div", "fb-foot");
+    var back = el("button", "fb-link", "Back to the questions");
+    back.type = "button";
+    back.addEventListener("click", renderQuestion);
+    foot.appendChild(back);
+    card.appendChild(foot);
+
+    swap(card);
+  }
+
+  function renderResult() {
+    var r = recommend(answers);
+    answers._pick = r.pick.id;
+    setProgress(null);
+    track("quiz_complete", { product: r.pick.id, budget: answers.budget, region: answers.region });
+
+    var card = el("div", "fb-card");
+
+    var head = el("div", "fb-result-head");
+    head.appendChild(el("div", "fb-eyebrow", "Based on what you've told us"));
+    head.appendChild(el("h2", "fb-result-name", r.pick.name));
+    head.appendChild(el("div", "fb-result-price", CONFIG.currency + r.pick.price));
+    head.appendChild(el("p", "fb-result-blurb", r.pick.blurb));
+    card.appendChild(head);
+
+    var reasons = reasonsFor(answers, r);
+    if (reasons.length) {
+      var rWrap = el("div");
+      rWrap.appendChild(el("div", "fb-section-label", "Why this one"));
+      var rList = el("div", "fb-reasons");
+      reasons.forEach(function (x) {
+        rList.appendChild(el("p", "fb-reason" + (x.flag ? " fb-reason-flag" : ""), x.text));
+      });
+      rWrap.appendChild(rList);
+      card.appendChild(rWrap);
+    }
+
+    var cWrap = el("div");
+    cWrap.appendChild(el("div", "fb-section-label", "What's in it"));
+    var cList = el("ul", "fb-contents");
+    r.pick.contents.forEach(function (row) {
+      var li = el("li");
+      li.appendChild(el("span", null, row.item));
+      li.appendChild(el("span", null, row.detail));
+      cList.appendChild(li);
+    });
+    cWrap.appendChild(cList);
+    card.appendChild(cWrap);
+
+    var cta = el("div", "fb-cta");
+    var row = el("div", "fb-cta-row");
+    row.appendChild(bookButton("Talk it through first"));
+    var shop = el("a", "fb-btn fb-btn-ghost", "Shop this");
+    shop.href = r.pick.url;
+    shop.addEventListener("click", function () { track("quiz_shop_click", { product: r.pick.id }); });
+    row.appendChild(shop);
+    cta.appendChild(row);
+    cta.appendChild(el("p", "fb-cta-note", "Not sure? A short call costs nothing and we'd rather you got this right."));
+    card.appendChild(cta);
+
+    // Alternatives — always shown, so nobody feels funnelled.
+    var alts = ORDER.filter(function (id) { return id !== r.pick.id; });
+    if (alts.length) {
+      var aWrap = el("div", "fb-alts");
+      aWrap.appendChild(el("div", "fb-section-label", "The other routes"));
+      var aList = el("div", "fb-alt-list");
+      alts.forEach(function (id) {
+        var p = PRODUCTS[id];
+        var state = r.availability[id];
+        var a = el("a", "fb-alt" + (state.unserviced ? " fb-alt-unavailable" : ""));
+        a.href = p.url;
+        var left = el("div");
+        left.appendChild(el("div", "fb-alt-name", p.name));
+        var why = state.unserviced
+          ? "Not available in your area yet"
+          : state.overBudget
+            ? "Above the budget you set"
+            : p.blurb;
+        left.appendChild(el("div", "fb-alt-why", why));
+        a.appendChild(left);
+        a.appendChild(el("div", "fb-alt-price", CONFIG.currency + p.price));
+        aList.appendChild(a);
+      });
+      aWrap.appendChild(aList);
+      card.appendChild(aWrap);
+    }
+
+    if (CONFIG.emailEndpoint) { card.appendChild(optinBlock(r)); }
+
+    var foot = el("div", "fb-foot");
+    var again = el("button", "fb-link", "Start again");
+    again.type = "button";
+    again.addEventListener("click", function () {
+      answers = {};
+      cursor = 0;
+      renderQuestion();
+    });
+    foot.appendChild(again);
+    card.appendChild(foot);
+
+    swap(card);
+  }
+
+  function optinBlock(r) {
+    var wrap = el("div", "fb-optin");
+    wrap.appendChild(el("div", "fb-section-label", "Keep this"));
+    var form = el("form", "fb-optin-row");
+    var input = el("input", "fb-input");
+    input.type = "email";
+    input.required = true;
+    input.name = "email";
+    input.placeholder = "your@email.com";
+    input.setAttribute("aria-label", "Email address");
+    var submit = el("button", "fb-btn fb-btn-ghost", "Email me this");
+    submit.type = "submit";
+    form.appendChild(input);
+    form.appendChild(submit);
+
+    var msg = el("p", "fb-opt-note", "We'll send your result and nothing else unless you ask.");
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      submit.disabled = true;
+      submit.textContent = "Sending…";
+      fetch(CONFIG.emailEndpoint, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "Accept": "application/json" },
+        body: JSON.stringify({ email: input.value, product: r.pick.id, answers: answers })
+      }).then(function (res) {
+        if (!res.ok) { throw new Error(res.status); }
+        wrap.innerHTML = "";
+        wrap.appendChild(el("p", "fb-opt-note", "Sent. Check your inbox — and your spam folder, just in case."));
+        track("quiz_email_capture", { product: r.pick.id });
+      }).catch(function () {
+        submit.disabled = false;
+        submit.textContent = "Email me this";
+        msg.textContent = "That didn't send. Try again, or book a call and we'll talk instead.";
+      });
+    });
+
+    wrap.appendChild(form);
+    wrap.appendChild(msg);
+    return wrap;
+  }
+
+  /* When this file is opened on its own (not inside Squarespace), paint the
+     page background so the preview matches the embedded version. */
+  if (!document.querySelector(".sqs-block, [data-block-type], #siteWrapper")) {
+    document.documentElement.classList.add("fb-standalone");
+  }
+
+  renderQuestion();
+})();
+</script>
