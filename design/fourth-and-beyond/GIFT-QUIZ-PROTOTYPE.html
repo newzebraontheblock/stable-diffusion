@@ -1,0 +1,203 @@
+<title>Gift Quiz Prototype</title>
+<style>
+:root{
+  --green:#2E3830; --coral:#CC7C72; --cream:#FAF8F4; --sage:#E8E8D8;
+  --ground:#DDE6EA; --surface:var(--cream); --raised:var(--sage);
+  --ink:var(--green); --emphasis:#1C231E; --muted:#434E42; --mist:#9FB9C9;
+  --display:Alice,Georgia,Cambria,'Times New Roman',serif;
+  --body:Calibri,Carlito,'Segoe UI',ui-sans-serif,-apple-system,Roboto,Arial,sans-serif;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--body);
+  font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:var(--display);font-weight:400;margin:0;line-height:1.15;text-wrap:balance}
+p{margin:0}
+:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+
+.bar{background:var(--green);color:var(--cream);font-size:.72rem;letter-spacing:.1em;
+  text-transform:uppercase;font-weight:700;padding:.55rem 1.25rem;text-align:center}
+.stage{max-width:640px;margin:0 auto;padding:clamp(2rem,6vw,3.5rem) clamp(1.15rem,5vw,2rem) 5rem}
+
+.brand{display:inline-grid;font-family:var(--display);line-height:.9;letter-spacing:-.015em;
+  font-size:1.15rem;margin-bottom:2.5rem}
+.brand .lo{justify-self:end;padding-left:1.5em}
+.brand .amp{color:var(--coral);padding-right:.14em}
+
+.prog{display:flex;align-items:center;gap:.6rem;margin-bottom:1.5rem;font-size:.72rem;
+  letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--muted)}
+.track{flex:1;height:3px;background:var(--mist);border-radius:2px;overflow:hidden}
+.fill{height:100%;background:var(--ink);width:0;transition:width .3s ease}
+
+.qtitle{font-size:clamp(1.6rem,1.3rem + 1.6vw,2.3rem);letter-spacing:-.02em;margin-bottom:1.5rem}
+.opts{display:flex;flex-direction:column;gap:.6rem}
+.opt{font:inherit;text-align:left;cursor:pointer;background:var(--surface);color:var(--ink);
+  border:1px solid var(--mist);border-radius:2px;padding:.95rem 1.15rem;
+  transition:border-color .15s ease,background .15s ease,transform .15s ease}
+.opt:hover{border-color:var(--ink);transform:translateX(3px)}
+.opt.sel{background:var(--ink);color:var(--cream);border-color:var(--ink)}
+
+.nav{display:flex;gap:.75rem;align-items:center;margin-top:2rem}
+.link{font:inherit;font-size:.9rem;background:none;border:0;cursor:pointer;color:var(--muted);
+  text-decoration:underline;text-underline-offset:3px;padding:0}
+.link:hover{color:var(--ink)}
+.btn{font:inherit;font-weight:700;cursor:pointer;border:0;background:var(--ink);color:var(--cream);
+  padding:.75rem 1.4rem;border-radius:2px;text-decoration:none;display:inline-block}
+.btn:hover{background:var(--emphasis)}
+
+.fade{animation:in .32s ease}
+@keyframes in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.fade{animation:none}.opt:hover{transform:none}}
+
+/* result */
+.rblock{background:var(--surface);border:1px solid var(--mist);border-radius:2px;
+  padding:1.3rem 1.4rem;margin-top:1rem}
+.rlabel{font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;font-weight:700;
+  color:var(--muted);margin-bottom:.55rem}
+.rblock h3{font-size:1.25rem;margin-bottom:.5rem}
+.rblock p + p{margin-top:.6rem}
+.price{font-family:var(--display);font-size:1.5rem;color:var(--emphasis)}
+.notebox{background:var(--raised);border-radius:2px;padding:1rem 1.15rem;margin-top:.8rem;
+  font-family:var(--display);font-size:1.08rem;line-height:1.5}
+.copyrow{display:flex;align-items:center;gap:.8rem;margin-top:.75rem}
+.copied{font-size:.85rem;color:var(--muted)}
+.cta{background:var(--ink);color:var(--cream);border-radius:2px;padding:1.4rem 1.5rem;margin-top:1.5rem}
+.cta h3{color:var(--cream);font-size:1.3rem;margin-bottom:.5rem}
+.cta p{font-size:.95rem;opacity:.85}
+.cta .btn{background:var(--cream);color:var(--ink);margin-top:1rem}
+.cta .btn:hover{background:#fff}
+.tags{margin-top:1.5rem;font-size:.78rem;color:var(--muted);font-family:ui-monospace,Menlo,monospace}
+.hint{font-size:.85rem;color:var(--muted);margin-top:.9rem}
+</style>
+
+<div class="bar">Prototype &mdash; click through as a gift-buyer would</div>
+
+<div class="stage">
+  <span class="brand"><span>fourth</span><span class="lo"><span class="amp">&amp;</span>beyond</span></span>
+  <div id="app" aria-live="polite"></div>
+</div>
+
+<script>
+(function(){
+  var app=document.getElementById('app');
+  var Q=[
+    {k:'stage',t:'Where is she up to?',o:[
+      ['More than six weeks until the birth','early'],
+      ['Due within the next six weeks','imminent'],
+      ['The baby has just arrived','newborn'],
+      ["She's a few weeks in",'weeks_in']]},
+    {k:'first',t:'Is this her first baby?',o:[
+      ['Her first','yes'],["She's done this before",'no'],["I'm not sure",'unknown']]},
+    {k:'support',t:'How much help will she have at home?',o:[
+      ['A partner around most of the time','high'],
+      ['Some family or friends nearby','medium'],
+      ['Mostly on her own','low'],
+      ["I don't know",'unknown']]},
+    {k:'closeness',t:'How well do you know her?',o:[
+      ["Very well — I'd know how she's really doing",'close'],
+      ['Good friend or family','friend'],
+      ['A colleague, or a friend of a friend','distant']]},
+    {k:'budget',t:'Roughly what did you have in mind?',skip:true,o:[
+      ["Around £50 — I'm going in with others",'shared'],
+      ['Around £150','kit'],
+      ['£200 or more','plus']]}
+  ];
+  var i=0, A={};
+
+  var LEAD={
+    yes:"Because it's her first, lead with the Maternal Journal — it's in every box. She doesn't yet know what she'll need, and it walks her through the part nobody explains.",
+    no:"She's done this before, so she knows exactly how hard it is. Lead with the practical relief, not the guidance.",
+    unknown:"The kit covers either case — practical recovery essentials, with the Maternal Journal included for the parts nobody explains."
+  };
+  var ADDON={
+    low:{h:'The Home Recovery Kit + a night nanny or meals voucher',
+         p:"With little help at home, what she needs most is hands, not more objects. The voucher is the part she'll remember."},
+    medium:{h:'The Home Recovery Kit + a physio or counselling voucher',
+         p:"She has some support around her, so the voucher covers what friends and family can't."},
+    high:{h:'The Home Recovery Kit',
+         p:"She's got people around her. The kit on its own is plenty — no need to add to it."},
+    unknown:{h:'The Home Recovery Kit',
+         p:"Without knowing what help she has, the kit on its own is the safe choice. It works either way."}
+  };
+  var TIME={
+    early:"Order whenever you like — we'll hold it and deliver the week before she's due.",
+    imminent:"Send it now. It wants to be in the house before the hospital bag leaves it.",
+    newborn:"Send it today. The first fortnight is when it does the most work.",
+    weeks_in:"Not too late — most support disappears around now, which is exactly the problem."
+  };
+  var NOTE={
+    close:"I know everyone's going to be looking at the baby. This one's for you. I'm around — for the 3am ones too.",
+    friend:"Everyone's buying for the baby, so I got you something for you. No need to reply to this — or to anything, for a while.",
+    distant:"Congratulations. We thought you might like something for you, rather than another babygrow. Wishing you a gentle few weeks."
+  };
+
+  function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;')}
+
+  function question(){
+    var q=Q[i];
+    var h='<div class="fade"><div class="prog"><span>Question '+(i+1)+' of '+Q.length+'</span>'+
+      '<span class="track"><span class="fill" style="width:'+((i)/Q.length*100)+'%"></span></span></div>'+
+      '<h2 class="qtitle">'+esc(q.t)+'</h2><div class="opts">';
+    q.o.forEach(function(o,n){
+      h+='<button class="opt'+(A[q.k]===o[1]?' sel':'')+'" data-v="'+o[1]+'">'+esc(o[0])+'</button>';
+    });
+    h+='</div><div class="nav">';
+    if(i>0) h+='<button class="link" id="back">Back</button>';
+    if(q.skip) h+='<button class="link" id="skip">Rather not say</button>';
+    h+='</div></div>';
+    app.innerHTML=h;
+    [].forEach.call(app.querySelectorAll('.opt'),function(b){
+      b.onclick=function(){A[Q[i].k]=b.dataset.v; next()};
+    });
+    var bk=document.getElementById('back'); if(bk) bk.onclick=function(){i--;question()};
+    var sk=document.getElementById('skip'); if(sk) sk.onclick=function(){A.budget='skip'; next()};
+  }
+  function next(){ i++; i<Q.length?question():result() }
+
+  function result(){
+    var add=ADDON[A.support]||ADDON.unknown;
+    var shared = A.budget==='shared';
+    var h='<div class="fade"><div class="prog"><span>Your recommendation</span>'+
+      '<span class="track"><span class="fill" style="width:100%"></span></span></div>'+
+      '<h2 class="qtitle">Here’s what we’d send.</h2>'+
+
+      '<div class="rblock"><p class="rlabel">What to send</p>'+
+      '<h3>'+esc(add.h)+'</h3>'+
+      '<p class="price">£150'+(A.support==='low'||A.support==='medium'?' + voucher':'')+'</p>'+
+      '<p>'+esc(add.p)+'</p>'+
+      '<p>'+esc(LEAD[A.first]||LEAD.unknown)+'</p>'+
+      (shared?'<p><b>Going in with others works well here</b> — three of you covers the kit comfortably.</p>':'')+
+      '</div>'+
+
+      '<div class="rblock"><p class="rlabel">When it should arrive</p><p>'+esc(TIME[A.stage])+'</p></div>'+
+
+      '<div class="rblock"><p class="rlabel">What to write</p>'+
+      '<div class="notebox" id="note">“'+esc(NOTE[A.closeness])+'”</div>'+
+      '<div class="copyrow"><button class="btn" id="copy">Copy this note</button>'+
+      '<span class="copied" id="cst"></span></div></div>'+
+
+      '<div class="cta"><h3>We’re not open yet.</h3>'+
+      '<p>Kits ship spring 2027. Join the waitlist and we’ll tell you the moment gifting opens — in time for her.</p>'+
+      '<a class="btn" href="#" onclick="return false">Join the waitlist</a></div>'+
+
+      '<p class="tags">Stored against this signup: audience=gifter &middot; '+
+        Object.keys(A).map(function(k){return k+'='+A[k]}).join(' &middot; ')+'</p>'+
+      '<p class="hint"><button class="link" id="again">Start again</button> to try a different combination — the recommendation, the timing and the note all change.</p>'+
+      '</div>';
+    app.innerHTML=h;
+    document.getElementById('again').onclick=function(){i=0;A={};question()};
+    document.getElementById('copy').onclick=function(){
+      var t=document.getElementById('note').textContent.replace(/^“|”$/g,'');
+      var done=function(){document.getElementById('cst').textContent='Copied'};
+      try{
+        navigator.clipboard.writeText(t).then(done,select);
+      }catch(e){select()}
+      function select(){
+        var r=document.createRange(); r.selectNodeContents(document.getElementById('note'));
+        var s=window.getSelection(); s.removeAllRanges(); s.addRange(r);
+        document.getElementById('cst').textContent='Selected — press Ctrl/Cmd+C';
+      }
+    };
+  }
+  question();
+})();
+</script>
