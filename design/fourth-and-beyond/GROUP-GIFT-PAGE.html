@@ -1,0 +1,155 @@
+<title>Group Gift Page</title>
+<style>
+:root{
+  --green:#2E3830; --coral:#CC7C72; --coral-text:#AC4B3E;
+  --cream:#FAF8F4; --sage:#E8E8D8; --sky:#A8C4D8;
+  --ground:var(--sky); --surface:var(--cream); --raised:var(--sage);
+  --ink:var(--green); --emphasis:#1C231E; --muted:#434E42; --mist:#7E9DB4;
+  --display:Alice,Georgia,Cambria,'Times New Roman',serif;
+  --body:Calibri,Carlito,'Segoe UI',ui-sans-serif,-apple-system,Roboto,Arial,sans-serif;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--body);
+  font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:var(--display);font-weight:400;margin:0;line-height:1.18;text-wrap:balance}
+p{margin:0}
+:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+
+.bar{background:var(--green);color:var(--cream);font-size:.72rem;padding:.5rem .9rem;
+  display:flex;flex-wrap:wrap;gap:.5rem .9rem;align-items:center;justify-content:center}
+.bar b{letter-spacing:.12em;text-transform:uppercase;font-size:.65rem;opacity:.6}
+.tog{font:inherit;font-size:.72rem;font-weight:700;cursor:pointer;background:transparent;
+  color:inherit;opacity:.55;border:1px solid transparent;border-radius:999px;padding:.22rem .7rem}
+.tog[aria-pressed="true"]{opacity:1;background:var(--cream);color:var(--green)}
+
+/* deliberately narrow - this is opened on a phone from a WhatsApp message */
+.phone{max-width:430px;margin:0 auto;padding:1.75rem 1.15rem 4rem}
+
+.brand{display:inline-grid;font-family:var(--display);line-height:.9;letter-spacing:-.015em;
+  font-size:1rem;margin-bottom:1.75rem}
+.brand .lo{justify-self:end;padding-left:1.5em}
+.brand .amp{color:var(--coral);padding-right:.14em}
+
+h1{font-size:clamp(1.6rem,1.35rem + 1.6vw,2.05rem);letter-spacing:-.015em}
+.lede{margin-top:1.1rem;color:var(--muted);font-size:1.02rem}
+.lede + .lede{margin-top:.7rem}
+
+.card{background:var(--surface);border:1px solid var(--mist);border-radius:3px;
+  padding:1.35rem 1.25rem;margin-top:1.75rem}
+
+.figures{display:flex;align-items:baseline;gap:.5rem;flex-wrap:wrap}
+.raised{font-family:var(--display);font-size:2rem;color:var(--emphasis);line-height:1;
+  font-variant-numeric:tabular-nums}
+.target{color:var(--muted);font-size:.95rem}
+.track{height:8px;background:var(--raised);border-radius:99px;overflow:hidden;margin-top:.85rem}
+.fill{height:100%;background:var(--green);border-radius:99px;width:57%}
+.count{margin-top:.6rem;font-size:.9rem;color:var(--muted)}
+
+.amts{display:grid;grid-template-columns:repeat(4,1fr);gap:.45rem;margin-top:1.4rem}
+.amt{font:inherit;font-weight:700;cursor:pointer;background:transparent;color:var(--ink);
+  border:1.5px solid var(--mist);border-radius:3px;padding:.7rem .3rem;text-align:center;
+  transition:border-color .15s ease,background .15s ease}
+.amt:hover{border-color:var(--ink)}
+.amt[aria-pressed="true"]{background:var(--ink);color:var(--cream);border-color:var(--ink)}
+
+.btn{display:block;width:100%;font:inherit;font-weight:700;font-size:1.05rem;cursor:pointer;
+  border:0;background:var(--ink);color:var(--cream);padding:.95rem 1.2rem;border-radius:3px;
+  margin-top:1rem;text-align:center;text-decoration:none}
+.btn:hover{background:var(--emphasis)}
+.btn-alt{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--ink)}
+.btn-alt:hover{background:var(--ink);color:var(--cream)}
+
+.small{font-size:.82rem;color:var(--muted);margin-top:.8rem;text-align:center}
+.holdnote{background:var(--raised);border-radius:3px;padding:.85rem 1rem;margin-top:1.1rem;
+  font-size:.85rem;color:var(--muted)}
+.holdnote b{color:var(--ink)}
+
+.thanks{text-align:center;padding-top:1.5rem}
+.thanks h2{font-size:1.55rem}
+.thanks p{margin-top:.9rem;color:var(--muted)}
+.hidden{display:none}
+</style>
+
+<div class="bar">
+  <b>Prototype</b>
+  <button class="tog" id="t-give" aria-pressed="true">Shared page</button>
+  <button class="tog" id="t-thanks" aria-pressed="false">After chipping in</button>
+</div>
+
+<div class="phone">
+  <span class="brand"><span>fourth</span><span class="lo"><span class="amp">&amp;</span>beyond</span></span>
+
+  <!-- ============ SHARED PAGE ============ -->
+  <div id="give">
+    <h1>Priya is putting together a gift for Hannah.</h1>
+    <p class="lede">Most gifts for a new baby are for the baby. This one&rsquo;s for her.</p>
+    <p class="lede">A recovery kit for the weeks after birth &mdash; the part nobody prepares you for. Chosen for the things she&rsquo;ll actually need, and the things nobody warns her about.</p>
+
+    <div class="card">
+      <div class="figures">
+        <span class="raised">&pound;85</span>
+        <span class="target">of &pound;150</span>
+      </div>
+      <div class="track"><div class="fill"></div></div>
+      <p class="count">4 people have chipped in</p>
+
+      <div class="amts" role="group" aria-label="Choose an amount">
+        <button class="amt" aria-pressed="false">&pound;15</button>
+        <button class="amt" aria-pressed="true">&pound;25</button>
+        <button class="amt" aria-pressed="false">&pound;50</button>
+        <button class="amt" aria-pressed="false">Other</button>
+      </div>
+
+      <button class="btn" id="chip">Chip in</button>
+      <p class="small">No account needed. Takes about thirty seconds.</p>
+    </div>
+
+    <div class="holdnote">
+      <b>Not live yet.</b> Group gifting opens when we launch in spring 2027. Join the waitlist and we&rsquo;ll tell you the moment it does &mdash; in time for Hannah.
+    </div>
+    <a class="btn btn-alt" href="#" onclick="return false">Join the waitlist</a>
+  </div>
+
+  <!-- ============ AFTER CONTRIBUTING ============ -->
+  <div id="thanks" class="hidden">
+    <div class="thanks">
+      <h2>That&rsquo;s Hannah one step closer.</h2>
+      <p>Want to nudge anyone else?</p>
+      <button class="btn" id="share">Share this</button>
+      <p class="small">One more share usually does more than one more contribution.</p>
+    </div>
+    <div class="card">
+      <div class="figures">
+        <span class="raised">&pound;110</span>
+        <span class="target">of &pound;150</span>
+      </div>
+      <div class="track"><div class="fill" style="width:73%"></div></div>
+      <p class="count">5 people have chipped in &mdash; you were the fifth</p>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var give=document.getElementById('give'),th=document.getElementById('thanks'),
+      tg=document.getElementById('t-give'),tt=document.getElementById('t-thanks');
+  function show(isThanks){
+    give.classList.toggle('hidden',isThanks);
+    th.classList.toggle('hidden',!isThanks);
+    tg.setAttribute('aria-pressed',String(!isThanks));
+    tt.setAttribute('aria-pressed',String(isThanks));
+    window.scrollTo({top:0,behavior:'instant'});
+  }
+  tg.onclick=function(){show(false)}; tt.onclick=function(){show(true)};
+  document.getElementById('chip').onclick=function(){show(true)};
+  var amts=[].slice.call(document.querySelectorAll('.amt'));
+  amts.forEach(function(a){a.onclick=function(){
+    amts.forEach(function(o){o.setAttribute('aria-pressed',String(o===a))});
+  }});
+  document.getElementById('share').onclick=function(){
+    var t=document.getElementById('share');
+    t.textContent='Prototype — sharing not wired up';
+    setTimeout(function(){t.textContent='Share this'},1800);
+  };
+})();
+</script>
