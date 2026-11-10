@@ -67,20 +67,58 @@ h1{font-size:clamp(1.6rem,1.35rem + 1.6vw,2.05rem);letter-spacing:-.015em}
 .thanks{text-align:center;padding-top:1.5rem}
 .thanks h2{font-size:1.55rem}
 .thanks p{margin-top:.9rem;color:var(--muted)}
+.voice{display:block;width:100%;font:inherit;font-weight:600;font-size:.95rem;cursor:pointer;
+  background:transparent;color:var(--ink);border:1.5px dashed var(--mist);border-radius:3px;
+  padding:.75rem 1rem;margin-top:1rem;text-align:center}
+.voice:hover{border-color:var(--ink);border-style:solid}
+.voice[aria-pressed="true"]{border-style:solid;border-color:var(--ink);background:var(--raised)}
+.voicehint{font-size:.82rem;color:var(--muted);margin-top:.45rem;text-align:center}
+
+.feedwrap{margin-top:1.75rem}
+.eyebrow{font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;font-weight:700;
+  color:var(--muted);margin:0 0 .85rem}
+.feed{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:.75rem}
+.feed li{background:var(--surface);border:1px solid var(--mist);border-radius:3px;padding:.85rem 1rem}
+.feed li.mine{border-color:var(--ink)}
+.who{display:flex;justify-content:space-between;align-items:baseline;gap:1rem}
+.who b{font-family:var(--display);font-weight:400;font-size:1.05rem}
+.who span{font-size:.9rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.msg{margin-top:.3rem;font-size:.92rem;color:var(--muted);line-height:1.45}
+.msg.voiced{font-style:italic}
+.msg.voiced::before{content:"\25B6";font-style:normal;color:var(--coral);
+  margin-right:.45rem;font-size:.75rem}
 .hidden{display:none}
 </style>
 
 <div class="bar">
   <b>Prototype</b>
-  <button class="tog" id="t-give" aria-pressed="true">Shared page</button>
-  <button class="tog" id="t-thanks" aria-pressed="false">After chipping in</button>
+  <button class="tog" id="t-v2" aria-pressed="true">Chip in</button>
+  <button class="tog" id="t-v2b" aria-pressed="false">After chipping in</button>
+  <button class="tog" id="t-v1" aria-pressed="false">Share-only fallback</button>
 </div>
 
 <div class="phone">
   <span class="brand"><span>fourth</span><span class="lo"><span class="amp">&amp;</span>beyond</span></span>
 
-  <!-- ============ SHARED PAGE ============ -->
-  <div id="give">
+  <!-- ============ V1 - SHARE ONLY ============ -->
+  <div id="v1" class="hidden">
+    <h1>Priya is putting together a gift for Hannah.</h1>
+    <p class="lede">Most gifts for a new baby are for the baby. This one&rsquo;s for her.</p>
+    <p class="lede">A recovery kit for the weeks after birth &mdash; the part nobody prepares you for. Chosen for the things she&rsquo;ll actually need, and the things nobody warns her about.</p>
+    <div class="card">
+      <div class="kit"><h3>Full Recovery Kit</h3><span class="p">&pound;150</span></div>
+      <p class="kitnote"><b>Six people at &pound;25 covers it.</b> <b>Priya is collecting</b> &mdash; send her your bit however you normally would, and she&rsquo;ll order it once everyone&rsquo;s in.</p>
+      <button class="btn" id="share1">Share this</button>
+      <p class="small">The more people who see it, the smaller everyone&rsquo;s share.</p>
+    </div>
+    <div class="split">
+      <p>Expecting yourself? We launch in spring 2027 &mdash; founding members get first access.</p>
+      <a class="btn btn-alt" href="#" onclick="return false">Join the waitlist</a>
+    </div>
+  </div>
+
+  <!-- ============ V2 - WITH PAYMENTS ============ -->
+  <div id="v2">
     <h1>Priya is putting together a gift for Hannah.</h1>
     <p class="lede">Most gifts for a new baby are for the baby. This one&rsquo;s for her.</p>
     <p class="lede">A recovery kit for the weeks after birth &mdash; the part nobody prepares you for. Chosen for the things she&rsquo;ll actually need, and the things nobody warns her about.</p>
@@ -91,7 +129,7 @@ h1{font-size:clamp(1.6rem,1.35rem + 1.6vw,2.05rem);letter-spacing:-.015em}
         <span class="target">of &pound;150</span>
       </div>
       <div class="track"><div class="fill"></div></div>
-      <p class="count">4 people have chipped in</p>
+      <p class="count">4 people have chipped in &middot; <b>six at &pound;25 covers it</b></p>
 
       <div class="amts" role="group" aria-label="Choose an amount">
         <button class="amt" aria-pressed="false">&pound;15</button>
@@ -100,8 +138,25 @@ h1{font-size:clamp(1.6rem,1.35rem + 1.6vw,2.05rem);letter-spacing:-.015em}
         <button class="amt" aria-pressed="false">Other</button>
       </div>
 
+      <button class="voice" id="addvoice">+&nbsp; Add a voice note</button>
+      <p class="voicehint">She&rsquo;ll hear it when the box arrives.</p>
       <button class="btn" id="chip">Chip in</button>
       <p class="small">No account needed. Takes about thirty seconds.</p>
+    </div>
+
+    <div class="feedwrap">
+      <p class="eyebrow">Who&rsquo;s chipped in</p>
+      <ul class="feed">
+        <li><div class="who"><b>Maya</b><span>&pound;25</span></div>
+          <p class="msg">&ldquo;Thinking of you. I&rsquo;ll be round with food the second you want company.&rdquo;</p></li>
+        <li><div class="who"><b>Tom</b><span>&pound;20</span></div>
+          <p class="msg voiced">Left a voice note</p></li>
+        <li><div class="who"><b>Alex</b><span>&pound;15</span></div>
+          <p class="msg">&ldquo;From everyone on the team. Take your time coming back.&rdquo;</p></li>
+        <li><div class="who"><b>Priya</b><span>&pound;25</span></div>
+          <p class="msg">&ldquo;Started this one. Love you.&rdquo;</p></li>
+      </ul>
+      <p class="small">Every message is printed on a card in the box. Voice notes become a link she can play.</p>
     </div>
 
     <div class="holdnote">
@@ -111,11 +166,11 @@ h1{font-size:clamp(1.6rem,1.35rem + 1.6vw,2.05rem);letter-spacing:-.015em}
   </div>
 
   <!-- ============ AFTER CONTRIBUTING ============ -->
-  <div id="thanks" class="hidden">
+  <div id="v2b" class="hidden">
     <div class="thanks">
       <h2>That&rsquo;s Hannah one step closer.</h2>
       <p>Want to nudge anyone else?</p>
-      <button class="btn" id="share">Share this</button>
+      <button class="btn" id="share2">Share this</button>
       <p class="small">One more share usually does more than one more contribution.</p>
     </div>
     <div class="card">
@@ -126,30 +181,49 @@ h1{font-size:clamp(1.6rem,1.35rem + 1.6vw,2.05rem);letter-spacing:-.015em}
       <div class="track"><div class="fill" style="width:73%"></div></div>
       <p class="count">5 people have chipped in &mdash; you were the fifth</p>
     </div>
+    <div class="feedwrap">
+      <p class="eyebrow">Who&rsquo;s chipped in</p>
+      <ul class="feed">
+        <li class="mine"><div class="who"><b>You</b><span>&pound;25</span></div>
+          <p class="msg voiced">Voice note saved &mdash; she&rsquo;ll hear it when the box arrives</p></li>
+        <li><div class="who"><b>Maya</b><span>&pound;25</span></div>
+          <p class="msg">&ldquo;Thinking of you. I&rsquo;ll be round with food the second you want company.&rdquo;</p></li>
+        <li><div class="who"><b>Tom</b><span>&pound;20</span></div>
+          <p class="msg voiced">Left a voice note</p></li>
+      </ul>
+    </div>
   </div>
 </div>
 
 <script>
 (function(){
-  var give=document.getElementById('give'),th=document.getElementById('thanks'),
-      tg=document.getElementById('t-give'),tt=document.getElementById('t-thanks');
-  function show(isThanks){
-    give.classList.toggle('hidden',isThanks);
-    th.classList.toggle('hidden',!isThanks);
-    tg.setAttribute('aria-pressed',String(!isThanks));
-    tt.setAttribute('aria-pressed',String(isThanks));
+  var views={v1:document.getElementById('v1'),v2:document.getElementById('v2'),v2b:document.getElementById('v2b')};
+  var togs={v1:document.getElementById('t-v1'),v2:document.getElementById('t-v2'),v2b:document.getElementById('t-v2b')};
+  function show(k){
+    Object.keys(views).forEach(function(n){
+      views[n].classList.toggle('hidden',n!==k);
+      togs[n].setAttribute('aria-pressed',String(n===k));
+    });
     window.scrollTo({top:0,behavior:'instant'});
   }
-  tg.onclick=function(){show(false)}; tt.onclick=function(){show(true)};
-  document.getElementById('chip').onclick=function(){show(true)};
+  Object.keys(togs).forEach(function(k){togs[k].onclick=function(){show(k)}});
+  document.getElementById('chip').onclick=function(){show('v2b')};
+  var av=document.getElementById('addvoice');
+  av.onclick=function(){
+    var on=av.getAttribute('aria-pressed')==='true';
+    av.setAttribute('aria-pressed',String(!on));
+    av.innerHTML=on?'+&nbsp; Add a voice note':'\u25B6&nbsp; Voice note ready';
+  };
   var amts=[].slice.call(document.querySelectorAll('.amt'));
   amts.forEach(function(a){a.onclick=function(){
     amts.forEach(function(o){o.setAttribute('aria-pressed',String(o===a))});
   }});
-  document.getElementById('share').onclick=function(){
-    var t=document.getElementById('share');
-    t.textContent='Prototype — sharing not wired up';
-    setTimeout(function(){t.textContent='Share this'},1800);
-  };
+  ['share1','share2'].forEach(function(id){
+    var b=document.getElementById(id); if(!b) return;
+    b.onclick=function(){
+      var t=b.innerHTML; b.textContent='Prototype — sharing not wired up';
+      setTimeout(function(){b.innerHTML=t},1800);
+    };
+  });
 })();
 </script>

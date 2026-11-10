@@ -1,60 +1,28 @@
 <title>Fourth &amp; Beyond</title>
 <style>
 :root{
-  /* confirmed brand system - sky blue ground, deep green accent */
-  --green:#2E3830;      /* Deep Green - now the accent */
-  --coral:#CC7C72;      /* Berry/Coral - decorative only */
-  --cream:#FAF8F4;      /* Cream - cards and surfaces */
-  --sage:#E8E8D8;       /* Pale Sage - banded sections */
-  --sky:#A8C4D8;        /* Soft Sky Blue - now the main background */
-
-  --ground:var(--sky);
-  --surface:var(--cream);
-  --raised:var(--sage);
-  --slot:#93B3CB;
-  --ink:var(--green);
-  --emphasis:#1C231E;
-  --muted:#434E42;
-  --accent:var(--green);
-  --mist:#7E9DB4;
-
-  --btn-bg:var(--green);
-  --btn-fg:var(--cream);
-  --btn-bg-hover:#1C231E;
-  --tag-bg:var(--cream);
-  --tag-fg:var(--green);
-  --amp:var(--coral);
-
+  --green:#2E3830; --coral:#CC7C72; --cream:#FAF8F4; --sage:#E8E8D8; --sky:#A8C4D8;
+  --ground:var(--sky); --surface:var(--cream); --raised:var(--sage); --slot:#93B3CB;
+  --ink:var(--green); --emphasis:#1C231E; --muted:#434E42; --accent:var(--green); --mist:#7E9DB4;
+  --btn-bg:var(--green); --btn-fg:var(--cream); --btn-bg-hover:#1C231E;
+  --tag-bg:var(--cream); --tag-fg:var(--green); --amp:var(--coral);
   --display:Alice,Georgia,Cambria,'Times New Roman',serif;
   --body:Calibri,Carlito,'Segoe UI',ui-sans-serif,-apple-system,Roboto,'Helvetica Neue',Arial,sans-serif;
-
-  --measure:64ch;
-  --pad:clamp(1.25rem,5vw,3rem);
-  --gutter:clamp(2.5rem,7vw,5.5rem);
+  --measure:64ch; --pad:clamp(1.25rem,5vw,3rem); --gutter:clamp(2.5rem,7vw,5.5rem);
 }
-
-/* review toggle: lighter version of the same blue */
 :root.tint{--ground:#DDE6EA}
-
 *{box-sizing:border-box}
-body{
-  margin:0;background:var(--ground);color:var(--ink);
-  font-family:var(--body);
-  font-size:clamp(1.0625rem,1rem + .25vw,1.125rem);line-height:1.62;
-  -webkit-font-smoothing:antialiased;
-}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--body);
+  font-size:clamp(1.0625rem,1rem + .25vw,1.125rem);line-height:1.62;-webkit-font-smoothing:antialiased}
 h1,h2,h3{font-family:var(--display);font-weight:400;text-wrap:balance;margin:0}
 h1,h2{line-height:1.12}
 h3{line-height:1.25}
 p{margin:0}
 a{color:inherit}
 :focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
-
 .wrap{width:100%;max-width:1080px;margin:0 auto;padding-inline:var(--pad)}
 .label{font-size:.6875rem;letter-spacing:.16em;text-transform:uppercase;font-weight:600;color:var(--accent);margin:0}
-
-/* ---------- mockup toolbar ---------- */
-.bar{position:sticky;top:0;z-index:60;background:var(--green);color:var(--cream);font-size:.75rem}
+.bar{position:relative;z-index:60;background:var(--green);color:var(--cream);font-size:.75rem}
 .bar .wrap{display:flex;flex-wrap:wrap;align-items:center;gap:.75rem 1.25rem;padding-block:.5rem}
 .bar b{font-weight:600;letter-spacing:.1em;text-transform:uppercase;font-size:.6875rem;opacity:.6}
 .bar .sep{flex:1}
@@ -64,39 +32,28 @@ a{color:inherit}
 .tab:hover{opacity:1}
 .tab[aria-selected="true"],.tab[aria-pressed="true"]{opacity:1;background:var(--cream);color:var(--green)}
 .grd{display:inline-flex;align-items:center;gap:.3rem}
-
-/* ---------- wordmark ---------- */
-.brand,.fbrand{
-  display:inline-grid;font-family:var(--display);font-weight:400;
-  line-height:.9;letter-spacing:-.015em;color:var(--ink);text-decoration:none;white-space:nowrap;
-}
+.brand,.fbrand{display:inline-grid;font-family:var(--display);font-weight:400;line-height:.9;
+  letter-spacing:-.015em;color:var(--ink);text-decoration:none;white-space:nowrap}
 .brand{font-size:1.15rem}
 .fbrand{font-size:1.45rem}
 .brand .lo,.fbrand .lo{justify-self:end;padding-left:1.5em}
 .brand .amp,.fbrand .amp{color:var(--amp);padding-right:.14em}
-
-/* ---------- site nav ---------- */
-.nav{border-bottom:1px solid var(--mist);background:var(--ground)}
+.nav{position:sticky;top:0;z-index:55;border-bottom:1px solid var(--mist);background:var(--ground)}
 .nav .wrap{display:flex;align-items:center;gap:1.5rem;padding-block:.95rem}
 .nav ul{display:flex;gap:1.6rem;list-style:none;margin:0 0 0 auto;padding:0;font-size:.9375rem}
 .nav a{text-decoration:none;color:var(--muted)}
 .nav a:hover{color:var(--ink)}
-.btn{display:inline-block;border:0;cursor:pointer;font:inherit;font-weight:600;
-  background:var(--btn-bg);color:var(--btn-fg);padding:.7rem 1.35rem;border-radius:2px;
-  text-decoration:none;white-space:nowrap;transition:background .18s ease}
+.btn{display:inline-block;border:0;cursor:pointer;font:inherit;font-weight:600;background:var(--btn-bg);
+  color:var(--btn-fg);padding:.7rem 1.35rem;border-radius:2px;text-decoration:none;white-space:nowrap;
+  transition:background .18s ease}
 .btn:hover{background:var(--btn-bg-hover)}
 .nav .btn{padding:.55rem 1.1rem;font-size:.9375rem}
 @media (max-width:760px){.nav ul{display:none}}
-
 section{padding-block:var(--gutter)}
-.rule{border-top:1px solid var(--mist)}
-
-/* ---------- hero ---------- */
 .hero{padding-block:clamp(3rem,8vw,5.5rem) var(--gutter)}
 .hero h1{font-size:clamp(2.35rem,1.4rem + 4.2vw,4.4rem);max-width:17ch;letter-spacing:-.02em}
 .hero h1 span{color:var(--emphasis);display:block}
 .hero .lede{font-size:clamp(1.05rem,1rem + .35vw,1.2rem);color:var(--muted);max-width:56ch;margin-top:1.5rem}
-.hero .lede b{color:var(--ink);font-weight:600}
 .reveal{opacity:0;transform:translateY(14px);animation:rise .7s cubic-bezier(.2,.7,.3,1) forwards}
 .reveal:nth-child(2){animation-delay:.07s}
 .reveal:nth-child(3){animation-delay:.14s}
@@ -104,137 +61,103 @@ section{padding-block:var(--gutter)}
 .reveal:nth-child(5){animation-delay:.28s}
 @keyframes rise{to{opacity:1;transform:none}}
 @media (prefers-reduced-motion:reduce){.reveal{animation:none;opacity:1;transform:none}}
-
-.trimesters{display:grid;grid-template-columns:repeat(4,1fr);gap:.5rem;margin-top:2.75rem;max-width:520px}
-.tri{padding-top:.65rem;border-top:3px solid var(--mist)}
-.tri span{font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:600}
-.tri.now{border-top-color:var(--coral)}
-.tri.now span{color:var(--accent)}
-.tri.now small{display:block;font-size:.75rem;color:var(--muted);letter-spacing:.02em;text-transform:none;font-weight:600;margin-top:.15rem}
-
 .signup{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:2.25rem;max-width:480px}
 .signup input{flex:1 1 15rem;font:inherit;color:var(--ink);background:var(--surface);
   border:1px solid var(--mist);padding:.7rem .9rem;border-radius:2px}
 .signup input::placeholder{color:var(--muted)}
 .signup input:focus{border-color:var(--accent);outline:none}
 .micro{font-size:.8125rem;color:var(--muted);margin-top:.85rem;max-width:52ch}
-
 .stack{display:flex;flex-direction:column;gap:1.35rem}
 .prose{max-width:var(--measure);font-size:1.0625rem}
 h2{font-size:clamp(1.7rem,1.3rem + 1.6vw,2.5rem);letter-spacing:-.015em;max-width:20ch}
 .pull{font-family:var(--display);font-size:clamp(1.5rem,1.2rem + 1.4vw,2.1rem);line-height:1.25;
   color:var(--accent);max-width:22ch;border-left:3px solid var(--coral);padding-left:1.25rem}
-
-/* ---------- hero opener + held copy ---------- */
-.opener{font-size:clamp(.95rem,.9rem + .25vw,1.05rem);color:var(--muted);max-width:46ch;
-  margin-bottom:1.75rem;line-height:1.5}
+.eyebrow{font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;font-weight:700;color:var(--muted);margin:0 0 1.1rem}
+.statement{font-size:clamp(1.85rem,1.3rem + 2.4vw,3rem);letter-spacing:-.02em;max-width:18ch;line-height:1.12}
+.statement.sm{font-size:clamp(1.5rem,1.2rem + 1.6vw,2.2rem);max-width:22ch}
+.statement span{color:var(--emphasis)}
+.chips-band{text-align:center}
+.chips{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:.6rem;justify-content:center}
+.chips li{background:var(--surface);border:1px solid var(--mist);border-radius:999px;padding:.55rem 1.15rem;
+  font-size:.95rem;font-weight:600}
+.probs{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));margin-top:2.5rem}
+.prob{background:var(--surface);border:1px solid var(--mist);border-radius:3px;padding:1.5rem}
+.prob h3{font-size:1.2rem;margin-bottom:.5rem}
+.prob p{color:var(--muted);font-size:.95rem}
+.hero-shot{margin-top:2.5rem;aspect-ratio:16/10}
+.founder{display:flex;flex-direction:column;gap:.9rem;max-width:56ch}
+.founder-shot{aspect-ratio:4/3;max-width:22rem}
+.cap{font-size:.85rem;color:var(--muted);margin:0}
+.why{list-style:none;margin:0 0 2rem;padding:0;display:flex;flex-direction:column;gap:.9rem;max-width:46ch}
+.why li{position:relative;padding-left:1.6rem;font-size:1.05rem}
+.why li::before{content:"";position:absolute;left:0;top:.6em;width:.55rem;height:.55rem;border-radius:50%;background:var(--coral)}
+.faqwrap{max-width:44rem}
+.faq{margin-top:1.75rem;border-top:1px solid var(--mist)}
+.faq details{border-bottom:1px solid var(--mist)}
+.faq summary{cursor:pointer;list-style:none;padding:1.1rem 2rem 1.1rem 0;position:relative;
+  font-family:var(--display);font-size:1.15rem}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";position:absolute;right:0;top:1rem;font-size:1.35rem;color:var(--accent)}
+.faq details[open] summary::after{content:"\2212"}
+.fbody{padding:0 0 1.25rem}
+.fbody p{color:var(--muted)}
+.closer{background:var(--green);color:var(--cream);text-align:center}
+.closer h2{color:var(--cream);max-width:20ch;margin:0 auto;font-size:clamp(1.7rem,1.3rem + 1.8vw,2.6rem);letter-spacing:-.02em}
+.closer > .wrap > p{color:var(--cream);opacity:.82;margin:1rem auto 0;max-width:34ch}
+.formcard{background:var(--cream);border-radius:4px;padding:1.5rem 1.35rem;margin:2rem auto 0;max-width:26rem}
+.formcard .signup{margin-top:0;max-width:none}
+.formcard .btn{width:100%}
+.formcard .micro{text-align:center;margin-inline:auto}
+.stickybar{position:sticky;bottom:0;z-index:50;background:var(--ground);border-top:1px solid var(--mist);
+  padding:.7rem var(--pad);padding-bottom:calc(.7rem + env(safe-area-inset-bottom))}
+.stickybar .btn{display:block;max-width:1080px;margin:0 auto;text-align:center;border-radius:999px}
+.opener{font-size:clamp(.95rem,.9rem + .25vw,1.05rem);color:var(--muted);max-width:46ch;margin-bottom:1.75rem;line-height:1.5}
 .held{position:relative;opacity:.5;border-left:2px dashed var(--mist);padding-left:.9rem}
-.heldtag{display:block;font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;
-  font-weight:700;color:var(--coral);opacity:.9;margin-bottom:.3rem;font-style:normal}
-
-/* ---------- she needs strip ---------- */
+.heldtag{display:block;font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;
+  color:var(--coral);opacity:.9;margin-bottom:.3rem;font-style:normal}
 .needs{display:grid;gap:.75rem;grid-template-columns:repeat(auto-fit,minmax(12rem,1fr));margin-top:2rem}
-.need{display:flex;align-items:center;min-height:6.5rem;background:var(--surface);
-  border:1px solid var(--mist);border-radius:2px;padding:1.25rem;text-decoration:none;
-  transition:border-color .18s ease,transform .18s ease}
+.need{display:flex;align-items:center;min-height:6.5rem;background:var(--surface);border:1px solid var(--mist);
+  border-radius:2px;padding:1.25rem;text-decoration:none;transition:border-color .18s ease,transform .18s ease}
 .need:hover{border-color:var(--ink);transform:translateY(-2px)}
 .need span{font-family:var(--display);font-size:1.2rem;line-height:1.2;color:var(--ink)}
-.bigline{font-family:var(--display);font-size:clamp(1.35rem,1.1rem + 1.2vw,1.9rem);
-  line-height:1.25;color:var(--emphasis);margin-top:.75rem!important;max-width:24ch}
-
-/* ---------- hero dual paths ---------- */
 .paths{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:2.25rem;max-width:520px}
 .paths .btn{flex:1 1 13rem;text-align:center}
 .btn-alt{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--ink)}
 .btn-alt:hover{background:var(--ink);color:var(--ground)}
 @media (max-width:520px){.paths .btn{flex:1 1 100%}}
-
-/* ---------- two paths section ---------- */
-.pathgrid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(1.5rem,4vw,3rem)}
-.pathblock{display:flex;flex-direction:column;gap:.9rem;background:var(--surface);
-  border:1px solid var(--mist);padding:clamp(1.35rem,3vw,2rem)}
-.pathblock h2{font-size:clamp(1.25rem,1.1rem + .7vw,1.6rem);max-width:none}
-.pathblock p{color:var(--muted);font-size:.9688rem}
-@media (max-width:720px){.pathgrid{grid-template-columns:1fr}}
-
-/* ---------- advisory board (structure only) ---------- */
-.advisors{display:grid;gap:1.5rem;grid-template-columns:repeat(auto-fit,minmax(12rem,1fr));margin-top:1.5rem}
-.advisor{display:flex;flex-direction:column;gap:.75rem}
-.aphoto{aspect-ratio:1;background:var(--slot);border:1px dashed var(--muted);border-radius:2px}
 .await,.hold,.todo{color:var(--muted);font-size:.8125rem;font-style:italic}
-.hold{margin-top:1.5rem;max-width:60ch}
-.timing{margin-top:1rem;color:var(--muted);font-size:.95rem}
-.choose{margin-top:1.5rem;background:var(--surface);border:1px solid var(--mist);
-  border-left:3px solid var(--coral);border-radius:2px;padding:1rem 1.2rem;font-size:1rem;max-width:56ch}
+.choose{margin-top:1.5rem;background:var(--surface);border:1px solid var(--mist);border-left:3px solid var(--coral);
+  border-radius:2px;padding:1rem 1.2rem;font-size:1rem;max-width:56ch}
 .choose b{color:var(--emphasis)}
-.todo-tag{background:transparent!important;color:var(--muted)!important;
-  border:1px dashed var(--mist);font-style:italic}
-
-/* ---------- product architecture ---------- */
-.products{display:flex;flex-direction:column;gap:.6rem;margin-top:2.75rem}
+.todo-tag{background:transparent!important;color:var(--muted)!important;border:1px dashed var(--mist);font-style:italic}
+.products{display:flex;flex-direction:column;gap:.6rem;margin-top:1.5rem}
 .product{background:var(--surface);border:1px solid var(--mist)}
-.product summary{display:flex;flex-wrap:wrap;align-items:baseline;gap:.5rem 1rem;
-  cursor:pointer;padding:1.15rem 1.4rem;list-style:none}
+.product summary{display:flex;flex-wrap:wrap;align-items:baseline;gap:.5rem 1rem;cursor:pointer;
+  padding:1.15rem 1.4rem;list-style:none}
 .product summary::-webkit-details-marker{display:none}
 .product summary::after{content:"+";margin-left:auto;color:var(--accent);font-size:1.3rem;line-height:1}
 .product[open] summary::after{content:"\2212"}
 .product summary:hover{background:var(--raised)}
 .pname{font-family:var(--display);font-size:1.3rem;color:var(--ink)}
-.pmeta{font-size:.8125rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600;
-  color:var(--tag-fg);background:var(--tag-bg);padding:.2rem .55rem;border-radius:2px}
+.pmeta{font-size:.8125rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600;color:var(--tag-fg);
+  background:var(--tag-bg);padding:.2rem .55rem;border-radius:2px}
 .pbody{padding:0 1.4rem 1.4rem;display:flex;flex-direction:column;gap:.7rem}
 .pbody p{color:var(--muted);font-size:.9688rem}
-
-/* ---------- value props ---------- */
-.props{display:grid;gap:2.25rem;grid-template-columns:repeat(auto-fit,minmax(14rem,1fr));margin-top:2.5rem}
-.prop{display:flex;flex-direction:column;gap:.5rem;border-top:1px solid var(--mist);padding-top:1.1rem}
-.prop h3{font-size:1.2rem}
-.prop p{color:var(--muted);font-size:.9375rem}
-
-/* ---------- gifting ---------- */
-.gift{background:var(--raised);border-block:1px solid var(--mist)}
-.gift .inner{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(2rem,5vw,4rem);align-items:center}
-.gift h2{max-width:16ch}
-.gift p{color:var(--muted);margin-top:1rem;max-width:46ch}
-.gift .btn{margin-top:1.75rem}
-.reassure{list-style:none;margin:1.5rem 0 0;padding:0;display:flex;flex-direction:column;gap:.7rem;max-width:44ch}
-.reassure li{position:relative;padding-left:1.4rem;font-size:.95rem;color:var(--muted)}
-.reassure li::before{content:"";position:absolute;left:0;top:.62em;width:.5rem;height:.5rem;
-  border-radius:50%;background:var(--coral)}
-.reassure b{color:var(--ink);font-weight:600}
-@media (max-width:800px){.gift .inner{grid-template-columns:1fr}}
-
-/* photography placeholder - clearly an image slot, not decoration */
-.shot{aspect-ratio:4/3;background:var(--slot);border:1px dashed var(--muted);
-  display:grid;place-content:center;gap:.35rem;text-align:center;padding:1rem;color:var(--ink)}
+.shot{aspect-ratio:4/3;background:var(--slot);border:1px dashed var(--muted);display:grid;place-content:center;
+  gap:.35rem;text-align:center;padding:1rem;color:var(--ink)}
 .shot b{font-size:.6875rem;letter-spacing:.14em;text-transform:uppercase;font-weight:600}
 .shot span{font-size:.8125rem;opacity:.75;font-family:var(--body)}
-
-/* ---------- timeline ---------- */
-.phases{display:grid;margin-top:2.75rem}
-.phase{display:grid;grid-template-columns:11rem 1fr;gap:1.5rem;padding-block:1.6rem;border-top:1px solid var(--mist)}
-.phase:last-child{border-bottom:1px solid var(--mist)}
-.phase.beyond dt{color:var(--accent)}
-.phase dt{font-family:var(--display);font-weight:400;font-size:1.2rem;color:var(--ink);margin:0}
-.phase dd{margin:0;color:var(--muted)}
-.phase dd b{color:var(--ink);font-weight:600;display:block;font-size:1.0625rem;margin-bottom:.2rem;font-family:var(--body)}
-@media (max-width:640px){.phase{grid-template-columns:1fr;gap:.4rem}}
-
-/* ---------- cards ---------- */
 .cards{display:grid;gap:1.5rem;grid-template-columns:repeat(auto-fill,minmax(16rem,1fr));margin-top:2.5rem}
 .card{display:flex;flex-direction:column;gap:.6rem;background:var(--surface);border:1px solid var(--mist);
   padding:1.5rem;text-decoration:none;transition:border-color .18s ease,transform .18s ease}
 .card:hover{border-color:var(--accent);transform:translateY(-2px)}
 .card h3{font-size:1.2rem;line-height:1.25}
 .card p{color:var(--muted);font-size:.9375rem}
-.cat{font-size:.6875rem;letter-spacing:.13em;text-transform:uppercase;font-weight:600;
-  color:var(--tag-fg);background:var(--tag-bg);padding:.2rem .55rem;border-radius:2px;align-self:flex-start}
+.cat{font-size:.6875rem;letter-spacing:.13em;text-transform:uppercase;font-weight:600;color:var(--tag-fg);
+  background:var(--tag-bg);padding:.2rem .55rem;border-radius:2px;align-self:flex-start}
 .read{font-size:.8125rem;color:var(--muted);margin-top:auto;padding-top:.5rem}
-
 .band{background:var(--raised);border-block:1px solid var(--mist)}
 .band h2{max-width:18ch}
-
-/* ---------- hub ---------- */
 .hubhead{padding-block:clamp(2.5rem,6vw,4.5rem) 2rem}
 .hubhead h1{font-size:clamp(2rem,1.5rem + 2.4vw,3.2rem);letter-spacing:-.02em}
 .filters{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:2.25rem}
@@ -242,19 +165,34 @@ h2{font-size:clamp(1.7rem,1.3rem + 1.6vw,2.5rem);letter-spacing:-.015em;max-widt
   border:1px solid var(--mist);border-radius:999px;padding:.4rem 1rem;transition:all .16s ease}
 .pill:hover{color:var(--ink);border-color:var(--accent)}
 .pill[aria-pressed="true"]{background:var(--btn-bg);border-color:var(--btn-bg);color:var(--btn-fg)}
-.featured{display:grid;grid-template-columns:1.2fr 1fr;gap:2.5rem;align-items:center;
-  background:var(--surface);border:1px solid var(--mist);padding:clamp(1.5rem,4vw,2.75rem);margin-top:2.5rem}
+.featured{display:grid;grid-template-columns:1.2fr 1fr;gap:2.5rem;align-items:center;background:var(--surface);
+  border:1px solid var(--mist);padding:clamp(1.5rem,4vw,2.75rem);margin-top:2.5rem}
 .featured h2{font-size:clamp(1.5rem,1.2rem + 1.2vw,2.1rem);max-width:none;margin-top:.75rem}
 .featured p{color:var(--muted);margin-top:.85rem}
 @media (max-width:760px){.featured{grid-template-columns:1fr}}
 .hidden{display:none}
-
 footer{border-top:1px solid var(--mist);padding-block:3rem;font-size:.875rem;color:var(--muted)}
 footer .wrap{display:flex;flex-wrap:wrap;gap:1.5rem 2.5rem;align-items:flex-start}
 footer ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:.45rem}
 footer a{text-decoration:none}
 footer a:hover{color:var(--ink)}
 .note{margin-left:auto;max-width:30ch;font-size:.8125rem}
+/* ---------- Amae steal: budget-led routing ---------- */
+.budget{display:grid;gap:.6rem;grid-template-columns:repeat(auto-fit,minmax(13rem,1fr));margin-top:2rem}
+.bud{display:flex;flex-direction:column;gap:.3rem;background:var(--surface);border:1px solid var(--mist);
+  border-radius:3px;padding:1rem 1.15rem;text-decoration:none;transition:border-color .18s ease}
+.bud:hover{border-color:var(--ink)}
+.bud b{font-family:var(--display);font-weight:400;font-size:1.3rem;color:var(--emphasis)}
+.bud span{font-size:.9rem;color:var(--muted)}
+
+/* ---------- Amae steal: segmented signup ---------- */
+.seg{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:.9rem;justify-content:center}
+.seg button{font:inherit;font-size:.85rem;font-weight:600;cursor:pointer;background:transparent;
+  color:var(--ink);border:1.5px solid var(--mist);border-radius:999px;padding:.4rem .9rem}
+.seg button:hover{border-color:var(--ink)}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--cream);border-color:var(--ink)}
+.seglabel{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;
+  color:var(--muted);margin-bottom:.6rem;text-align:center}
 </style>
 
 <div class="bar">
@@ -263,6 +201,7 @@ footer a:hover{color:var(--ink)}
     <div class="tabs" role="tablist" aria-label="Pages">
       <button class="tab" role="tab" aria-selected="true" data-view="home">Home</button>
       <button class="tab" role="tab" aria-selected="false" data-view="hub">Resource Hub</button>
+      <button class="tab" role="tab" aria-selected="false" data-view="biz">For Employers</button>
     </div>
     <span class="sep"></span>
     <span class="grd">Blue
@@ -278,44 +217,72 @@ footer a:hover{color:var(--ink)}
     <ul>
       <li><a href="#products">What&rsquo;s inside</a></li>
       <li><a href="#needs">She needs</a></li>
-      <li><a href="#timeline">12 weeks</a></li>
+      <li><a href="#budget">By budget</a></li>
       <li><a href="#" data-go="hub">Resource Hub</a></li>
+      <li><a href="#" data-go="biz">For employers</a></li>
     </ul>
     <a class="btn" href="#join">Join the waitlist</a>
   </div>
 </header>
 
-<!-- ============ HOME ============ -->
 <main id="view-home">
-
   <section class="hero">
     <div class="wrap">
-      <p class="opener reveal">You know she&rsquo;s about to go through a life&#8209;changing experience.<br>You just don&rsquo;t know what would actually help.</p>
+      <p class="opener reveal">You know she&rsquo;s about to go through a life&#8209;changing experience. You just don&rsquo;t know what would actually help.</p>
       <h1 class="reveal">Nobody prepares you for the fourth trimester. <span>We do.</span></h1>
       <p class="lede reveal">Post&#8209;birth recovery kits and journals, for body and for mind, beyond the first 42 days.</p>
-
       <div class="paths reveal">
         <a class="btn" href="#join">Gifting for someone else</a>
         <a class="btn btn-alt" href="#join">For myself</a>
       </div>
       <p class="micro reveal">Launching spring 2027. Founding members get first access.</p>
+      <div class="shot hero-shot reveal" role="img" aria-label="Photography placeholder: hero image">
+        <b>Photography</b><span>Hero image &mdash; to be booked</span>
+      </div>
     </div>
   </section>
 
-  <section class="rule">
+  <section class="band chips-band">
+    <div class="wrap">
+      <p class="eyebrow">Built with mothers from day one</p>
+      <ul class="chips">
+        <li>130+ mothers surveyed</li>
+        <li>Clinically reviewed</li>
+        <li>For body and for mind</li>
+        <li>Beyond the first 42 days</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2 class="statement">The focus falls entirely on the baby.</h2>
+      <div class="probs">
+        <div class="prob"><h3>Nobody tells you what&rsquo;s normal</h3>
+          <p>Bleeding, cramping, night sweats. Most people find out by searching at three in the morning.</p></div>
+        <div class="prob"><h3>Support stops at six weeks</h3>
+          <p>The fourth trimester runs twelve. And some care only arrives if you know to ask for it.</p></div>
+        <div class="prob"><h3>Everyone buys for the baby</h3>
+          <p>The babygrows, the blankets, the tiny shoes. Almost nothing for the person recovering.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
     <div class="wrap stack prose">
+      <p class="eyebrow">The research</p>
       <h2>Mothers know best</h2>
-      <p>We asked over 130 mothers what they actually needed after giving birth.</p>
-      <p>They told us what they wished someone had given them.</p>
+      <p>We asked over 130 mothers what they actually needed after giving birth. They told us what they wished someone had given them.</p>
       <p class="held"><span class="heldtag">Figures on hold &mdash; awaiting citable sample and date</span>
         78% had never received a recovery kit of any kind. 40% didn&rsquo;t know the NHS offered perinatal mental health support. One in five felt their emotional wellbeing wasn&rsquo;t taken seriously.</p>
       <p class="pull">So we built the thing they described.</p>
     </div>
   </section>
 
-  <section class="rule" id="needs">
+  <section id="needs">
     <div class="wrap">
-      <h2>She needs&hellip;</h2>
+      <p class="eyebrow">She needs&hellip;</p>
+      <h2 class="statement sm">Four things, and none of them is a babygrow.</h2>
       <div class="needs">
         <a class="need" href="#products"><span>Her body to heal</span></a>
         <a class="need" href="#products"><span>Sleep</span></a>
@@ -325,123 +292,114 @@ footer a:hover{color:var(--ink)}
     </div>
   </section>
 
-  <section class="rule twopaths">
+  <section class="band" id="products">
     <div class="wrap">
-      <div class="pathgrid">
-        <div class="pathblock">
-          <h2>Buying for someone you love</h2>
-          <p>You want to give her something that actually helps. Not another candle. Not something she&rsquo;ll smile at and quietly put in a drawer. It arrives before the birth, so it&rsquo;s there when she needs it.</p>
-        </div>
-        <div class="pathblock">
-          <h2>Buying for yourself</h2>
-          <p>You&rsquo;ve thought about the pram, the cot, the hospital bag. Almost nobody thinks about their own recovery until they&rsquo;re in it. This is the kit you&rsquo;d have assembled yourself, if you&rsquo;d known what to buy and had the time and the headspace.</p>
+      <p class="eyebrow">What&rsquo;s inside</p>
+      <h2 class="statement sm">Everything she&rsquo;ll need, <span>already in the house.</span></h2>
+
+      <div id="budget">
+        <p class="eyebrow" style="margin:2rem 0 0">Or shop by budget</p>
+        <div class="budget">
+          <a class="bud" href="#products"><b>Under &pound;20</b><span>The Maternal Journal, on its own</span></a>
+          <a class="bud" href="#products"><b>&pound;150</b><span>Basic Home Recovery Kit</span></a>
+          <a class="bud" href="#products"><b>&pound;150 and up</b><span>Full kit, or a kit plus vouchers</span></a>
         </div>
       </div>
-    </div>
-  </section>
 
-  <section class="rule" id="products">
-    <div class="wrap">
-      <p class="label">What&rsquo;s inside</p>
-      <h2>Three parts, for body and for mind.</h2>
       <div class="products">
         <details class="product">
           <summary><span class="pname">Basic Home Recovery Kit</span><span class="pmeta">&pound;150</span></summary>
-          <div class="pbody">
-            <p>For a straightforward vaginal birth. Clinically reviewed recovery essentials, in the house before you need them &mdash; no ordering, no pharmacy run, no asking someone to go out for you in week one.</p>
-            <p class="todo">[Full contents list to be added]</p>
-          </div>
+          <div class="pbody"><p>For a straightforward vaginal birth. Clinically reviewed recovery essentials, in the house before you need them.</p>
+          <p class="todo">[Full contents list to be added]</p></div>
         </details>
         <details class="product">
           <summary><span class="pname">Full Home Recovery Kit</span><span class="pmeta todo-tag">Price to confirm</span></summary>
-          <div class="pbody">
-            <p>Ready for however the birth actually goes, caesarean included. Everything in the Basic kit, plus what she will need if she is recovering from abdominal surgery at the same time as everything else.</p>
-            <p class="todo">[Full contents list to be added]</p>
-          </div>
+          <div class="pbody"><p>Ready for however the birth actually goes, caesarean included. Everything in the Basic kit, plus what she&rsquo;ll need recovering from abdominal surgery too.</p>
+          <p class="todo">[Full contents list to be added]</p></div>
         </details>
         <details class="product">
           <summary><span class="pname">The Maternal Journal</span><span class="pmeta">Included in every box</span></summary>
-          <div class="pbody">
-            <p>Created by midwife Laura Godfrey&#8209;Isaacs with King&rsquo;s College London. Prompts and guidance for the days when you do not know where to start &mdash; the mind half of recovery, included as standard.</p>
-          </div>
+          <div class="pbody"><p>Created by midwife Laura Godfrey&#8209;Isaacs with King&rsquo;s College London. The mind half of recovery, included as standard.</p></div>
         </details>
         <details class="product">
           <summary><span class="pname">Service Vouchers</span><span class="pmeta">Add&#8209;on</span></summary>
-          <div class="pbody">
-            <p>Physiotherapy, counselling, night nanny support and ready&#8209;made meals. For when what you need most is a person, not a product &mdash; redeemable when you are ready.</p>
-          </div>
+          <div class="pbody"><p>Physiotherapy, counselling, night nanny support and ready&#8209;made meals. For when what she needs is a person, not a product.</p></div>
         </details>
       </div>
-      <p class="choose"><b>Gifting? Send the Full kit.</b> Nobody knows in advance how the birth will go &mdash; including her. A caesarean is often not something anyone gets to plan for.</p>
-      <p class="timing">Arrives before the due date, ready for the day she comes home.</p>
+      <p class="choose"><b>Gifting? Send the Full kit.</b> Nobody knows in advance how the birth will go &mdash; including her.</p>
     </div>
   </section>
 
-  <section class="gift" id="gifting">
-    <div class="wrap inner">
-      <div>
-        <h2>Something she&rsquo;ll actually appreciate</h2>
-        <p>Most gifts say congratulations.</p>
-        <p class="bigline">This one says: I know what&rsquo;s coming, and I&rsquo;ve got you.</p>
-      </div>
-      <div class="shot" role="img" aria-label="Photography placeholder: gifting moment">
-        <b>Photography</b>
-        <span>Gifting shot &mdash; to be booked</span>
-      </div>
-    </div>
-  </section>
-
-  <section class="rule" id="timeline">
+  <section id="gifting">
     <div class="wrap">
-      <p class="label">The fourth trimester</p>
-      <h2>Twelve weeks. And what happens after them.</h2>
-      <dl class="phases">
-        <div class="phase"><dt>Days 1&ndash;3</dt><dd><b>Getting home</b>Comfort and practical recovery essentials for the days when leaving the house is not an option.</dd></div>
-        <div class="phase"><dt>Days 4&ndash;14</dt><dd><b>Healing and rest</b>Support for physical recovery, with guidance on what is normal and the signs worth calling someone about.</dd></div>
-        <div class="phase"><dt>Days 15&ndash;42</dt><dd><b>Finding a rhythm</b>Feeding, sleep and mental health &mdash; up to the six&#8209;week check, which most people are told is the finish line.</dd></div>
-        <div class="phase"><dt>Days 43&ndash;84</dt><dd><b>Where most support stops</b>It isn&rsquo;t the finish line. The fourth trimester runs a further six weeks past that appointment, and this is the stretch nobody prepares you for. Some of the care you are entitled to only arrives if you know to ask for it &mdash; and nobody tells you what to ask.</dd></div>
-        <div class="phase beyond"><dt>Day 85 onwards</dt><dd><b>And beyond</b>Longer&#8209;term recovery, pelvic health and returning to yourself. The fourth trimester ends; the recovery doesn&rsquo;t &mdash; which is the half we are named after.</dd></div>
-      </dl>
-    </div>
-  </section>
-
-  <section class="rule" id="advisors">
-    <div class="wrap">
-      <p class="label">Advisory board</p>
-      <h2>&nbsp;</h2>
-      <div class="advisors">
-        <div class="advisor"><div class="aphoto" aria-hidden="true"></div><p class="await">Awaiting confirmed copy</p></div>
-        <div class="advisor"><div class="aphoto" aria-hidden="true"></div><p class="await">Awaiting confirmed copy</p></div>
-        <div class="advisor"><div class="aphoto" aria-hidden="true"></div><p class="await">Awaiting confirmed copy</p></div>
-      </div>
-      <p class="hold">Section structure only. Names, titles and descriptions are pending confirmation with each advisor and must not be drafted here.</p>
-    </div>
-  </section>
-
-  <section class="rule">
-    <div class="wrap">
-      <p class="label">Resource hub</p>
-      <h2>Start preparing now &mdash; free.</h2>
-      <div class="cards">
-        <a class="card" href="#" data-go="hub"><span class="cat">Recovery</span><h3>What actually happens to your body in week one</h3><p>An honest account of the first seven days, and what to have ready.</p><span class="read">6 min read</span></a>
-        <a class="card" href="#" data-go="hub"><span class="cat">Mental health</span><h3>Baby blues, or something more?</h3><p>How to tell the difference, and exactly who to call.</p><span class="read">8 min read</span></a>
-        <a class="card" href="#" data-go="hub"><span class="cat">For partners</span><h3>A partner&rsquo;s guide to the first fortnight</h3><p>What genuinely helps &mdash; and what to stop asking.</p><span class="read">5 min read</span></a>
-      </div>
+      <p class="eyebrow">For the gift&#8209;giver</p>
+      <h2 class="statement">Most gifts say congratulations. <span>This one says: I know what&rsquo;s coming, and I&rsquo;ve got you.</span></h2>
     </div>
   </section>
 
   <section class="band">
-    <div class="wrap stack">
-      <h2>Not sure what she needs? Neither is she. That&rsquo;s rather the point.</h2>
-      <form class="signup" id="join" onsubmit="return false">
-        <input type="email" placeholder="your@email.com" aria-label="Email address" required>
-        <button class="btn" type="submit">Join the waitlist</button>
-      </form>
+    <div class="wrap founder">
+      <div class="shot founder-shot" role="img" aria-label="Photography placeholder: founder portrait">
+        <b>Photography</b><span>Founder portrait &mdash; to be booked</span>
+      </div>
+      <p class="cap">[Founder name], founder</p>
+      <h2 class="statement sm">I built what I wished someone had given me.</h2>
+      <p class="held"><span class="heldtag">Awaiting your words &mdash; two or three sentences, first person</span>
+        Why you started this, in your own voice. What happened to you, what was missing, and what you did about it.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <p class="eyebrow">Why join early</p>
+      <ul class="why">
+        <li>First access when we launch in spring 2027.</li>
+        <li>Founding member pricing, held for you.</li>
+        <li>Tell us what should be in the kit &mdash; we&rsquo;re still listening.</li>
+        <li>Free resources as we publish them, before anyone else.</li>
+      </ul>
+      <a class="btn" href="#join">Join the waitlist</a>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap faqwrap">
+      <p class="eyebrow">FAQ</p>
+      <h2 class="statement sm">Questions? We&rsquo;ve got you.</h2>
+      <div class="faq">
+        <details><summary>What&rsquo;s actually in the kit?</summary><div class="fbody"><p class="todo">[Contents list to be confirmed]</p></div></details>
+        <details><summary>When does it arrive?</summary><div class="fbody"><p>You choose the delivery date. Most people have it in the house a few weeks before the due date.</p></div></details>
+        <details><summary>Which kit should I send as a gift?</summary><div class="fbody"><p>The Full kit. Nobody knows in advance how the birth will go &mdash; including her &mdash; and the Full kit covers a caesarean too.</p></div></details>
+        <details><summary>Can several of us go in together?</summary><div class="fbody"><p>Yes &mdash; that&rsquo;s what most people do. <b>Six people at &pound;25 covers a kit.</b> Group gifting opens when we launch; join the waitlist and we&rsquo;ll tell you.</p></div></details>
+        <details><summary>Is this medical advice?</summary><div class="fbody"><p>No. Everything is clinically reviewed, but it doesn&rsquo;t replace advice from your midwife, GP or health visitor.</p></div></details>
+        <details><summary>When do you launch?</summary><div class="fbody"><p>Spring 2027. Founding members get first access.</p></div></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="closer">
+    <div class="wrap">
+      <h2>Let us help you prepare.</h2>
+      <p>Not sure what she needs? Neither is she. That&rsquo;s rather the point.</p>
+      <div class="formcard">
+        <p class="seglabel">I am&hellip;</p>
+        <div class="seg" role="group" aria-label="Which best describes you">
+          <button type="button" aria-pressed="true">Looking for a gift</button>
+          <button type="button" aria-pressed="false">Expecting</button>
+          <button type="button" aria-pressed="false">A new mum</button>
+        </div>
+        <form class="signup" id="join" onsubmit="return false">
+          <input type="email" placeholder="your@email.com" aria-label="Email address" required>
+          <button class="btn" type="submit">Join the waitlist</button>
+        </form>
+        <p class="micro">Launching spring 2027. Founding members get first access.</p>
+      </div>
     </div>
   </section>
 </main>
 
-<!-- ============ RESOURCE HUB ============ -->
+<div class="stickybar"><a class="btn" href="#join">Join the waitlist</a></div>
+
 <main id="view-hub" class="hidden">
   <section class="hubhead">
     <div class="wrap stack">
@@ -470,8 +428,7 @@ footer a:hover{color:var(--ink)}
           <p class="read">6 min read</p>
         </div>
         <div class="shot" role="img" aria-label="Photography placeholder: featured article image">
-          <b>Photography</b>
-          <span>Featured image &mdash; to be booked</span>
+          <b>Photography</b><span>Featured image &mdash; to be booked</span>
         </div>
       </article>
 
@@ -499,6 +456,69 @@ footer a:hover{color:var(--ink)}
   </section>
 </main>
 
+<main id="view-biz" class="hidden">
+  <section class="hero">
+    <div class="wrap">
+      <p class="eyebrow">For employers</p>
+      <h1>The weeks that decide <span>whether she comes back.</span></h1>
+      <p class="lede">Parental leave support that arrives at her door, anywhere in the UK. One invoice, nothing to administer.</p>
+      <a class="btn" href="#talk">Talk to us</a>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap">
+      <h2 class="statement">Your policy ends at the gate. Her recovery doesn&rsquo;t.</h2>
+      <p class="prose" style="margin-top:1.5rem;color:var(--muted)">Enhanced pay, a longer leave, a phased return &mdash; good policy, all of it, and none of it reaches the twelve weeks where people quietly decide they are not coming back.</p>
+      <p class="held" style="margin-top:1.5rem"><span class="heldtag">Figure on hold &mdash; needs a citable source before this page goes live</span>
+        Replacing someone who does not return costs a multiple of their salary. A kit costs &pound;150.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <p class="eyebrow">What each employee gets</p>
+      <h2 class="statement sm">A box, and then a year of support.</h2>
+      <div class="probs">
+        <div class="prob"><h3>The Full Recovery Kit</h3>
+          <p>Delivered before the due date, ready for whatever the birth turns out to be. Your note inside, in your name.</p></div>
+        <div class="prob"><h3>Membership for the first year</h3>
+          <p>The resource hub, member events, member pricing on top-up items and partner rates &mdash; for as long as they need it.</p></div>
+        <div class="prob"><h3>A returners&rsquo; voucher</h3>
+          <p>Counselling or physiotherapy, timed for the return to work rather than the birth. The moment retention is actually won or lost.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap">
+      <p class="eyebrow">Why it works for you</p>
+      <ul class="why">
+        <li><b>One invoice.</b> A standing arrangement, not forty separate purchases.</li>
+        <li><b>Nothing to administer.</b> No codes to chase, no redemptions to track, no expiry dates.</li>
+        <li><b>Anywhere in the UK.</b> Not a London benefit with a national headcount.</li>
+        <li><b>Co&#8209;branded.</b> Your note, from your team, in a box opened at home in front of family.</li>
+        <li><b>It arrives whether or not she asks.</b> The people who most need support are the least likely to request it.</li>
+      </ul>
+      <p class="todo">[Minimum order and per-seat pricing to confirm]</p>
+    </div>
+  </section>
+
+  <section class="closer" id="talk">
+    <div class="wrap">
+      <h2>Support that reaches them at home.</h2>
+      <p>Tell us how many people go on parental leave in a year and we&rsquo;ll come back with a plan.</p>
+      <div class="formcard">
+        <form class="signup" onsubmit="return false">
+          <input type="email" placeholder="you@company.com" aria-label="Work email address" required>
+          <button class="btn" type="submit">Start a conversation</button>
+        </form>
+        <p class="micro">Launching spring 2027. Founding partners are being signed now.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
 <footer>
   <div class="wrap">
     <div class="stack" style="gap:.6rem">
@@ -518,8 +538,8 @@ footer a:hover{color:var(--ink)}
 
 <script>
 (function(){
-  var views={home:document.getElementById('view-home'),hub:document.getElementById('view-hub')};
-  var tabs=[].slice.call(document.querySelectorAll('.tab'));
+  var views={home:document.getElementById('view-home'),hub:document.getElementById('view-hub'),biz:document.getElementById('view-biz')};
+  var tabs=[].slice.call(document.querySelectorAll('.tabs .tab'));
   function show(name){
     Object.keys(views).forEach(function(k){views[k].classList.toggle('hidden',k!==name)});
     tabs.forEach(function(t){t.setAttribute('aria-selected',String(t.dataset.view===name))});
@@ -538,6 +558,11 @@ footer a:hover{color:var(--ink)}
   }
   sky.addEventListener('click',function(){ground(false)});
   tint.addEventListener('click',function(){ground(true)});
+
+  var segs=[].slice.call(document.querySelectorAll('.seg button'));
+  segs.forEach(function(b){b.addEventListener('click',function(){
+    segs.forEach(function(o){o.setAttribute('aria-pressed',String(o===b))});
+  })});
 
   var pills=[].slice.call(document.querySelectorAll('.pill'));
   var cards=[].slice.call(document.querySelectorAll('#grid .card'));
